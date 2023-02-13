@@ -11,26 +11,35 @@ from rest_framework.views import APIView
 from .serializers import UserSerializer, PlayerSerializer, GamekeeperSerializer
 from .models import Player
 
-class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `retrieve` actions.
-    """
-
-    queryset = Player.objects.all()
-    serializer_class = PlayerSerializer
-    authentication_classes = [IsAuthenticated]
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-
-    @action(detail=False, methods=["get"], url_path="me", name="me")
-    def me(self, request):
-        """Get the current authenticated user"""
-        serializer = self.get_serializer(request.user)
-        return Response(serializer.data)
-
-
-class RegistrationView(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class PlayerRegistrationVieset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     authentication_classes = []
-    serializer_class = UserPostSerializer
+    def post(self, request):
+        """
+        Create a student record
+        :param request: Request object for creating Player/GameKeeper
+        :return: Returns data of created Player/GameKeeper
+        """
+        serializer = PlayerSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=ValueError):
+            serializer.create(validated_data=request.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.error_messages,
+                        status=status.HTTP_400_BAD_REQUEST)
+
+class GamekeeperRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    authentication_classes = []
+    def post(self, request):
+        """
+        Create a student record
+        :param request: Request object for creating Player/GameKeeper
+        :return: Returns data of created Player/GameKeeper
+        """
+        serializer = GamekeeperSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=ValueError):
+            serializer.create(validated_data=request.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.error_messages,
+                        status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(APIView):
@@ -38,31 +47,25 @@ class LoginView(APIView):
     authentication_classes = ()
 
     def post(self, request, format=None):
-        email = request.data.get("email", None)
+        username = request.data.get("username", None)
         password = request.data.get("password", None)
-        if email is None or password is None:
+        if username is None or password is None:
             return Response(
                 {"message": "Username and password cannot be empty"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        user = authenticate(email=email, password=password)
+        user = authenticate(username=username, password=password)
         if user is not None:
-            if user.is_active:
-                login(request, user)
-                # CsrfViewMiddleware automatically adds csrf token as cookie
-                # SessionMiddleware automatically adds session id as cookie
-                return Response(
-                    {
-                        "message": "Logged in successfully",
-                        "user": UserSerializer(user).data,
-                    },
-                    status=status.HTTP_200_OK,
-                )
-            else:
-                return Response(
-                    {"message": "This account is not active!!"},
-                    status=status.HTTP_401_UNAUTHORIZED,
-                )
+            login(request, user)
+            # CsrfViewMiddleware automatically adds csrf token as cookie
+            # SessionMiddleware automatically adds session id as cookie
+            return Response(
+                {
+                    "message": "Logged in successfully",
+                    "user": UserSerializer(user).data,
+                },
+                status=status.HTTP_200_OK,
+            )
         else:
             return Response(
                 {"message": "Invalid username or password!!"},
