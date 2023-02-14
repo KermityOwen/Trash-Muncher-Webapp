@@ -11,8 +11,9 @@ from rest_framework.views import APIView
 from .serializers import UserSerializer, PlayerSerializer, GamekeeperSerializer
 from .models import Player
 
-class PlayerRegistrationVieset(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class PlayerRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     authentication_classes = []
+    serializer_class = PlayerSerializer
     def post(self, request):
         """
         Create a student record
@@ -28,6 +29,7 @@ class PlayerRegistrationVieset(mixins.CreateModelMixin, viewsets.GenericViewSet)
 
 class GamekeeperRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     authentication_classes = []
+    serializer_class = GamekeeperSerializer
     def post(self, request):
         """
         Create a student record

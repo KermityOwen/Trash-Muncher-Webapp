@@ -46,7 +46,7 @@ class UserPostSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields = ('name')        
+        fields = ['name'] 
 
 
 class PlayerSerializer(serializers.ModelSerializer):
