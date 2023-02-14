@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'trashsite'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # USed during development to see all open api urls by running python manage.py show_urls
+
+    # Handler for adding, removing and modifying Trashmonsters
+    'TM_handler',
+
+    # For user managing API
     'django_extensions',
-    # API apps
     'users',
 ]
 
