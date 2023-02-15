@@ -21,4 +21,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('', include('trashsite.urls')),
     path('api/users/', include('trashusers.urls')),
+    path('api/monsters/', include('trashmonsters.urls'))
 ]

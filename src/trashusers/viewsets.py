@@ -3,13 +3,14 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework import mixins, status, viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import UserSerializer, UserPostSerializer, PlayerSerializer, GameKeeperSerializer
 from .models import Player, GameKeeper, User
+
 
 class PlayerRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Player.objects.all()

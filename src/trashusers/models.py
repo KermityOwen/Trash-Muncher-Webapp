@@ -9,6 +9,7 @@ from django.utils import timezone
 
 class User(AbstractUser):
     pass
+
 class Team(models.Model):
     TEAMS=[("R", "Red"), ("B", "Blue"), ("G", "Green")]
     name=models.CharField(
