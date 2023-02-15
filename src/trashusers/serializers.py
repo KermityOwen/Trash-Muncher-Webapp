@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
             "id",
             "first_name",
             "last_name",
-            "email",
+            "username",
         ]
         read_only_fields = [
             "id",
@@ -26,7 +26,7 @@ class UserPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         read_only_fields = ["id"]
-        fields = ["email", "first_name", "last_name", "password"]
+        fields = ["username", "first_name", "last_name", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -50,33 +50,41 @@ class TeamSerializer(serializers.ModelSerializer):
 
 
 class PlayerSerializer(serializers.ModelSerializer):
-    user = UserSerializer(required=True)
-    team = TeamSerializer(required=True)
+    user = UserPostSerializer(required=True)
+    # team = TeamSerializer(required=True)
 
     class Meta:
         model = Player
         fields = [
-            "user",
-            "team",
+            "user"
         ]
     def create(self, validated_data):
-        user_data = validated_data.pop('user')
-        user = UserPostSerializer.create(UserSerializer(), validated_data=user_data)
-        team_data = validated_data.pop('team')
-        team = TeamSerializer.create(TeamSerializer(), validated_data=team_data)
-        player = Player.objects.update_or_create(user=user, team=team)
-
+        user_data = validated_data['user']
+        user_serializer = UserPostSerializer(data=user_data)
+        if user_serializer.is_valid(raise_exception=ValueError):
+            user = user_serializer.create(validated_data=user_data)
+        else:
+            print(user_data)
+        # team_data = validated_data.pop('team')
+        # team = TeamSerializer.create(TeamSerializer(), validated_data=team_data)
+        print("REACHED HERE 1")
+        player = Player.objects.update_or_create(user=user) #, team=team
+        print("REACHED HERE 2")
         return player
 
-class GamekeeperSerializer(serializers.ModelSerializer):
-    user = UserSerializer(required=True)
+class GameKeeperSerializer(serializers.ModelSerializer):
+    user = UserPostSerializer(required=True)
     class Meta:
         model = GameKeeper
         fields = [
             "user",
         ]
-        def create(self, validated_data):
-            user_data = validated_data.pop('user')
-            user = UserPostSerializer.create(UserSerializer(), validated_data=user_data)
-            gamekeeper = GameKeeper.objects.update_or_create(user=user)
-            return gamekeeper
+    def create(self, validated_data):
+        user_data = validated_data['user']
+        user_serializer = UserPostSerializer(data=user_data)
+        if user_serializer.is_valid(raise_exception=ValueError):
+            user = user_serializer.create(validated_data=user_data)
+        else:
+            print(user_data)
+        gamekeeper = GameKeeper.objects.update_or_create(user=user)
+        return gamekeeper
