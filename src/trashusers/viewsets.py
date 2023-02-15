@@ -2,46 +2,30 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from rest_framework import filters, mixins, status, viewsets
+from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import UserSerializer, PlayerSerializer, GamekeeperSerializer
-from .models import Player
+from .serializers import UserSerializer, UserPostSerializer, PlayerSerializer, GameKeeperSerializer
+from .models import Player, GameKeeper, User
 
 class PlayerRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = Player.objects.all()
     authentication_classes = []
     serializer_class = PlayerSerializer
-    def post(self, request):
-        """
-        Create a student record
-        :param request: Request object for creating Player/GameKeeper
-        :return: Returns data of created Player/GameKeeper
-        """
-        serializer = PlayerSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=ValueError):
-            serializer.create(validated_data=request.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.error_messages,
-                        status=status.HTTP_400_BAD_REQUEST)
 
 class GamekeeperRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = GameKeeper.objects.all()
     authentication_classes = []
-    serializer_class = GamekeeperSerializer
-    def post(self, request):
-        """
-        Create a student record
-        :param request: Request object for creating Player/GameKeeper
-        :return: Returns data of created Player/GameKeeper
-        """
-        serializer = GamekeeperSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=ValueError):
-            serializer.create(validated_data=request.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.error_messages,
-                        status=status.HTTP_400_BAD_REQUEST)
+    serializer_class = GameKeeperSerializer
+
+
+class UserRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = User.objects.all()
+    authentication_classes = []
+    serializer_class = UserPostSerializer
 
 
 class LoginView(APIView):

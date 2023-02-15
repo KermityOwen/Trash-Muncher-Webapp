@@ -1,4 +1,4 @@
-"""trashmunchers URL Configuration
+"""trashmain URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -20,5 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('', include('trashsite.urls')),
-    path('api/users/', include('users.urls')),
+    path('api/users/', include('trashusers.urls')),
 ]
