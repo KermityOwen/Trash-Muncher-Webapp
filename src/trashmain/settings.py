@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # For user managing API
     'django_extensions',
     'trashusers',
+    # For monster managing API
+    'trashmonsters'
 ]
 
 MIDDLEWARE = [
