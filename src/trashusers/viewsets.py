@@ -21,7 +21,6 @@ class GamekeeperRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericVie
     authentication_classes = []
     serializer_class = GameKeeperSerializer
 
-
 class UserRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
     authentication_classes = []

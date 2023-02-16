@@ -5,8 +5,6 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework.exceptions import ValidationError as DRFValidationError
 
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
@@ -19,8 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
         ]
-
-
 
 class UserPostSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,8 +42,7 @@ class UserPostSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields = ['name'] 
-
+        fields = ["name"]
 
 class PlayerSerializer(serializers.ModelSerializer):
     user = UserPostSerializer(required=True)
