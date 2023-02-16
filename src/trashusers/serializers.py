@@ -66,9 +66,7 @@ class PlayerSerializer(serializers.ModelSerializer):
         # team_data = validated_data.pop('team')
         # team = TeamSerializer.create(TeamSerializer(), validated_data=team_data)
         comment_data = validated_data.get('comment')
-        print("REACHED HERE 1")
         player, created = Player.objects.update_or_create(user=user, comment=comment_data) #, team=team
-        print("REACHED HERE 2")
         return player
 
 class GameKeeperSerializer(serializers.ModelSerializer):
