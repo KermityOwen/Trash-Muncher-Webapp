@@ -20,8 +20,10 @@ class Team(models.Model):
 
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,  primary_key=True,related_name="player",)
+    comment = models.CharField(max_length=255)
     # team = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL)
 
 class GameKeeper(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,related_name="gamekeeper",)
+    trash = models.CharField(max_length=255)
     

@@ -51,19 +51,23 @@ class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
         fields = [
-            "user"
+            "user",
+            "comment",
         ]
     def create(self, validated_data):
-        user_data = validated_data['user']
+        user_data = validated_data.get('user')
         user_serializer = UserPostSerializer(data=user_data)
+        print(user_serializer)
         if user_serializer.is_valid(raise_exception=ValueError):
             user = user_serializer.create(validated_data=user_data)
+            print(user)
         else:
             print(user_data)
         # team_data = validated_data.pop('team')
         # team = TeamSerializer.create(TeamSerializer(), validated_data=team_data)
+        comment_data = validated_data.get('comment')
         print("REACHED HERE 1")
-        player = Player.objects.update_or_create(user=user) #, team=team
+        player, created = Player.objects.update_or_create(user=user, comment=comment_data) #, team=team
         print("REACHED HERE 2")
         return player
 
@@ -73,13 +77,15 @@ class GameKeeperSerializer(serializers.ModelSerializer):
         model = GameKeeper
         fields = [
             "user",
+            "trash",
         ]
     def create(self, validated_data):
-        user_data = validated_data['user']
+        user_data = validated_data.get('user')
         user_serializer = UserPostSerializer(data=user_data)
         if user_serializer.is_valid(raise_exception=ValueError):
             user = user_serializer.create(validated_data=user_data)
         else:
             print(user_data)
-        gamekeeper = GameKeeper.objects.update_or_create(user=user)
+        trash_data = validated_data.get('trash')
+        gamekeeper, created = GameKeeper.objects.update_or_create(user=user, trash=trash_data)
         return gamekeeper
