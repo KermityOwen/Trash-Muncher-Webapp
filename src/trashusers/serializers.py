@@ -46,13 +46,13 @@ class TeamSerializer(serializers.ModelSerializer):
 
 class PlayerSerializer(serializers.ModelSerializer):
     user = UserPostSerializer(required=True)
-    # team = TeamSerializer(required=True)
+    team = TeamSerializer(required=True)
 
     class Meta:
         model = Player
         fields = [
             "user",
-            "comment",
+            "team",
         ]
     def create(self, validated_data):
         user_data = validated_data.get('user')
@@ -63,10 +63,9 @@ class PlayerSerializer(serializers.ModelSerializer):
             print(user)
         else:
             print(user_data)
-        # team_data = validated_data.pop('team')
-        # team = TeamSerializer.create(TeamSerializer(), validated_data=team_data)
-        comment_data = validated_data.get('comment')
-        player, created = Player.objects.update_or_create(user=user, comment=comment_data) #, team=team
+        # Overriding create function necessitates this, can be changed to take ints if preferred.
+        team_data = validated_data.get('team')
+        player, created = Player.objects.update_or_create(user=user, team=Team.objects.get(name=team_data['name']))
         return player
 
 class GameKeeperSerializer(serializers.ModelSerializer):
@@ -75,7 +74,6 @@ class GameKeeperSerializer(serializers.ModelSerializer):
         model = GameKeeper
         fields = [
             "user",
-            "trash",
         ]
     def create(self, validated_data):
         user_data = validated_data.get('user')
@@ -84,6 +82,5 @@ class GameKeeperSerializer(serializers.ModelSerializer):
             user = user_serializer.create(validated_data=user_data)
         else:
             print(user_data)
-        trash_data = validated_data.get('trash')
-        gamekeeper, created = GameKeeper.objects.update_or_create(user=user, trash=trash_data)
+        gamekeeper, created = GameKeeper.objects.update_or_create(user=user)
         return gamekeeper
