@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Map :)</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" type="text/css" href={% static "css/style.css" %}>
+    <script src={% static "js/map.js" %}></script>
+  </head>
+  <body>
+    <h3>The map</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+    <!--<button onclick="changeZoom()">click to unzoom!!!</button>
+    <button onclick="goToLocation()">Current Location</button>
+    -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>
