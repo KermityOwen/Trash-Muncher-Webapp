@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     # For user managing API
-    # 'django_extensions',
+    'django_extensions',
     'trashusers',
     # For monster managing API
     'trashmonsters'
