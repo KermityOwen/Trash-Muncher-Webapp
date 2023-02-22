@@ -5,6 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework.exceptions import ValidationError as DRFValidationError
 from trashmain.auxillary import get_player_team
+from trashmain.permissions import isGameKeeper, isPlayer
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -69,6 +70,10 @@ class PlayerSerializer(serializers.ModelSerializer):
         # Overriding create function necessitates this, can be changed to take ints if preferred.
         team_data = validated_data.get('team')
         player, created = Player.objects.update_or_create(user=user, team=Team.objects.get(name=team_data['name']))
+        perm = isGameKeeper()
+        print(perm.has_permission(player))
+        perm = isPlayer()
+        print(perm.has_permission(player))
         return player
 
 class GameKeeperSerializer(serializers.ModelSerializer):

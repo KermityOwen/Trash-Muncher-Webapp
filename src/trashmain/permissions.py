@@ -8,5 +8,5 @@ class isGameKeeper(BasePermission):
 
 class isPlayer(BasePermission):
     def has_permission(self, request):
-        qs = GameKeeper.objects.filter(user=request.user)
+        qs = Player.objects.filter(user=request.user)
         return qs.exists()
