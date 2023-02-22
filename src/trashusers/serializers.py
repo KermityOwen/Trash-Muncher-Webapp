@@ -4,8 +4,8 @@ from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework.exceptions import ValidationError as DRFValidationError
-
-
+from trashmain.auxillary import get_player_team
+from trashmain.permissions import isGameKeeper, isPlayer
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,8 +19,6 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
         ]
-
-
 
 class UserPostSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,30 +44,36 @@ class UserPostSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields = ['name'] 
-
+        fields = ["name"]
 
 class PlayerSerializer(serializers.ModelSerializer):
+    # Need to create the teams first, before using this, could look into the idea of some kinda database initialization, 
+    # or simply adding it to the readme, this way is better, because you can change names of teams then if you want to set it up
     user = UserPostSerializer(required=True)
-    # team = TeamSerializer(required=True)
+    team = TeamSerializer(required=True)
 
     class Meta:
         model = Player
         fields = [
-            "user"
+            "user",
+            "team",
         ]
     def create(self, validated_data):
-        user_data = validated_data['user']
+        user_data = validated_data.get('user')
         user_serializer = UserPostSerializer(data=user_data)
+        print(user_serializer)
         if user_serializer.is_valid(raise_exception=ValueError):
             user = user_serializer.create(validated_data=user_data)
+            print(user)
         else:
             print(user_data)
-        # team_data = validated_data.pop('team')
-        # team = TeamSerializer.create(TeamSerializer(), validated_data=team_data)
-        print("REACHED HERE 1")
-        player = Player.objects.update_or_create(user=user) #, team=team
-        print("REACHED HERE 2")
+        # Overriding create function necessitates this, can be changed to take ints if preferred.
+        team_data = validated_data.get('team')
+        player, created = Player.objects.update_or_create(user=user, team=Team.objects.get(name=team_data['name']))
+        perm = isGameKeeper()
+        print(perm.has_permission(player))
+        perm = isPlayer()
+        print(perm.has_permission(player))
         return player
 
 class GameKeeperSerializer(serializers.ModelSerializer):
@@ -80,11 +84,11 @@ class GameKeeperSerializer(serializers.ModelSerializer):
             "user",
         ]
     def create(self, validated_data):
-        user_data = validated_data['user']
+        user_data = validated_data.get('user')
         user_serializer = UserPostSerializer(data=user_data)
         if user_serializer.is_valid(raise_exception=ValueError):
             user = user_serializer.create(validated_data=user_data)
         else:
             print(user_data)
-        gamekeeper = GameKeeper.objects.update_or_create(user=user)
+        gamekeeper, created = GameKeeper.objects.update_or_create(user=user)
         return gamekeeper
