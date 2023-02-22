@@ -152,7 +152,7 @@ a.register:visited {
 #map {
 	height: 400px; /* The height is 400 pixels */
 	width: 600px; /* The width is the width of the web page */
-
+	z-index: -1;
 	box-shadow: 0px 4px 30px #272727;
 	
 }
@@ -162,4 +162,18 @@ a.register:visited {
   	width: 600px; /* The width is the width of the web page */
 	margin: auto;
 	position:relative;
+}
+
+.below_map {
+	list-style-type: none;
+	text-align: center;
+}
+.mapButton {
+	float: left;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 33.33%; /* Four links of equal widths */
+  text-align: center;
+	
 }
