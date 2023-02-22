@@ -142,16 +142,24 @@ a.register:visited {
 	float: right;
 }
 
+.map-modal {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+}
+
 #map {
 	height: 400px; /* The height is 400 pixels */
 	width: 600px; /* The width is the width of the web page */
-	border: #0F0F0F;
-	border-style: solid;
-	border-width: 1px;
+
+	box-shadow: 0px 4px 30px #272727;
+	
 }
 
 #mapUI {
 	height: 400px; /* The height is 400 pixels */
   	width: 600px; /* The width is the width of the web page */
 	margin: auto;
+	position:relative;
 }
