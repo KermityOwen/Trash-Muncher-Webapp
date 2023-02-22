@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import TrashImages
+from .models import Images
 
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TrashImages
+        model = Images
         fields = '__all__'
