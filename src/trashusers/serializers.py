@@ -4,6 +4,7 @@ from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework.exceptions import ValidationError as DRFValidationError
+from trashmain.auxillary import get_player_team
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,6 +46,8 @@ class TeamSerializer(serializers.ModelSerializer):
         fields = ["name"]
 
 class PlayerSerializer(serializers.ModelSerializer):
+    # Need to create the teams first, before using this, could look into the idea of some kinda database initialization, 
+    # or simply adding it to the readme, this way is better, because you can change names of teams then if you want to set it up
     user = UserPostSerializer(required=True)
     team = TeamSerializer(required=True)
 
