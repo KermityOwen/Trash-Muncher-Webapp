@@ -88,3 +88,17 @@ def removeScore(request):
     TM.save()
 
     return Response(TMSerializer(TM, many=False).data)
+
+@api_view(['POST'])
+def getLeaderTeam(request):
+    TM_ID = request.data.get("TM_ID", None)
+    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+
+    # Using bubble search for now (hard code for only 3 groups), can optimise or fix in the future. ceebs
+    if (TM.Team1_Score >= TM.Team2_Score):
+        if (TM.Team1_Score > TM.Team3_Score):
+            return Response(1)
+        else:
+            return Response(3)
+    elif (TM.Team2_Score > TM.Team3_Score):
+        return Response (2)

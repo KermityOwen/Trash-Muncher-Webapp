@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('change-score', viewset.changeScore),
     path('add-score', viewset.addScore),
-    path('remove-score', viewset.removeScore)
+    path('remove-score', viewset.removeScore),
+
+    path('get-leader', viewset.getLeaderTeam)
 ]
 
