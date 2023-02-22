@@ -16,12 +16,12 @@ class PlayerRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet
     queryset = Player.objects.all()
     authentication_classes = []
     serializer_class = PlayerSerializer
+    
 
 class GamekeeperRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = GameKeeper.objects.all()
     authentication_classes = []
     serializer_class = GameKeeperSerializer
-
 
 class UserRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
