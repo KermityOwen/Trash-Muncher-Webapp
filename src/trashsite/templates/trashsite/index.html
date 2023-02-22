@@ -8,14 +8,26 @@
 </head>
 
 <body>
-	<header>
-    <nav>
-    	<ul class = "nav_links">
-	        <li class="about"><a href="#">About</a></li>
-	        <li class="register"><a href="#">Register</a></li>
-	    	<li class="login"><a href="#">Login</a></li>
-        </ul>
-     </nav>
-     </header>
+	<div class="container">
+    	<div class="images">
+	       	<img src = "{% static 'images/green.png' %}" class="green" />
+            <img src = "{% static 'images/red.png' %}" class="red" />
+            <img src = "{% static 'images/pale.png' %}" class="pale" />
+        </div>
+		<div class="content">
+	    </div>
+		<div class="header">
+		    <nav>
+		   	<ul class = "nav_links">
+		        <li class="home"><a href="#" class="home">Home</a></li>
+		       	<li class="about"><a href="#" class="about">About</a></li>
+		    	<li class="login"><a href="#" class="login">Login</a></li>
+   		        <li class="register"><a href="#" class="register">Register</a></li>
+		        </ul>
+			</nav>
+		</div>
+	</div>
+    <img src = "{% static 'images/left_plant.png' %}" class="left_plant" />
+    <img src = "{% static 'images/right_plant.png' %}" class="right_plant" />
 </body>
 </html>
