@@ -18,3 +18,10 @@ def addTM(request):
     if (serializer.is_valid()):
         serializer.save()
     return Response(serializer.data)
+
+# @api_view(['POST'])
+# def calcDistance(request):
+#     TM_ID = request.get
+#     TM = TrashMonsters.objects.filter()
+#     serializer = TMSerializer()
+#     print(TM_ID)
