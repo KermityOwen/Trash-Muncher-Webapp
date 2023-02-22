@@ -9,6 +9,8 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 django-extensions = "*"
+pillow = "*"
+piplock = "*"
 
 [dev-packages]
 

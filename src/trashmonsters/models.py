@@ -1,4 +1,5 @@
 from django.db import models
+from trashusers.models import Team
 
 # class Counters(models.Model):
 #     Current_User_ID = models.SmallIntegerField()
@@ -21,3 +22,4 @@ class TrashMonsters(models.Model):
     # ToString method for debug
     def __str__(self):
         return ("TM's ID: %d, Lat: %f, Long: %d,"%(self.TM_ID, self.Latitude, self.Longitude))
+
