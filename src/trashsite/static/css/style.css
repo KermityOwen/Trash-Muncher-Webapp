@@ -44,6 +44,15 @@ header {
 }
 
 #map {
-  height: 400px; /* The height is 400 pixels */
-  width: 600px; /* The width is the width of the web page */
+	height: 400px; /* The height is 400 pixels */
+	width: 600px; /* The width is the width of the web page */
+	border: #0F0F0F;
+	border-style: solid;
+	border-width: 1px;
+}
+
+#mapUI {
+	height: 400px; /* The height is 400 pixels */
+  	width: 600px; /* The width is the width of the web page */
+	margin: auto;
 }
