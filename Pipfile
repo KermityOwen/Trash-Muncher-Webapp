@@ -10,6 +10,8 @@ markdown = "*"
 django-filter = "*"
 django-extensions = "*"
 pillow = "*"
+piplock = "*"
+geopy = "*"
 
 [dev-packages]
 

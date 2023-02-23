@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "93b6dbf2036d5304147bfc32e29f32e0638353ddc3ea84102c20356d0d80e7bf"
+            "sha256": "0050f9efee7aef87b8a241c040670676ff068805135e2b86bef41c7119e0c86b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -55,6 +55,22 @@
             ],
             "index": "pypi",
             "version": "==3.14.0"
+        },
+        "geographiclib": {
+            "hashes": [
+                "sha256:6b7225248e45ff7edcee32becc4e0a1504c606ac5ee163a5656d482e0cd38734",
+                "sha256:f7f41c85dc3e1c2d3d935ec86660dc3b2c848c83e17f9a9e51ba9d5146a15859"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==2.0"
+        },
+        "geopy": {
+            "hashes": [
+                "sha256:228cd53b6eef699b2289d1172e462a90d5057779a10388a7366291812601187f",
+                "sha256:4a29a16d41d8e56ba8e07310802a1cbdf098eeb6069cc3d6d3068fc770629ffc"
+            ],
+            "index": "pypi",
+            "version": "==2.3.0"
         },
         "importlib-metadata": {
             "hashes": [
@@ -155,6 +171,14 @@
             "index": "pypi",
             "version": "==9.4.0"
         },
+        "piplock": {
+            "hashes": [
+                "sha256:57d420e33642a3d8638f4e395ea9e52095710f6b102978d2416e51124ae7f6f3",
+                "sha256:c3750fa351b983acce39e457c9ce2ffcaa70272c64bed88f7f530e710559b1ca"
+            ],
+            "index": "pypi",
+            "version": "==0.1.0"
+        },
         "pytz": {
             "hashes": [
                 "sha256:01a0681c4b9684a28304615eba55d1ab31ae00bf68ec157ec3708a8182dbbcd0",
@@ -169,14 +193,6 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.3"
-        },
-        "tzdata": {
-            "hashes": [
-                "sha256:2b88858b0e3120792a3c0635c23daf36a7d7eeeca657c323da299d2094402a0d",
-                "sha256:fe5f866eddd8b96e9fcba978f8e503c909b19ea7efda11e52e39494bad3a7bfa"
-            ],
-            "markers": "sys_platform == 'win32'",
-            "version": "==2022.7"
         },
         "zipp": {
             "hashes": [

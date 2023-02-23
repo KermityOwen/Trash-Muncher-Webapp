@@ -1,21 +1,22 @@
 <!doctype html>
+{% load static %}
+{% include 'trashsite/template.html' %}
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>Trash Munchers</title>
-	{% load static %}
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+ 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-index.css' %}">
 </head>
-
-<body>
-	<header>
-    <nav>
-    	<ul class = "nav_links">
-	        <li class="about"><a href="#">About</a></li>
-	        <li class="register"><a href="#">Register</a></li>
-	    	<li class="login"><a href="/login">Login</a></li>
-        </ul>
-     </nav>
-     </header>
-</body>
+	<body>
+		<div class="home_page">
+        	<div class="title">
+		    	<font class="title_trash">TRASH</font><br>
+				<font class="title_munchers">MUNCHERS</font><br><br>
+            </div>
+            <font class="description">A location based "cookie-clicker" type game<br>
+            <font class="description_second">to promote sustainability at University of Exeter</font></font>
+            <br><button class="start">Let's go!</button>
+	    </div>
+    </body>
 </html>
