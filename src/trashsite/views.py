@@ -7,5 +7,8 @@ def template(request):
 def index(request):
     return render(request, 'trashsite/index.html')
 
+def about(request):
+    return render(request, 'trashsite/about.html')
+
 def map(request):
     return render(request, 'trashsite/map.html')
