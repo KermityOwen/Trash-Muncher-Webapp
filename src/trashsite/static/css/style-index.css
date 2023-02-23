@@ -1,0 +1,64 @@
+.title {
+	text-align: center;
+	padding-left: 5.3vw;
+}
+
+.title_trash {
+	font-family: "Bubbler One", sans-serif;
+	font-size: max(8.5vw, 10vh);
+	letter-spacing: 0.7vw;
+	padding-right: 12.6vw;
+}
+
+.title_munchers {
+	font-family: "Bubbler One", sans-serif;
+	font-size: max(5.5vw, 10vh);
+	line-height: 2vw;
+	letter-spacing: 0.7vw;
+	display: inline-block;
+	transform: scaleY(0.9);
+	transform-origin: 0 0;
+	margin-bottom: -50%;
+}
+
+.description {
+	display: inline-block;
+	text-align: center;
+	font-family: 'Chilanka', cursive;
+	font-size: max(1.5vw, 3vh);
+	letter-spacing: 0.2vw;
+}
+
+.description_second {
+	letter-spacing: 0.28vw;
+}
+
+.start {
+	left: 50%;
+	top: 118%;
+	position: absolute;
+	display: inline-block;
+	padding: 2% 11% 1.3% 11%;
+	border-radius: 6vh;
+	font-family: 'Chilanka', cursive;
+	line-height: 1.5em;
+	text-align: center;
+	transform: translate(-50%, -50%);
+	font-size: max(1.5vw, 3vh);
+	border: none;
+	background-color: #B5D3D2;
+	box-shadow: 0vh 0.6vh 1vh rgba(0, 0, 0, 0.3);
+	transition: all 0.5s;
+}
+
+.start:hover {
+	background-color: #DFC9B5;
+	transition: all 0.5s ease 0.5s;
+}
+
+.home_page {
+	position: absolute;
+	top: 46%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
