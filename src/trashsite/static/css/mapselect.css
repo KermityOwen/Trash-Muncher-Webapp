@@ -1,0 +1,40 @@
+.map-modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 85vw;
+	height: 75vh;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	border-radius: 25px;
+}
+
+.form {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	grid-template-rows: repeat(7, auto);
+	background-color: #E1E1E1;
+}
+
+.map {
+	background-color: green;
+}
+
+.form input {
+	width: auto;
+	margin: 0 10px;
+}
+
+.radio {
+	width: 100%;
+}
+
+.submit-button {
+	background: #F2DBC6;
+	border-radius: 15px;
+	height: 50px;
+	border: none;
+}
