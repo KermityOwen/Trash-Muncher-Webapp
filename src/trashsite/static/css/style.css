@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+@import url('https://fonts.googleapis.com/css2?family=Bubbler+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chilanka&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -12,6 +14,7 @@ body {
 
 li, a, button {
 	font-family: "Montserrat", sans-serif;
+	font-size: 0.97vw;
 	text-decoration: none;
 	decoration: none;
 }
@@ -41,7 +44,11 @@ a.register:visited {
 }
 
 .green {
-	width: 92%;
+	width: 28%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: inline-block;
 }
 
 .red {
@@ -53,7 +60,8 @@ a.register:visited {
 }
 
 .pale {
-	width: 38%;
+	width: 48%;
+	height: 87%;
 	position: fixed;
 	bottom: 0;
 	right: 0;
@@ -69,7 +77,7 @@ a.register:visited {
 }
 
 .right_plant {
-	width: 16.5%;
+	width: 17.5%;
 	position: fixed;
 	bottom: 0;
 	right: 0;
@@ -84,7 +92,7 @@ a.register:visited {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	box-shadow: 0px 4px 30px #272727;
+	box-shadow: 0px 0.7vw 6vh #272727;
 }
 
 .header {
@@ -99,7 +107,7 @@ a.register:visited {
 
 .nav_links li {
 	display: inline-block;
-	padding: 0px 20px;
+	padding: 0px 2.5vh;
 }
 
 .nav_links li a {
