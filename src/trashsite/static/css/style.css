@@ -160,8 +160,8 @@ a.register:visited {
 }
 
 #map {
-	height: 500px; /* The height is 400 pixels */
-	width: 800px; /* The width is the width of the web page */
+	height: 60vh; /* The height is 400 pixels */
+	width: 50vw; /* The width is the width of the web page */
 	z-index: -1;
 	box-shadow: 0px 4px 30px #272727;
 	
