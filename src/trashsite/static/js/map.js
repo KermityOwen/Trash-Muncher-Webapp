@@ -4,20 +4,62 @@ var map;
 //draws the map onto the screen
 function initMap(){
 //future code for setting current position
+var geoButton = document.getElementById("geoButton");
+var coords;
+navigator.permissions.query({name:'geolocation'}).then((result) => {
+  if(result.state === 'granted'){
+    getPosition().then(console.log);
+    
+    alert(coords);
+    geoButton.style.display = 'none';
+    createMap(coords);
+  }
+  else if(result.state==='prompt'){
+    geoButton.style.display = 'none';
+    coords = navigator.geolocation.getCurrentPosition(success,failure);}
+  else if(result.state==='denied'){
+    geoButton.style.display = 'inline';
+  }
+  result.addEventListener('change', () => {
+    if(result.state==='granted'){
+      createMap(coords);
+    }
+  });
+});
 
-
-map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 18,
-        tilt:45,
-        disableDefaultUI: true,
-        zoomControl: false,
-        gestureHandling: "none",
-        center: {lat: 50.73646948193597, lng: -3.5317420013942633},
-        mapId:'805b0b106a1a291d'
-      });
 //future code to draw shapes for the area of control
 
+//code to set the monster points
+//for (let index = 0; index < 2; index++) { 
+//  const monster= monsters[index];
+  
+//}
+
 }
+
+function getPosition(){
+  return new Promise((success,failure) => {
+    navigator.geolocation.getCurrentPosition(success,failure);
+  });
+}
+function createMap(coords){
+  //alert(coords);
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 18,
+    tilt:45,
+    disableDefaultUI: true,
+    zoomControl: false,
+    gestureHandling: "none",
+    center: {lat: coords[0], lng: coords[1]},
+    mapId:'805b0b106a1a291d'
+  });
+}
+
+function runPermission(){
+  alert("hi");
+  navigator.geolocation.getCurrentPosition(success,failure);
+}
+
 
 //will be called on a click event with the gmaps api, passes in longitude, latitude
 function placeMonster(){ //need to add parameters once working
@@ -65,4 +107,16 @@ function placeMonster(){ //need to add parameters once working
 function ajax(){
   alert("this will do ajax shit soon");
 }
+
+function success(position){
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  var coords=[longitude,latitude];
+  return coords;
+}
+
+function failure(){
+  return [50.73646948193597, -3.5317420013942633]
+}
+
 window.initMap = initMap;
