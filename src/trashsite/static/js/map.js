@@ -6,13 +6,11 @@ function initMap(){
 //future code for setting current position
 var geoButton = document.getElementById("geoButton");
 var coords;
-navigator.permissions.query({name:'geolocation'}).then((result) => {
+navigator.permissions.query({name:'geolocation'}).then(async (result) => {
   if(result.state === 'granted'){
-    getPosition().then(console.log);
-    
-    alert(coords);
     geoButton.style.display = 'none';
-    createMap(coords);
+    await getPosition();
+    
   }
   else if(result.state==='prompt'){
     geoButton.style.display = 'none';
@@ -20,9 +18,12 @@ navigator.permissions.query({name:'geolocation'}).then((result) => {
   else if(result.state==='denied'){
     geoButton.style.display = 'inline';
   }
-  result.addEventListener('change', () => {
+  result.addEventListener('change', async () => {
     if(result.state==='granted'){
-      createMap(coords);
+      await getPosition();
+    }
+    if(result.state==='denied'){
+      geoButton.style.display = 'inline';
     }
   });
 });
@@ -37,20 +38,19 @@ navigator.permissions.query({name:'geolocation'}).then((result) => {
 
 }
 
-function getPosition(){
-  return new Promise((success,failure) => {
-    navigator.geolocation.getCurrentPosition(success,failure);
+async function getPosition(){
+  return new Promise((resolve,reject) => {
+    navigator.geolocation.getCurrentPosition(position => {resolve(createMap(position.coords))},reject);
   });
 }
 function createMap(coords){
-  //alert(coords);
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 18,
     tilt:45,
     disableDefaultUI: true,
     zoomControl: false,
     gestureHandling: "none",
-    center: {lat: coords[0], lng: coords[1]},
+    center: {lat: coords.latitude, lng: coords.longitude},
     mapId:'805b0b106a1a291d'
   });
 }
