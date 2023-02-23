@@ -1,44 +1,167 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400');
+@import url('https://fonts.googleapis.com/css2?family=Bubbler+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chilanka&display=swap');
 
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	background-color: #F0F0F0;
+}
+
+body {
+	background-color: #61846F;
 }
 
 li, a, button {
 	font-family: "Montserrat", sans-serif;
-	color: #0F0F0F;
+	font-weight: 500;
+	font-size: 0.97vw;
 	text-decoration: none;
+	decoration: none;
 }
 
-header {
-	overflow: hidden;	
+a.home:visited {
+	text-decoration: none;
+	color: white;
+}
+
+a.about:visited {
+	text-decoration: none;
+	color: white;
+}
+
+a.login:visited {
+	text-decoration: none;
+	color: black;
+}
+
+a.register:visited {
+	text-decoration: none;
+	color: black;
+}
+
+.images { 
+	position: absolute;
+}
+
+.green {
+	width: 28%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: inline-block;
+}
+
+.red {
+	width: 21%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	display: inline-block;
+}
+
+.pale {
+	width: 48%;
+	height: 87%;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	display: inline-block;
+}
+
+.left_plant {
+	width: 14%;
+	position: fixed;
+	bottom: 3vh;
+	left: 2.2vw;
+	display: inline-block;
+}
+
+.right_plant {
+	width: 17.5%;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	display: inline-block;
+}
+
+.container {
+	height: 93vh;
+	width: 95vw;
+	background-color: #D9D9D9;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 0px 0.7vw 6vh #272727;
+}
+
+.header {
 	align-items: center;
-	padding: 30px 10%;
+	padding: 1.6vw 4vh;
+	position: relative;
+}
+
+.header {
+	z-index: 10;
 }
 
 .nav_links li {
 	display: inline-block;
-	padding: 0px 9px;
+	padding: 0px 2.5vh;
 }
 
 .nav_links li a {
 	transition: all 0.3s ease 0s;
 }
-	
-.nav_links li a:hover {
-	color: #96A394;
+
+.nav_links li a.home:hover {
+	color: #FCDFC4;
+}
+
+.nav_links li a.about:hover {
+	color: #FCDFC4;
+}
+
+.nav_links li a.register:hover {
+	color: #977453;
+}
+
+.nav_links li a.login:hover {
+	color: #977453;
+}
+
+.home {
+	color: #FFFFFF;
+	float: left;
 }
 
 .about {
+	color: #FFFFFF;
 	float: left;
 }
 
 .register {
+	color: #000000;
 	float: right;
 }
+
 .login {
+	color: #000000;
 	float: right;
+}
+
+#map {
+	height: 400px; /* The height is 400 pixels */
+	width: 600px; /* The width is the width of the web page */
+	border: #0F0F0F;
+	border-style: solid;
+	border-width: 1px;
+}
+
+#mapUI {
+	height: 400px; /* The height is 400 pixels */
+  	width: 600px; /* The width is the width of the web page */
+	margin: auto;
 }
