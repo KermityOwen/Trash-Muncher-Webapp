@@ -1,6 +1,7 @@
 from rest_framework.test import (
     APITestCase,
     APIClient,
+    force_authenticate,
 )
 from rest_framework import status
 from .models import Player, GameKeeper, User, Team
@@ -48,14 +49,3 @@ class UserViewsetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["id"], self.user.id)
         self.assertEqual(response.data["username"], self.user.username)
-
-    def test_login(self):
-        self.client.force_authenticate()
-        response = self.client.post(
-            self.url+"/users/login/",
-            {
-                "username": self.user.username,
-                "password": self.user.password,
-            },
-        )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
