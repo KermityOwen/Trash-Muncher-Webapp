@@ -21,8 +21,8 @@ class UserViewsetTest(APITestCase):
             self.url + "/player-register/",
             {
                 "username": "test_user",
-                "first_name": "john",
-                "last_name": "example",
+                "first_name": "Test",
+                "last_name": "User",
                 "password": "secure_password",
             },
         )
