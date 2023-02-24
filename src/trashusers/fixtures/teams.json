@@ -1,0 +1,23 @@
+[
+  {
+    "model": "trashusers.team",
+    "pk": 1,
+    "fields": {
+      "name": "Red"
+    }
+  },
+  {
+    "model": "trashusers.team",
+    "pk": 2,
+    "fields": {
+      "name": "Green"
+    }
+  },
+  {
+    "model": "trashusers.team",
+    "pk": 3,
+    "fields": {
+      "name": "Blue"
+    }
+  }
+]
