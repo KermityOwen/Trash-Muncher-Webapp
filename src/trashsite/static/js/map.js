@@ -43,6 +43,8 @@ async function getPosition(){
     navigator.geolocation.getCurrentPosition(position => {resolve(createMap(position.coords))},reject);
   });
 }
+
+
 function createMap(coords){
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 18,
@@ -53,6 +55,19 @@ function createMap(coords){
     center: {lat: coords.latitude, lng: coords.longitude},
     mapId:'805b0b106a1a291d'
   });
+
+  //gets the monsters to put on the map
+  const http = new XMLHttpRequest();
+  const url="api/monsters/get-tms";
+  http.open("GET",url);
+  http.send();
+
+  http.onreadystatechange = (e) => {
+    if (http.readyState === XMLHttpRequest.DONE) {
+      const monsters=JSON.parse(http.responseText);
+      createMonsters(monsters);
+    }
+  }
 }
 
 function runPermission(){
@@ -60,6 +75,20 @@ function runPermission(){
   navigator.geolocation.getCurrentPosition(success,failure);
 }
 
+function createMonsters(monsters){
+  
+  monsters.forEach(element => {
+    let latitude = element.Latitude;
+    let longitude = element.Longitude;
+
+    //currently only creates a google map marker, will create a 3d object at a later date which can store id, this cannot.
+    new google.maps.Marker({
+      position:{lat:latitude,lng:longitude},
+      map,
+      title:"id:"+element.TM_ID,
+    })
+  });
+}
 
 //will be called on a click event with the gmaps api, passes in longitude, latitude
 function placeMonster(){ //need to add parameters once working
