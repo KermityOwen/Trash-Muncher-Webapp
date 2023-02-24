@@ -61,12 +61,8 @@ class PlayerSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.get('user')
         user_serializer = UserPostSerializer(data=user_data)
-        print(user_serializer)
         if user_serializer.is_valid(raise_exception=ValueError):
             user = user_serializer.create(validated_data=user_data)
-            print(user)
-        else:
-            print(user_data)
         # Overriding create function necessitates this, can be changed to take ints if preferred.
         team_data = validated_data.get('team')
         player, _ = Player.objects.update_or_create(user=user, team=Team.objects.get(name=team_data['name']))

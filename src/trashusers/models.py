@@ -14,11 +14,7 @@ class User(AbstractUser):
 
 class Team(models.Model):
     TEAMS=[("R", "Red"), ("B", "Blue"), ("G", "Green")]
-    name=models.CharField(
-        default='R',
-        max_length=1,
-        choices=TEAMS,
-    )
+    name=models.CharField(max_length=10)
     points=models.IntegerField(default=0)
 
 class Player(models.Model):
