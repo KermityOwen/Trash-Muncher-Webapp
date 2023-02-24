@@ -37,6 +37,23 @@ class UserViewsetTest(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_create_gamekeeper(self):
+        self.client.force_authenticate()
+        response = self.client.post(
+            self.url + "/users/gamekeeper-register/",
+            {
+                "user": 
+                    {
+                        "username": "test_user",
+                        "first_name": "Test",
+                        "last_name": "User",
+                        "password": "secure_password"
+                    }
+            },
+            format='json',
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
     def test_get_user(self):
         self.client.force_authenticate(self.user)
         response = self.client.get(self.url + "/users/me/")
