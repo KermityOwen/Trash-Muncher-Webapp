@@ -14,7 +14,8 @@ navigator.permissions.query({name:'geolocation'}).then(async (result) => {
   }
   else if(result.state==='prompt'){
     geoButton.style.display = 'none';
-    coords = navigator.geolocation.getCurrentPosition(success,failure);}
+    await getPosition();
+  }
   else if(result.state==='denied'){
     geoButton.style.display = 'inline';
   }
@@ -31,14 +32,14 @@ navigator.permissions.query({name:'geolocation'}).then(async (result) => {
 //future code to draw shapes for the area of control
 
 }
-
+//deals with initial current position
 async function getPosition(){
   return new Promise((resolve,reject) => {
     navigator.geolocation.getCurrentPosition(position => {resolve(createMap(position.coords))},reject);
   });
 }
 
-
+//def important function needs changing for different uses
 function createMap(coords){
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 18,
@@ -49,6 +50,8 @@ function createMap(coords){
     center: {lat: coords.latitude, lng: coords.longitude},
     mapId:'805b0b106a1a291d'
   });
+
+  navigator.geolocation.watchPosition(successMove);
 
   //gets the monsters to put on the map
   const http = new XMLHttpRequest();
@@ -103,7 +106,8 @@ function createMonster(){
   }
 }
 
-//will be called on a click event with the gmaps api, passes in longitude, latitude
+//mostly a test thing, dont think its going to be used
+
 function placeMonster(){ //need to add parameters once working
   //creates a form to add a monster to the map
   if(document.getElementById("form")){
@@ -147,13 +151,18 @@ function placeMonster(){ //need to add parameters once working
 }
 
 
-function success(position){
+function successMove(position){ //will handle distances from monsters to player
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
-  var coords=[longitude,latitude];
-  return coords;
+  console.log("latitude:"+latitude+" longitude:"+longitude);
+  map.panTo({lat:latitude,lng:longitude});
 }
-
+function success(position){ //will handle distances from monsters to player
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  console.log("latitude:"+latitude+" longitude:"+longitude);
+  map.panTo({lat:latitude,lng:longitude});
+}
 function failure(){
   return [50.73646948193597, -3.5317420013942633]
 }
