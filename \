@@ -1,0 +1,210 @@
+body.preload *{
+	animation-duration: 0s !important;
+	-webkit-animation-duration: 0s !important;
+	transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
+}
+
+.title {
+	text-align: center;
+	padding-left: 5.3vw;
+}
+
+.title_trash {
+	font-family: "Bubbler One", sans-serif;
+	font-size: max(8.5vw, 10vh);
+	letter-spacing: 0.7vw;
+	padding-right: 12.6vw;
+}
+
+.title_munchers {
+	font-family: "Bubbler One", sans-serif;
+	font-size: max(5.5vw, 10vh);
+	line-height: 2vw;
+	letter-spacing: 0.7vw;
+	display: inline-block;
+	transform: scaleY(0.9);
+	transform-origin: 0 0;
+	margin-bottom: -50%;
+}
+
+.description {
+	white-space: nowrap;
+	position: absolute;
+	display: inline-block;
+	text-align: center;
+	font-family: 'Chilanka', cursive;
+	font-size: max(1.5vw, 3vh);
+	letter-spacing: 0.2vw;
+	bottom: -15.7%;
+}
+
+.description_outline {
+	white-space: nowrap;
+	position: absolute;
+	display: inline-block;
+	text-align: center;
+	font-family: 'Chilanka', cursive;
+	font-size: max(1.5vw, 3vh);
+	-webkit-text-stroke: unset;
+	text-stroke: unset;
+	-webkit-text-fill-color: black;
+	letter-spacing: 0.2vw;
+	-webkit-text-stroke: 0.6vw #D9D9D9;
+	bottom: -15.7%;
+}
+
+.description_second {
+	letter-spacing: 0.23vw;
+}
+
+.start {
+	left: 50%;
+	top: 136%;
+	position: absolute;
+	display: inline-block;
+	padding: 2.25% 12.6% 1.55% 12.6%;
+	border-radius: 15px;
+	font-family: 'Chilanka', cursive;
+	line-height: 1.5em;
+	text-align: center;
+	transform: translate(-50%, -50%);
+	font-size: max(1.5vw, 3vh);
+	border: none;
+	background-color: #B5D3D2;
+	box-shadow: 0vh 0.6vh 1vh rgba(0, 0, 0, 0.3);
+	transition: all 0.5s;
+	cursor: pointer;
+}
+
+.start:hover {
+	background-color: #DFC9B5;
+	border-radius: 25px;
+	transition: all 0.5s ease 0.0s;
+}
+
+.image_box{
+	position: absolute;
+	width: 31.5vw;
+	height: 65vh;
+	left: 56%;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	background: #ECECEC;
+	border-radius: 2vh;
+	padding: 20px 25px;
+	box-shadow: 0.7vw 0.5vh 3vh rgba(0, 0, 0, 0.4);
+	display: grid;
+	grid-template-rows: 7fr 1fr;
+}
+
+.about_text {
+	font-family: "Montserrat", sans-serif;
+	font-weight: 400;
+	font-size: 1.1vw;
+	text-decoration: none;
+	decoration: none;
+}
+
+.developed-info {
+	font-family: "Montserrat", sans-serif;
+	font-weight: 400;
+	position: absolute;
+	padding: 0 10px;
+	text-color: black;
+	font-size: 0.66vw;
+	opacity: 0;
+	-webkit-animation: fade 0.7s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fade 0.7s; /* Firefox < 16 */
+         -o-animation: fade 0.7s; /* Opera < 12.1 */
+            animation: fade 0.7s;
+}
+
+.info:hover .developed-info{
+	display: block;
+	opacity: 1;
+	animation: 100;
+	-webkit-animation: fadein 0.4s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.4s; /* Firefox < 16 */
+         -o-animation: fadein 0.4s; /* Opera < 12.1 */
+            animation: fadein 0.4s;
+}
+
+.info:hover .developed-second{
+	display: block;
+	opacity: 1;
+	animation: 100;
+	-webkit-animation: fadein 0.4s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.4s; /* Firefox < 16 */
+         -o-animation: fadein 0.4s; /* Opera < 12.1 */
+            animation: fadein 0.4s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fade {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fade {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fade {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fade {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+.info {
+	font-size: 1.2vw;
+	width: auto;
+	height: auto;
+	border-radius: 0px 16px 16px 16px;
+	transition: all .7s ease;
+	position: relative;
+	display: grid;
+	grid-template-rows: 1fr 4fr;
+}
+
+.info:hover {
+	background-color: white;
+	transition: all .4s ease;
+}
+
+.about_page {
+	position: absolute;
+	top: 43.7%;
+	left: 27%;
+	transform: translate(-50%, -50%);
+}
