@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'trashusers',
     # For monster managing API
     'trashmonsters',
-    'trashimages'
+    'trashimages',
 ]
 
 MIDDLEWARE = [
