@@ -30,12 +30,6 @@ navigator.permissions.query({name:'geolocation'}).then(async (result) => {
 
 //future code to draw shapes for the area of control
 
-//code to set the monster points
-//for (let index = 0; index < 2; index++) { 
-//  const monster= monsters[index];
-  
-//}
-
 }
 
 async function getPosition(){
@@ -65,7 +59,7 @@ function createMap(coords){
   http.onreadystatechange = (e) => {
     if (http.readyState === XMLHttpRequest.DONE) {
       const monsters=JSON.parse(http.responseText);
-      createMonsters(monsters);
+      drawMonsters(monsters);
     }
   }
 }
@@ -75,8 +69,8 @@ function runPermission(){
   navigator.geolocation.getCurrentPosition(success,failure);
 }
 
-function createMonsters(monsters){
-  
+function drawMonsters(monsters){
+  console.log(monsters);
   monsters.forEach(element => {
     let latitude = element.Latitude;
     let longitude = element.Longitude;
@@ -87,7 +81,26 @@ function createMonsters(monsters){
       map,
       title:"id:"+element.TM_ID,
     })
+    console.log("latitude:"+latitude+" longitude:"+longitude);
   });
+}
+
+function createMonster(){
+  const http = new XMLHttpRequest();
+  const url="api/monsters/add-tm";
+  const monster = {"Latitude":50.73646948193597,"Longitude":-3.5317420013942633};
+  //const monster = {"TM_ID":0, "T1Score":1, "T2Score":2, "T3Score":4};
+  http.open("POST",url);
+  http.setRequestHeader("Accept", "application/json");
+  http.setRequestHeader("Content-Type", "application/json");
+  http.send(JSON.stringify(monster));
+
+  http.onreadystatechange = (e) => {
+    if (http.readyState === XMLHttpRequest.DONE) {
+      console.log(http.status);
+      console.log(http.responseText);
+    }
+  }
 }
 
 //will be called on a click event with the gmaps api, passes in longitude, latitude
@@ -133,9 +146,6 @@ function placeMonster(){ //need to add parameters once working
   }
 }
 
-function ajax(){
-  alert("this will do ajax shit soon");
-}
 
 function success(position){
   var latitude = position.coords.latitude;
