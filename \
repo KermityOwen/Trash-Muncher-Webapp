@@ -106,23 +106,13 @@ body.preload *{
 	decoration: none;
 }
 
-.info {
-	border-radius: 8px;
-	transition: all .7s ease;
-	display: grid;
-	grid-template-rows: 16px fit-content(300px);
-}
-
-.info:hover {
-	background-color: white;
-	transition: all .4s ease;
-}
-
 .developed-info {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 400;
+	position: absolute;
 	padding: 0 10px;
-	font-size: 0.5em;
+	text-color: black;
+	font-size: 0.66vw;
 	opacity: 0;
 	-webkit-animation: fade 0.7s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fade 0.7s; /* Firefox < 16 */
@@ -194,6 +184,22 @@ body.preload *{
 @-o-keyframes fade {
     from { opacity: 1; }
     to   { opacity: 0; }
+}
+
+.info {
+	font-size: 1.2vw;
+	width: auto;
+	height: auto;
+	border-radius: 0px 16px 16px 16px;
+	transition: all .7s ease;
+	position: relative;
+	display: grid;
+	grid-template-rows: 1fr 4fr;
+}
+
+.info:hover {
+	background-color: white;
+	transition: all .4s ease;
 }
 
 .about_page {
