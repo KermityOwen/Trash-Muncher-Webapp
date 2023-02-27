@@ -6,4 +6,6 @@ urlpatterns = [
     path('map',views.map),
     path('about', views.about),
     path('', views.index, name='index'),
+    path('mapselect', views.mapselect),
+    path('imageapprove', views.imageapprove)
 ]
