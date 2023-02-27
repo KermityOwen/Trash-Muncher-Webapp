@@ -36,7 +36,7 @@ class ImageDeleteView(APIView):
     """
     Post function to allow the gamekeeper to delete an image with a specified ID 
     """
-    permission_classes = [permissions.IsAuthenticated] #isGamekeeper
+    permission_classes = [permissions.IsAuthenticated, isGameKeeper]
     def post(self, request):
         id = request.data.get("id", None)
         # Checks if an ID has been obtained, returns 404 if not
