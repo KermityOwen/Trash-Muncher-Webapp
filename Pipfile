@@ -12,6 +12,7 @@ django-extensions = "*"
 pillow = "*"
 piplock = "*"
 geopy = "*"
+drf-extra-fields = "*"
 
 [dev-packages]
 

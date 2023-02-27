@@ -5,4 +5,5 @@ from .models import Images
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
-        fields = ["image"]
+        fields = ["id",
+            "image"]

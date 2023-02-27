@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0050f9efee7aef87b8a241c040670676ff068805135e2b86bef41c7119e0c86b"
+            "sha256": "21c30c5298c4d23b3a41577f0e014404f27b72763cbe8559a9544abc7d4bde05"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -55,6 +55,14 @@
             ],
             "index": "pypi",
             "version": "==3.14.0"
+        },
+        "drf-extra-fields": {
+            "hashes": [
+                "sha256:54df0bef56c38ec7efb40e146ada42fa734b5087e45e9e54b2fd23baccc41466",
+                "sha256:a11aeecc85847b0acda6ce57bb144c584c8ebb43ecdf989d8caa7bb130090885"
+            ],
+            "index": "pypi",
+            "version": "==3.4.1"
         },
         "geographiclib": {
             "hashes": [
@@ -194,13 +202,21 @@
             "markers": "python_version >= '3.5'",
             "version": "==0.4.3"
         },
+        "tzdata": {
+            "hashes": [
+                "sha256:2b88858b0e3120792a3c0635c23daf36a7d7eeeca657c323da299d2094402a0d",
+                "sha256:fe5f866eddd8b96e9fcba978f8e503c909b19ea7efda11e52e39494bad3a7bfa"
+            ],
+            "markers": "sys_platform == 'win32'",
+            "version": "==2022.7"
+        },
         "zipp": {
             "hashes": [
-                "sha256:188834565033387710d046e3fe96acfc9b5e86cbca7f39ff69cf21a4128198b7",
-                "sha256:9e5421e176ef5ab4c0ad896624e87a7b2f07aca746c9b2aa305952800cb8eecb"
+                "sha256:112929ad649da941c23de50f356a2b5570c954b65150642bccdd66bf194d224b",
+                "sha256:48904fc76a60e542af151aded95726c1a5c34ed43ab4134b597665c86d7ad556"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==3.14.0"
+            "version": "==3.15.0"
         }
     },
     "develop": {}
