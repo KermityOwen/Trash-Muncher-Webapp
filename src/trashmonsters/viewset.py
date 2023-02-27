@@ -50,11 +50,11 @@ def calcDistance(request):
 @permission_classes([IsAuthenticated, isGameKeeper])
 def changeScore(request):
     TM_ID = request.data.get("TM_ID", None)
-    T1Score = request.data.get("T1Score", None)
-    T2Score = request.data.get("T2Score", None)
-    T3Score = request.data.get("T3Score", None)
-
     TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    T1Score = request.data.get("T1Score", TM.Team1_Score)
+    T2Score = request.data.get("T2Score", TM.Team2_Score)
+    T3Score = request.data.get("T3Score", TM.Team3_Score)
+
     TM.Team1_Score = T1Score
     TM.Team2_Score = T2Score
     TM.Team3_Score = T3Score
