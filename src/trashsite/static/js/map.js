@@ -4,16 +4,13 @@ var map;
 //draws the map onto the screen
 function initMap(){
 //future code for setting current position
-var geoButton = document.getElementById("geoButton");
 var coords;
 navigator.permissions.query({name:'geolocation'}).then(async (result) => {
   if(result.state === 'granted'){
-    geoButton.style.display = 'none';
     await getPosition();
     
   }
   else if(result.state==='prompt'){
-    geoButton.style.display = 'none';
     await getPosition();
   }
   else if(result.state==='denied'){
@@ -24,7 +21,6 @@ navigator.permissions.query({name:'geolocation'}).then(async (result) => {
       await getPosition();
     }
     if(result.state==='denied'){
-      geoButton.style.display = 'inline';
     }
   });
 });
@@ -50,27 +46,21 @@ function createMap(coords){
     center: {lat: coords.latitude, lng: coords.longitude},
     mapId:'805b0b106a1a291d'
   });
+  //const webglOverlayView = new google.maps.WebGLOverlayView();
+  //webglOverlayView.setMap(map);
 
   navigator.geolocation.watchPosition(successMove);
 
   //gets the monsters to put on the map
-  const http = new XMLHttpRequest();
   const url="api/monsters/get-tms";
-  http.open("GET",url);
-  http.send();
-
-  http.onreadystatechange = (e) => {
-    if (http.readyState === XMLHttpRequest.DONE) {
-      const monsters=JSON.parse(http.responseText);
-      drawMonsters(monsters);
+  fetch(url,{method:"get"}).then(async function(response){
+    if(response.ok){
+      drawMonsters(await response.json())
     }
-  }
+    else {throw new Error("very sad didnt work :(" + response.statusText)}
+  })
 }
 
-function runPermission(){
-  alert("hi");
-  navigator.geolocation.getCurrentPosition(success,failure);
-}
 
 function drawMonsters(monsters){
   console.log(monsters);
@@ -89,21 +79,16 @@ function drawMonsters(monsters){
 }
 
 function createMonster(){
-  const http = new XMLHttpRequest();
-  const url="api/monsters/add-tm";
   const monster = {"Latitude":50.73646948193597,"Longitude":-3.5317420013942633};
-  //const monster = {"TM_ID":0, "T1Score":1, "T2Score":2, "T3Score":4};
-  http.open("POST",url);
-  http.setRequestHeader("Accept", "application/json");
-  http.setRequestHeader("Content-Type", "application/json");
-  http.send(JSON.stringify(monster));
-
-  http.onreadystatechange = (e) => {
-    if (http.readyState === XMLHttpRequest.DONE) {
-      console.log(http.status);
-      console.log(http.responseText);
+  const url="api/monsters/add-tm";
+  const params = {body:JSON.stringify(monster),method:"POST",headers: {"content-type":"application/json"}}
+  fetch(url,params).then(async function(response){
+    if(response.ok){
+      //return response.json()
+      console.log(await response.json());
     }
-  }
+    else {throw new Error("very sad didnt work :(" + response.statusText)}
+  });
 }
 
 //mostly a test thing, dont think its going to be used
