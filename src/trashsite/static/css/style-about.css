@@ -63,7 +63,7 @@ body.preload *{
 	position: absolute;
 	display: inline-block;
 	padding: 2.25% 12.6% 1.55% 12.6%;
-	border-radius: 6vh;
+	border-radius: 15px;
 	font-family: 'Chilanka', cursive;
 	line-height: 1.5em;
 	text-align: center;
@@ -73,11 +73,13 @@ body.preload *{
 	background-color: #B5D3D2;
 	box-shadow: 0vh 0.6vh 1vh rgba(0, 0, 0, 0.3);
 	transition: all 0.5s;
+	cursor: pointer;
 }
 
 .start:hover {
 	background-color: #DFC9B5;
-	transition: all 0.5s ease 0.5s;
+	border-radius: 25px;
+	transition: all 0.5s ease 0.0s;
 }
 
 .image_box{
@@ -90,10 +92,10 @@ body.preload *{
 	transform: translateY(-50%);
 	background: #ECECEC;
 	border-radius: 2vh;
-	border-left: 1.5vw solid transparent;
-	border-right: 1.5vw solid transparent;
-	border-top: 2.5vh solid transparent;
+	padding: 20px 25px;
 	box-shadow: 0.7vw 0.5vh 3vh rgba(0, 0, 0, 0.4);
+	display: grid;
+	grid-template-rows: 7fr 1fr;
 }
 
 .about_text {
@@ -104,31 +106,23 @@ body.preload *{
 	decoration: none;
 }
 
+.info {
+	border-radius: 8px;
+	transition: all .7s ease;
+	display: grid;
+	grid-template-rows: 16px fit-content(300px);
+}
+
+.info:hover {
+	background-color: white;
+	transition: all .4s ease;
+}
+
 .developed-info {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 400;
-	white-space: nowrap;
-	position: absolute;
-	text-color: black;
-	font-size: 0.66vw;
-	bottom: 6.47%;
-	left: 5.2%;
-	opacity: 0;
-	-webkit-animation: fade 0.7s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fade 0.7s; /* Firefox < 16 */
-         -o-animation: fade 0.7s; /* Opera < 12.1 */
-            animation: fade 0.7s;
-}
-
-.developed-second {
-	font-family: "Montserrat", sans-serif;
-	font-weight: 400;
-	white-space: nowrap;
-	position: absolute;
-	text-color: black;
-	font-size: 0.66vw;
-	bottom: 3.31%;
-	left: 5.2%;
+	padding: 0 10px;
+	font-size: 0.5em;
 	opacity: 0;
 	-webkit-animation: fade 0.7s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fade 0.7s; /* Firefox < 16 */
@@ -200,23 +194,6 @@ body.preload *{
 @-o-keyframes fade {
     from { opacity: 1; }
     to   { opacity: 0; }
-}
-
-.info {
-	margin-top: 19.87vh;
-	font-size: 1.2vw;
-	width: 3.1vh;
-	height: 4.8vh;
-	border-radius: 30vw;
-	transition: all .7s ease;
-}
-
-.info:hover {
-	background-color: white;
-	width: 28.5vw;
-	height: 4.8vh;
-	text-align: left !important;
-	transition: all .4s ease;
 }
 
 .about_page {

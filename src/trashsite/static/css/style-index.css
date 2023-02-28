@@ -39,7 +39,7 @@
 	position: absolute;
 	display: inline-block;
 	padding: 2% 11% 1.3% 11%;
-	border-radius: 6vh;
+	border-radius: 15px;
 	font-family: 'Chilanka', cursive;
 	line-height: 1.5em;
 	text-align: center;
@@ -49,11 +49,13 @@
 	background-color: #B5D3D2;
 	box-shadow: 0vh 0.6vh 1vh rgba(0, 0, 0, 0.3);
 	transition: all 0.5s;
+	cursor: pointer;
 }
 
 .start:hover {
 	background-color: #DFC9B5;
-	transition: all 0.5s ease 0.5s;
+	border-radius: 25px;
+	transition: all 0.5s ease 0.0s;
 }
 
 .home_page {

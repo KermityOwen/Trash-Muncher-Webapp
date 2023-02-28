@@ -1,10 +1,14 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework import mixins, status, viewsets
+from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 
 from .serializers import UserSerializer, UserPostSerializer, PlayerSerializer, GameKeeperSerializer
 from .models import Player, GameKeeper, User
@@ -26,6 +30,26 @@ class UserRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     authentication_classes = []
     serializer_class = UserPostSerializer
 
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `retrieve` actions.
+    """
+
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    @action(detail=False, methods=["get"], url_path="me", name="me")
+    def me(self, request):
+        """Get the current authenticated user"""
+        if Player.objects.filter(user=request.user).exists():
+            self.serializer_class=PlayerSerializer
+            serializer = self.get_serializer(Player.objects.get(user=request.user))
+        if GameKeeper.objects.filter(user=request.user).exists():
+            self.serializer_class=GameKeeperSerializer
+            serializer = self.get_serializer(GameKeeperSerializer.objects.get(user=request.user))
+        return Response(serializer.data)
 
 class LoginView(APIView):
     permission_classes = ()

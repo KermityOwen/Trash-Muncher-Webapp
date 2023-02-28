@@ -8,6 +8,7 @@ users_router = SimpleRouter()
 users_router.register(r"player-register", viewsets.PlayerRegistrationViewset, basename="users")
 users_router.register(r"gamekeeper-register", viewsets.GamekeeperRegistrationViewset, basename="users")
 users_router.register(r"user-register", viewsets.UserRegistrationViewset, basename="users")
+users_router.register(r"", viewsets.UserViewSet, basename="")
 urlpatterns = [
     path('login/', viewsets.LoginView.as_view()),
     path('logout/', viewsets.logout_view),
