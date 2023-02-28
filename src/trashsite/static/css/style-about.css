@@ -121,33 +121,8 @@ body.preload *{
 .developed-info {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 400;
-<<<<<<< HEAD
-	white-space: nowrap;
-	position: absolute;
-	text-color: black;
-	font-size: 0.66vw;
-	bottom: 11.47%;
-	left: 5.2%;
-	opacity: 0;
-	-webkit-animation: fade 0.7s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fade 0.7s; /* Firefox < 16 */
-         -o-animation: fade 0.7s; /* Opera < 12.1 */
-            animation: fade 0.7s;
-}
-
-.developed-second {
-	font-family: "Montserrat", sans-serif;
-	font-weight: 400;
-	white-space: nowrap;
-	position: absolute;
-	text-color: black;
-	font-size: 0.66vw;
-	bottom: 9.31%;
-	left: 5.2%;
-=======
 	padding: 0 10px;
 	font-size: 0.5em;
->>>>>>> origin
 	opacity: 0;
 	-webkit-animation: fade 0.7s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fade 0.7s; /* Firefox < 16 */
