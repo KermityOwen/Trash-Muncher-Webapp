@@ -7,10 +7,12 @@ from .serializer import TMSerializer
 from trashmain.permissions import isPlayer, isGameKeeper
 
 from geopy import distance
-
 from random import randint
+import json, os
 
+config = json.load(open("trashmonsters/config.json"))
 cached_leader = {}
+
 
 def restart_testing_db():
     TMs = TrashMonsters.objects.all()
@@ -19,6 +21,7 @@ def restart_testing_db():
         TM.Team2_Score = randint(1, 99)
         TM.Team3_Score = randint(1, 99)
         TM.save()
+
 
 def bubble_search(TM: TrashMonsters):
     if (TM.Team1_Score >= TM.Team2_Score):
@@ -31,6 +34,7 @@ def bubble_search(TM: TrashMonsters):
     else:
         return 3
 
+
 def calculate_cached_leader():
     TMs = TrashMonsters.objects.all()
     for TM in TMs:
@@ -38,9 +42,11 @@ def calculate_cached_leader():
          cached_leader[TM.TM_ID] = bubble_search(TM)
     print(cached_leader)
 
+
 def calculate_specific_leader(TM_ID):
     TM = TrashMonsters.objects.get(TM_ID = TM_ID)
     cached_leader[TM.TM_ID] = bubble_search(TM)
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -48,6 +54,7 @@ def getTMs(request):
     TMs = TrashMonsters.objects.all()
     serializer = TMSerializer(TMs, many=True)
     return Response(serializer.data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -66,6 +73,7 @@ def addTM(request):
         serializer.save()
     return Response(serializer.data)
 
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def calcDistance(request):
@@ -77,6 +85,23 @@ def calcDistance(request):
     difference = distance.distance(target, origin).m
 
     return Response(difference)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def verifyDistance(request):
+    TM_ID = request.data.get("TM_ID", None)
+    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+
+    target = (TM.Latitude, TM.Longitude)
+    origin = (request.data.get("o-lat", None), request.data.get("o-long", None))
+    difference = distance.distance(target, origin).m
+
+    if difference >= config["distance_leeway"]:
+        return Response(True)
+    else:
+        return Response(False)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated, isGameKeeper])
@@ -115,6 +140,7 @@ def addScore(request):
 
     return Response(TMSerializer(TM, many=False).data)
 
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated, isGameKeeper])
 def removeScore(request):
@@ -132,6 +158,7 @@ def removeScore(request):
     calculate_specific_leader(TM_ID)
 
     return Response(TMSerializer(TM, many=False).data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
