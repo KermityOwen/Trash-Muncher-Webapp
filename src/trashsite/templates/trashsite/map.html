@@ -17,15 +17,17 @@
       <div class="below_map">
       <button onclick="placeMonster()" class="mapButton">testMonsterScreen</button>
       <button onclick="createMonster()" class="mapButton">testCreateMonster</button>
-      <button class="mapButton">testRemoveMonster</button>
+      <button class="mapButton" onclick = "getMonsters()">testRemoveMonster</button>
       </div>
     </div>
 
     <!--<button onclick="changeZoom()">click to unzoom!!!</button>
     <button onclick="goToLocation()">Current Location</button>
     -->
+    <!--api key is key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg-->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+    
+      src="https://maps.googleapis.com/maps/api/js?&callback=initMap&v=weekly"
       defer
     ></script>
   </body>

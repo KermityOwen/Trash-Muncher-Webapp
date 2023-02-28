@@ -1,6 +1,7 @@
 //code edited by william
 
 var map;
+var monsterArray = [];
 //draws the map onto the screen
 function initMap(){
 //future code for setting current position
@@ -43,7 +44,8 @@ function createMap(coords){
     disableDefaultUI: true,
     zoomControl: false,
     gestureHandling: "none",
-    center: {lat: coords.latitude, lng: coords.longitude},
+    center:{lat: 50.73646948193597,lng: -3.5317420013942633},
+    //center: {lat: coords.latitude, lng: coords.longitude},
     mapId:'805b0b106a1a291d'
   });
   //const webglOverlayView = new google.maps.WebGLOverlayView();
@@ -56,6 +58,7 @@ function createMap(coords){
   fetch(url,{method:"get"}).then(async function(response){
     if(response.ok){
       drawMonsters(await response.json())
+      console.log(monsterArray);
     }
     else {throw new Error("very sad didnt work :(" + response.statusText)}
   })
@@ -65,15 +68,21 @@ function createMap(coords){
 function drawMonsters(monsters){
   console.log(monsters);
   monsters.forEach(element => {
+    
     let latitude = element.Latitude;
     let longitude = element.Longitude;
 
     //currently only creates a google map marker, will create a 3d object at a later date which can store id, this cannot.
-    new google.maps.Marker({
+    console.log("creating a marker");
+    var marker = new google.maps.Marker({
       position:{lat:latitude,lng:longitude},
       map,
       title:"id:"+element.TM_ID,
     })
+    marker.addListener("click", () => {
+      console.log("hi there im cool");
+    });
+    monsterArray.push([element.TM_ID,marker])
     console.log("latitude:"+latitude+" longitude:"+longitude);
   });
 }
@@ -140,13 +149,13 @@ function successMove(position){ //will handle distances from monsters to player
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
   console.log("latitude:"+latitude+" longitude:"+longitude);
-  map.panTo({lat:latitude,lng:longitude});
+  //map.panTo({lat:latitude,lng:longitude});
 }
 function success(position){ //will handle distances from monsters to player
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
   console.log("latitude:"+latitude+" longitude:"+longitude);
-  map.panTo({lat:latitude,lng:longitude});
+  //map.panTo({lat:latitude,lng:longitude});
 }
 function failure(){
   return [50.73646948193597, -3.5317420013942633]
