@@ -10,21 +10,17 @@
 	</head>
 	<body>
 		<div class="map-modal">
-			<div class="form">
+			<div class="map-form">
 				<p>Add a point</p>
 				<form action="mapselect" onsubmit="return sendLocation()">
 					<label for="location_name">Pick a name for this location:</label>
 					<input type="text" id="location_name"><br>
-					<div class="radio">
-						<input type="radio" id="small" name="location_size" value="small">
-						<input type="radio" id="medium" name="location_size" value="medium">
-						<input type="radio" id="large" name="location_size" value="large">
-					</div>
 					<br>
 					<input class="submit-button" type="submit" value="Add it!">
 				</form>
 			</div>
 			<div class="map">
+				<img src="{% static 'images/tempmap.png' %}" style="object-fit: cover;">
 			</div>
 		</div>
 
