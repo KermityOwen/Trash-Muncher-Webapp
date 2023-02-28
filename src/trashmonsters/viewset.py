@@ -36,18 +36,11 @@ def calculate_cached_leader():
     for TM in TMs:
         # print (bubble_search(TM))
          cached_leader[TM.TM_ID] = bubble_search(TM)
-        # print("working")
-        # if (TM.Team1_Score >= TM.Team2_Score):
-        #     if (TM.Team1_Score > TM.Team3_Score):
-        #         cached_leader.update({TM.TM_ID, 1})
-        #     else:
-        #         cached_leader.update({TM.TM_ID, 3})
-        # elif (TM.Team2_Score > TM.Team3_Score):
-        #     cached_leader.update({TM.TM_ID, 2})
-        # else:
-        #     cached_leader.update({TM.TM_ID, 3})
     print(cached_leader)
 
+def calculate_specific_leader(TM_ID):
+    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    cached_leader[TM.TM_ID] = bubble_search(TM)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -99,6 +92,7 @@ def changeScore(request):
     TM.Team3_Score = T3Score
 
     TM.save()
+    calculate_specific_leader(TM_ID)
 
     return Response(TMSerializer(TM, many=False).data)
 
@@ -117,6 +111,7 @@ def addScore(request):
     TM.Team3_Score += T3Score
 
     TM.save()
+    calculate_specific_leader(TM_ID)
 
     return Response(TMSerializer(TM, many=False).data)
 
@@ -134,6 +129,7 @@ def removeScore(request):
     TM.Team3_Score -= T3Score
 
     TM.save()
+    calculate_specific_leader(TM_ID)
 
     return Response(TMSerializer(TM, many=False).data)
 
@@ -151,3 +147,5 @@ def getLeaderTeam(request):
             return Response(3)
     elif (TM.Team2_Score > TM.Team3_Score):
         return Response (2)
+    else:
+        return Response (3)
