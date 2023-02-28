@@ -1,20 +1,24 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated 
 
 from .models import TrashMonsters
 from .serializer import TMSerializer
+from trashmain.permissions import isPlayer, isGameKeeper
 
 from geopy import distance
 
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getTMs(request):
     TMs = TrashMonsters.objects.all()
     serializer = TMSerializer(TMs, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def getTM(request):
     TM_ID = request.data.get("TM_ID", None)
     TM = TrashMonsters.objects.get(TM_ID = TM_ID)
@@ -23,6 +27,7 @@ def getTM(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated, isGameKeeper])
 def addTM(request):
     serializer = TMSerializer(data=request.data)
     if (serializer.is_valid()):
@@ -30,6 +35,7 @@ def addTM(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def calcDistance(request):
     TM_ID = request.data.get("TM_ID", None)
     TM = TrashMonsters.objects.get(TM_ID = TM_ID)
@@ -41,6 +47,7 @@ def calcDistance(request):
     return Response(difference)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated, isGameKeeper])
 def changeScore(request):
     TM_ID = request.data.get("TM_ID", None)
     TM = TrashMonsters.objects.get(TM_ID = TM_ID)
@@ -58,6 +65,7 @@ def changeScore(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated, isPlayer])
 def addScore(request):
     TM_ID = request.data.get("TM_ID", None)
     T1Score = request.data.get("T1Score", 0)
@@ -74,6 +82,7 @@ def addScore(request):
     return Response(TMSerializer(TM, many=False).data)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated, isGameKeeper])
 def removeScore(request):
     TM_ID = request.data.get("TM_ID", None)
     T1Score = request.data.get("T1Score", 0)
@@ -90,6 +99,7 @@ def removeScore(request):
     return Response(TMSerializer(TM, many=False).data)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def getLeaderTeam(request):
     TM_ID = request.data.get("TM_ID", None)
     TM = TrashMonsters.objects.get(TM_ID = TM_ID)
