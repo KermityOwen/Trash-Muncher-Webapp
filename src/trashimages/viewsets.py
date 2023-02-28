@@ -6,10 +6,13 @@ from rest_framework.views import APIView
 from .models import Images
 from .serializer import ImageSerializer
 from trashmain.auxillary import get_player_team
-from trashmain.permissions import isPlayer
+from trashmain.permissions import isPlayer, isGameKeeper
 
 # Create your views here.
 class ImageSubmissionViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """
+    Allows users that are players to add an image to the database
+    """
     queryset = Images.objects.all()
     parser_classes = (MultiPartParser, FormParser)
     permission_classes = [permissions.IsAuthenticated, isPlayer]
@@ -20,27 +23,46 @@ class ImageSubmissionViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
 
 class ImageListViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    Allows a gamekeeper to view all images currently in the database
+    """
     queryset = Images.objects.all()
     parser_classes = (MultiPartParser, FormParser)
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, isGameKeeper]
     serializer_class = ImageSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
 
 class ImageDeleteView(APIView):
-    def get(self, request):
-        ids = request.data.get("id")
-        ids.split(',')
-        images = Images.objects.filter(id__in=ids)
-        serialized_images = ImageSerializer(images)
-        return Response(serialized_images.data)
+    """
+    Post function to allow the gamekeeper to delete an image with a specified ID 
+    """
+    permission_classes = [permissions.IsAuthenticated, isGameKeeper]
+    def post(self, request):
+        id = request.data.get("id", None)
+        # Checks if an ID has been obtained, returns 404 if not
+        if id is None:
+            return Response(
+                {
+                "message":"Invalid ID submitted"
+                }, status=status.HTTP_404_NOT_FOUND)
+        
+        # Try to get and delete an image with the specified ID, returns 404 if not possible
+        try:
+            image = Images.objects.get(pk=id)
+            image.delete()
+            return Response({
+                "message":"Image successfully deleted"
+            },
+            status=status.HTTP_200_OK,)
+        except:
+            return Response(
+                {
+                "message":"Image with specified ID does not exist"
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
 
-    # Function to delete a list of images from the database 
-    def delete(self, request):
-        ids = request.query_params.get("ids")
-        if ids:
-            for id in ids.split(','):
-                id = int(id)
-                image = Images.objects.get(id=id)
-                image.delete()
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            
