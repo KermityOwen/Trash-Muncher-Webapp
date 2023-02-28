@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # For monster managing API
     'trashmonsters',
     'trashimages',
+    # For scheduling
 ]
 
 MIDDLEWARE = [

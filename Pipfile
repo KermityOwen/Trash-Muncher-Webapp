@@ -12,6 +12,7 @@ django-extensions = "*"
 pillow = "*"
 piplock = "*"
 geopy = "*"
+schedule = "*"
 
 [dev-packages]
 
