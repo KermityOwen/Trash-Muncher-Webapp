@@ -10,5 +10,6 @@ users_router.register(r"gamekeeper-register", viewsets.GamekeeperRegistrationVie
 users_router.register(r"user-register", viewsets.UserRegistrationViewset, basename="users")
 urlpatterns = [
     path('login/', viewsets.LoginView.as_view()),
+    path('logout/', viewsets.logout_view),
 ]
 urlpatterns += users_router.urls
