@@ -8,6 +8,45 @@ from trashmain.permissions import isPlayer, isGameKeeper
 
 from geopy import distance
 
+from random import randint
+
+cached_leader = {}
+
+def restart_testing_db():
+    TMs = TrashMonsters.objects.all()
+    for TM in TMs:
+        TM.Team1_Score = randint(1, 99)
+        TM.Team2_Score = randint(1, 99)
+        TM.Team3_Score = randint(1, 99)
+        TM.save()
+
+def bubble_search(TM: TrashMonsters):
+    if (TM.Team1_Score >= TM.Team2_Score):
+        if (TM.Team1_Score > TM.Team3_Score):
+            return 1
+        else:
+            return 3
+    elif (TM.Team2_Score > TM.Team3_Score):
+        return 2
+    else:
+        return 3
+
+def calculate_cached_leader():
+    TMs = TrashMonsters.objects.all()
+    for TM in TMs:
+        # print (bubble_search(TM))
+         cached_leader[TM.TM_ID] = bubble_search(TM)
+        # print("working")
+        # if (TM.Team1_Score >= TM.Team2_Score):
+        #     if (TM.Team1_Score > TM.Team3_Score):
+        #         cached_leader.update({TM.TM_ID, 1})
+        #     else:
+        #         cached_leader.update({TM.TM_ID, 3})
+        # elif (TM.Team2_Score > TM.Team3_Score):
+        #     cached_leader.update({TM.TM_ID, 2})
+        # else:
+        #     cached_leader.update({TM.TM_ID, 3})
+    print(cached_leader)
 
 
 @api_view(['GET'])
