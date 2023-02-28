@@ -31,6 +31,9 @@ class ImageListViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
     permission_classes = [permissions.IsAuthenticated, isGameKeeper]
     serializer_class = ImageSerializer
 
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
 
 class ImageDeleteView(APIView):
     """
