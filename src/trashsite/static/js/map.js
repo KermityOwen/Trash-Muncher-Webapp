@@ -2,6 +2,7 @@
 
 var map;
 var monsterArray = [];
+var shapes = [];
 //draws the map onto the screen
 function initMap(){
 //future code for setting current position
@@ -25,8 +26,6 @@ navigator.permissions.query({name:'geolocation'}).then(async (result) => {
     }
   });
 });
-
-//future code to draw shapes for the area of control
 
 }
 //deals with initial current position
@@ -66,12 +65,16 @@ function createMap(coords){
 
 
 function drawMonsters(monsters){
-  console.log(monsters);
+  //for (let i= 0; i < markers.length; i++) {
+  //  monsterArray[i].marker.setMap(null);
+  //  shapes[i].setMap(null);
+  //}
+  //shapes=[];
+  //markers=[];
   monsters.forEach(element => {
     
     let latitude = element.Latitude;
     let longitude = element.Longitude;
-
     //currently only creates a google map marker, will create a 3d object at a later date which can store id, this cannot.
     console.log("creating a marker");
     var marker = new google.maps.Marker({
@@ -79,18 +82,88 @@ function drawMonsters(monsters){
       map,
       title:"id:"+element.TM_ID,
     })
+    monsterArray.push({"id":element.TM_ID,"monster":element,"marker":marker})
+    
+    drawShape(element);
+
     marker.addListener("click", () => {
-      console.log("hi there im cool");
+      //temporary fix for events triggering multiple times when clicking on the markers. Will only be able to press once in final code
+      var oldButton = document.getElementById("enterScore");
+      var button = oldButton.cloneNode(true);
+      oldButton.parentNode.replaceChild(button,oldButton);
+
+      monsterArray.forEach(element => {
+        if(element.marker==marker){
+          let monster = element.monster;
+          document.getElementById("showPoints").textContent="Red Team Points:"+monster.Team1_Score+"Green Team Points:"+monster.Team2_Score+"Blue Team Points"+ monster.Team3_Score
+          console.log("you have clicked on marker with id: "+element.id);
+          
+          //bit of a jank system, button press is done here instead of the usual onclick="" stuff
+          button.addEventListener("click", async () => {
+            var scoreInc=[0,0,0];
+            let value = document.querySelector('input[name="points"]:checked').value;
+            switch(value){
+              case "red_team":scoreInc[0]++;break;
+              case "green_team":scoreInc[1]++;break;
+              case "blue_team":scoreInc[2]++;break;
+            }
+            updateScore(monster.TM_ID,scoreInc).then(response =>{
+              element.monster = response;
+              monster = response;
+              document.getElementById("showPoints").textContent="Red Team Points:"+monster.Team1_Score+"Green Team Points:"+monster.Team2_Score+"Blue Team Points"+ monster.Team3_Score
+              //drawMonsters();
+            })
+          })
+        }
+      });
     });
-    monsterArray.push([element.TM_ID,marker])
-    console.log("latitude:"+latitude+" longitude:"+longitude);
   });
 }
 
-function createMonster(){
+function drawShape(monster){
+  var circleColour = "#000000";
+  var radius;
+  if(monster.Team1_Score>monster.Team2_Score && monster.Team1_Score>monster.Team2_Score){
+    circleColour="#FF0000";
+    if(monster.Team2_Score>monster.Team3_Score){
+      radius=monster.Team1_Score-monster.Team2_Score;
+    }
+    else{
+      radius=monster.Team1_Score-monster.Team3_Score;
+    }
+  }
+  else if(monster.Team2_Score>monster.Team1_Score && monster.Team2_Score>monster.Team3_Score){
+    circleColour="#00ff00";
+    if(monster.Team1_Score>monster.Team3_Score){
+      radius=monster.Team2_Score-monster.Team1_Score;
+    }
+    else{
+      radius=monster.Team2_Score-monster.Team3_Score;
+    }
+  }
+  else if(monster.Team3_Score>monster.Team1_Score && monster.Team3_Score>monster.Team2_Score){
+    circleColour="#0000ff";
+    if(monster.Team1_Score>monster.Team2_Score){
+      radius=monster.Team3_Score-monster.Team1_Score;
+    }
+    else{
+      radius=monster.Team3_Score-monster.Team2_Score;
+    }
+  }
+  else{radius=0};
+  console.log(circleColour);
+  var shape = new google.maps.Circle({
+    map:map,
+    fillColor:circleColour,
+    center:{lat:monster.Latitude,lng:monster.Longitude},
+    radius:radius*5});
+    shapes.push(shape);
+}
+
+function createMonster(){ //there will be a button to press instead at later date
   const monster = {"Latitude":50.73646948193597,"Longitude":-3.5317420013942633};
   const url="api/monsters/add-tm";
-  const params = {body:JSON.stringify(monster),method:"POST",headers: {"content-type":"application/json"}}
+  const params = {body:JSON.stringify(monster),method:"POST",headers: {"content-type":"application/json"}};
   fetch(url,params).then(async function(response){
     if(response.ok){
       //return response.json()
@@ -98,6 +171,13 @@ function createMonster(){
     }
     else {throw new Error("very sad didnt work :(" + response.statusText)}
   });
+}
+
+async function updateScore(id,scores){
+  const data = {"TM_ID":id,"T1Score":scores[0],"T2Score":scores[1],"T3Score":scores[2]};
+  const url="api/monsters/add-score";
+  const params = {body:JSON.stringify(data),method:"POST",headers: {"content-type":"application/json"}};
+  return fetch(url,params).then(response => response.json());
 }
 
 //mostly a test thing, dont think its going to be used
@@ -144,17 +224,16 @@ function placeMonster(){ //need to add parameters once working
   }
 }
 
-
 function successMove(position){ //will handle distances from monsters to player
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
-  console.log("latitude:"+latitude+" longitude:"+longitude);
+  //console.log("latitude:"+latitude+" longitude:"+longitude);
   //map.panTo({lat:latitude,lng:longitude});
 }
 function success(position){ //will handle distances from monsters to player
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
-  console.log("latitude:"+latitude+" longitude:"+longitude);
+  //console.log("latitude:"+latitude+" longitude:"+longitude);
   //map.panTo({lat:latitude,lng:longitude});
 }
 function failure(){

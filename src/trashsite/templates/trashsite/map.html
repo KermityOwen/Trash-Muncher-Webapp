@@ -15,9 +15,17 @@
       <div id="map">
       </div>
       <div class="below_map">
-      <button onclick="placeMonster()" class="mapButton">testMonsterScreen</button>
-      <button onclick="createMonster()" class="mapButton">testCreateMonster</button>
-      <button class="mapButton" onclick = "getMonsters()">testRemoveMonster</button>
+        <button onclick="placeMonster()" class="mapButton">testMonsterScreen</button>
+        <button onclick="createMonster()" class="mapButton">testCreateMonster</button>
+        <button class="mapButton" onclick = "getMonsters()">testRemoveMonster</button>
+        <p id="showPoints"></p>
+        <input type="radio" name = "points" id="red" value="red_team">
+        <label for="red">Red</label>
+        <input type="radio" name = "points" id="green" value="green_team">
+        <label for="green">Green</label>
+        <input type="radio" name = "points" id="blue" value="blue_team">
+        <label for="blue">Blue</label>
+        <button id="enterScore">Add Points</button>
       </div>
     </div>
 
