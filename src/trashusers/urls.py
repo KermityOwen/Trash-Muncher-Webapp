@@ -11,5 +11,6 @@ users_router.register(r"user-register", viewsets.UserRegistrationViewset, basena
 users_router.register(r"", viewsets.UserViewSet, basename="")
 urlpatterns = [
     path('login/', viewsets.LoginView.as_view()),
+    path('logout/', viewsets.logout_view),
 ]
 urlpatterns += users_router.urls
