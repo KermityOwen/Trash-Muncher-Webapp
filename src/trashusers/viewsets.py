@@ -9,6 +9,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import action, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 from .serializers import UserSerializer, UserPostSerializer, PlayerSerializer, GameKeeperSerializer
 from .models import Player, GameKeeper, User
@@ -66,12 +68,13 @@ class LoginView(APIView):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            # CsrfViewMiddleware automatically adds csrf token as cookie
-            # SessionMiddleware automatically adds session id as cookie
+            refresh = RefreshToken.for_user(user)
             return Response(
                 {
                     "message": "Logged in successfully",
                     "user": UserSerializer(user).data,
+                    "refresh":str(refresh),
+                    "access":str(refresh.access_token),
                 },
                 status=status.HTTP_200_OK,
             )
@@ -82,9 +85,14 @@ class LoginView(APIView):
             )
 
 
-@csrf_exempt
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-def logout_view(request):
-    logout(request)
-    return HttpResponse("Logged out", status=status.HTTP_200_OK)
+class LogoutView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)

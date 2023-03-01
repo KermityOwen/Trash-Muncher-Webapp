@@ -66,10 +66,6 @@ class PlayerSerializer(serializers.ModelSerializer):
         # Overriding create function necessitates this, can be changed to take ints if preferred.
         team_data = validated_data.get('team')
         player, created = Player.objects.update_or_create(user=user, team=Team.objects.get(name=team_data['name']))
-        perm = isGameKeeper()
-        print(perm.has_permission(player))
-        perm = isPlayer()
-        print(perm.has_permission(player))
         return player
 
 class GameKeeperSerializer(serializers.ModelSerializer):
@@ -88,3 +84,5 @@ class GameKeeperSerializer(serializers.ModelSerializer):
             print(user_data)
         gamekeeper, created = GameKeeper.objects.update_or_create(user=user)
         return gamekeeper
+
+
