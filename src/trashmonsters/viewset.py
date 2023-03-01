@@ -123,7 +123,7 @@ def changeScore(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated, isPlayer])
+@permission_classes([IsAuthenticated])
 def addScore(request):
     TM_ID = request.data.get("TM_ID", None)
     T1Score = request.data.get("T1Score", 0)

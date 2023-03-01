@@ -163,7 +163,8 @@ function drawShape(monster){
 function createMonster(){ //there will be a button to press instead at later date
   const monster = {"Latitude":50.73646948193597,"Longitude":-3.5317420013942633};
   const url="api/monsters/add-tm";
-  const params = {body:JSON.stringify(monster),method:"POST",headers: {"content-type":"application/json"}};
+  var csrftoken = Cookies.get('csrftoken');
+  const params = {credentials: 'include',body:JSON.stringify(monster),method:"POST",headers: {"X-CSRFToken": csrftoken,"content-type":"application/json"}};
   fetch(url,params).then(async function(response){
     if(response.ok){
       //return response.json()
@@ -173,10 +174,13 @@ function createMonster(){ //there will be a button to press instead at later dat
   });
 }
 
+
+
 async function updateScore(id,scores){
   const data = {"TM_ID":id,"T1Score":scores[0],"T2Score":scores[1],"T3Score":scores[2]};
   const url="api/monsters/add-score";
-  const params = {body:JSON.stringify(data),method:"POST",headers: {"content-type":"application/json"}};
+  var csrftoken = Cookies.get('csrftoken');
+  const params = {credentials: 'include',body:JSON.stringify(data),method:"POST",headers: {"X-CSRFToken": csrftoken,"content-type":"application/json"}};
   return fetch(url,params).then(response => response.json());
 }
 
