@@ -4,7 +4,6 @@
 <html>
   <head>
 	<title>Map :)</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href={% static "css/style.css" %}>
@@ -13,12 +12,13 @@
 	<body>
     <!--The div element for the map -->
     <div class="map-modal">
+      <p id="status">Welcome!</p>
       <div id="map">
       </div>
       <div class="below_map">
-        <button onclick="placeMonster()" class="mapButton">testMonsterScreen</button>
-        <button onclick="createMonster()" class="mapButton">testCreateMonster</button>
-        <button class="mapButton" onclick = "getMonsters()">testRemoveMonster</button>
+        <button onclick="createMonster()" class="mapButton">Create Monster</button>
+        <button onclick="toggleLocation()" class="mapButton">Toggle Location</button>
+        <button class="mapButton" onclick = "changeZoom()">Change Zoom</button>
         <p id="showPoints"></p>
         <input type="radio" name = "points" id="red" value="red_team">
         <label for="red">Red</label>
@@ -27,6 +27,13 @@
         <input type="radio" name = "points" id="blue" value="blue_team">
         <label for="blue">Blue</label>
         <button id="enterScore">Add Points</button>
+        <br>
+        <label for="latitude">Latitude</label>
+        <input type="text" class="position" id="latitude" readonly>
+        <label for="longitude">Longitude</label>
+        <input type="text" class="position" id="longitude"readonly>
+        
+
       </div>
     </div>
 
