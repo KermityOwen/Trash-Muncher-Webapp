@@ -10,6 +10,12 @@ def index(request):
 def about(request):
     return render(request, 'trashsite/about.html')
 
+def register(request):
+    return render(request, 'trashsite/register.html')
+
+def login(request):
+    return render(request, 'trashsite/login.html')
+
 def map(request):
     return render(request, 'trashsite/map.html')
 
