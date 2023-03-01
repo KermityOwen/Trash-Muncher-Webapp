@@ -184,5 +184,8 @@ a.register:visited {
 	
 }
 
-#geobutton {
+#status{
+	font-family: "Montserrat", sans-serif;
+	text-align: center;
+	font-size: larger;
 }
