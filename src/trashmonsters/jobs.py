@@ -6,20 +6,28 @@ from schedule import Scheduler
 import time, threading, schedule
 import json, os
 
+from .viewset import cached_leader
+
 #print(os.path.abspath(os.getcwd()))
 config = json.load(open("trashmonsters/config.json"))
 
 def decrTeamLeaders():
     TMs = TrashMonsters.objects.all()
     for TM in TMs:
-    # Using bubble search for now (hard code for only 3 groups), can optimise or fix in the future. ceebs
-        if (TM.Team1_Score >= TM.Team2_Score):
+
+    # HOLY FUCK THIS IS HORRIBLE. can be optimized with pointers but python is fucked
+        if (TM.Team1_Score > TM.Team2_Score):
             if (TM.Team1_Score > TM.Team3_Score):
                 autoRemoveScore(tm_id=TM.TM_ID, rem_team=1)
-                # print("TM: %d, Winning Team: %d"%(TM.TM_ID, 1))
+            elif (TM.Team1_Score == TM.Team3_Score):
+                autoRemoveScore(tm_id=TM.TM_ID, rem_team=cached_leader.get(TM.TM_ID))
+
+        elif (TM.Team1_Score == TM.Team2_Score):
+            if (TM.Team1_Score > TM.Team3_Score):
+                autoRemoveScore(tm_id=TM.TM_ID, rem_team=1)
             else:
-                autoRemoveScore(tm_id=TM.TM_ID, rem_team=3)
-                # print("TM: %d, Winning Team: %d"%(TM.TM_ID, 3))
+                autoRemoveScore(tm_id=TM.TM_ID, rem_team=cached_leader.get(TM.TM_ID))
+
         elif (TM.Team2_Score > TM.Team3_Score):
             autoRemoveScore(tm_id=TM.TM_ID, rem_team=2)
             # print("TM: %d, Winning Team: %d"%(TM.TM_ID, 2))
@@ -35,10 +43,11 @@ def autoRemoveScore(tm_id, rem_team):
         elif rem_team == 3:
             TM.Team3_Score -= 1
         else:
-            print("invalid team")
+            print("Error: Invalid team")
         TM.save()
+        print("Scheduled trash eating!")
     except:
-        print("Error: TM_ID not found")
+        print("Error: Something went wrong!")
 
 
 

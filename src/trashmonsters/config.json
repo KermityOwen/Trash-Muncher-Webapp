@@ -1,3 +1,4 @@
 {
-    "monster_eating_interval":21600
+    "monster_eating_interval":21600,
+    "distance_leeway": 50
 }
