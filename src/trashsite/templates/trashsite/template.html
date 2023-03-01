@@ -5,6 +5,18 @@
 	<title>Trash Munchers</title>
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script>
+		async function logout() {
+			const url = "api/users/logout/";
+			const params = {
+				headers: { "content-type" : "application/json; charset=UTF-8" },
+				method: "GET",
+				mode: "cors"
+			}
+			await fetch(url, params);
+			location.reload();
+		}
+	</script>
 </head>
 
 <body>
@@ -21,8 +33,13 @@
 		   	<ul class = "nav_links">
 		        <li class="home"><a href="{% url 'index' %}" class="home">Home</a></li>
 		       	<li class="about"><a href="about" class="about">About</a></li>
-		    	<li class="login"><a href="login" class="login">Login</a></li>
-   		        <li class="register"><a href="register" class="register">Register</a></li>
+                {% if user.is_authenticated %}
+                	<li class="login"><a href="javascript:logout();" class="login">Logout</a></li>
+   			        <li class="register">{{ user }}</li>
+                {% else %}
+   			    	<li class="login"><a href="login" class="login">Login</a></li>
+   			        <li class="register"><a href="register" class="register">Register</a></li>
+                {% endif %}
 		        </ul>
 			</nav>
 		</div>

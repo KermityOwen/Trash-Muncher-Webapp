@@ -10,6 +10,12 @@ def index(request):
 def about(request):
     return render(request, 'trashsite/about.html')
 
+def register(request):
+    return render(request, 'trashsite/register.html')
+
+def login(request):
+    return render(request, 'trashsite/login.html')
+
 def map(request):
     return render(request, 'trashsite/map.html')
 
@@ -18,3 +24,6 @@ def imageapprove(request):
 
 def mapselect(request):
     return render(request, 'trashsite/mapselect.html')
+
+def handler404(request, exception):
+    return render(request, 'trashsite/404.html')
