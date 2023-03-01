@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import api_view
@@ -13,6 +15,8 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, UserPostSerializer, PlayerSerializer, GameKeeperSerializer
 from .models import Player, GameKeeper, User
 
+def csrf(request):
+    return JsonResponse({'csrfToken': get_token(request)})
 
 class PlayerRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Player.objects.all()
@@ -51,6 +55,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
             serializer = self.get_serializer(GameKeeperSerializer.objects.get(user=request.user))
         return Response(serializer.data)
 
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class LoginView(APIView):
     permission_classes = ()
     authentication_classes = ()

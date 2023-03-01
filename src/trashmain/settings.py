@@ -47,11 +47,16 @@ INSTALLED_APPS = [
     'trashmonsters',
     'trashimages',
     # For scheduling
+    'corsheaders',
 ]
+
+SESSION_COOKIE_SECURE = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -146,3 +151,13 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ),
 }
+
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPSONLY = False
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_WHITELIST = ('localhost:5173')
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://172.0.0.1'
+]

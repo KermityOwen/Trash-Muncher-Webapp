@@ -10,6 +10,7 @@ users_router.register(r"gamekeeper-register", viewsets.GamekeeperRegistrationVie
 users_router.register(r"user-register", viewsets.UserRegistrationViewset, basename="users")
 users_router.register(r"", viewsets.UserViewSet, basename="")
 urlpatterns = [
+    path('csrf/', viewsets.csrf),
     path('login/', viewsets.LoginView.as_view()),
     path('logout/', viewsets.logout_view),
 ]
