@@ -26,3 +26,5 @@ urlpatterns = [
     path('api/monsters/', include('trashmonsters.urls')),
     path('api/images/', include('trashimages.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404='trashsite.views.handler404'

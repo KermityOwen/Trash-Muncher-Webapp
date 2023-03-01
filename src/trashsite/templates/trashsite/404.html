@@ -1,0 +1,47 @@
+<!doctype html>
+{% load static %}
+{% include 'trashsite/template.html' %}
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Trash Munchers</title>
+ 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+		.error_page {
+			position: absolute;
+			top: 46%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.title {
+			text-align: center;
+		}
+
+		.title_trash {
+			color: red;
+			font-family: "Bubbler One", sans-serif;
+			font-size: max(8.5vw, 10vh);
+			letter-spacing: 0.7vw;
+		}
+	
+		.title_munchers {
+			padding-top: 3%;
+			font-family: "Bubbler One", sans-serif;
+			font-size: max(1.5vw, 7vh);
+			line-height: 2vw;
+			letter-spacing: 0.7vw;
+			display: inline-block;
+			transform: scaleY(0.9);
+			transform-origin: 0 0;
+			margin-bottom: -50%;
+			white-space: nowrap;
+		}
+	</style>
+</head>
+		<div class="error_page">
+        	<div class="title">
+		    	<font class="title_trash">404</font><br>
+				<font class="title_munchers">PAGE DOESN'T EXIST</font><br><br>
+            </div>
+	    </div>                 
+</html>
