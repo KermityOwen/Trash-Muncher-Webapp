@@ -152,16 +152,37 @@ a.register:visited {
 	float: right;
 }
 
-#map {
-	height: 400px; /* The height is 400 pixels */
-	width: 600px; /* The width is the width of the web page */
-	border: #0F0F0F;
-	border-style: solid;
-	border-width: 1px;
+.map-modal {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
 }
 
-#mapUI {
-	height: 400px; /* The height is 400 pixels */
-  	width: 600px; /* The width is the width of the web page */
-	margin: auto;
+#map {
+	height: 60vh; /* The height is 400 pixels */
+	width: 50vw; /* The width is the width of the web page */
+	z-index: -1;
+	box-shadow: 0px 4px 30px #272727;
+	
+}
+
+
+
+.below_map {
+	list-style-type: none;
+	text-align: center;
+}
+.mapButton {
+	float: left;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 33.33%; /* Four links of equal widths */
+  text-align: center;
+  
+	
+}
+
+#geobutton {
 }
