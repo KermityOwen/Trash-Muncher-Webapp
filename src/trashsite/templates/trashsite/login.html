@@ -8,7 +8,7 @@
  	<link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/style-login.css' %}">
     <script type="text/javascript">
-		function check(event) {
+		async function check(event) {
 			event.preventDefault();
 			
 			const url = "api/users/login/";
@@ -33,7 +33,6 @@
 			var parseObj = JSON.parse(stringObj);
 			
 			var message = parseObj[0]["message"];
-			console.log(message);
 			
 			if (message === "Logged in successfully") {
 				window.location.replace("{% url 'index' %}");

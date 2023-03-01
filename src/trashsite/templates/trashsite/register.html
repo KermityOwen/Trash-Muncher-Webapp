@@ -53,21 +53,21 @@
 				var message2 = parseObj[0][0];
 			} catch (error) {
 				//
-			}
+			}		
 			
-			if (typeof message !== 'undefined') {
-				if (message.length < 10) {
-					window.location.replace("{% url 'index' %}");
-				} else {
+			if (parseObj.length !== 1) {
+				window.location.replace("{% url 'index' %}");
+			} else {
+				if (typeof message !== 'undefined') {
 					document.getElementById('register').reset();
 					document.getElementById('message').innerHTML = message;
+				} else if (typeof message2 !== 'undefined') {
+					document.getElementById('register').reset();
+					document.getElementById('message').innerHTML = message2;
+				} else {
+					document.getElementById('register').reset();
+					document.getElementById('message').innerHTML = "Unexpected error";
 				}
-			} else if (typeof message2 !== 'undefined') {
-				document.getElementById('register').reset();
-				document.getElementById('message').innerHTML = message2;
-			} else {
-				document.getElementById('register').reset();
-				document.getElementById('message').innerHTML = "Unexpected error";
 			}
 		}
 	</script>

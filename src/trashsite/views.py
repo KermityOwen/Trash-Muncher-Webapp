@@ -24,3 +24,6 @@ def imageapprove(request):
 
 def mapselect(request):
     return render(request, 'trashsite/mapselect.html')
+
+def handler404(request, exception):
+    return render(request, 'trashsite/404.html')
