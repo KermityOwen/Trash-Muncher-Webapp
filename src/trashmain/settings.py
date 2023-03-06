@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,11 +48,23 @@ INSTALLED_APPS = [
     'trashmonsters',
     'trashimages',
     # For scheduling
+    'corsheaders',
+]
+
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPSONLY = False
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_WHITELIST = ('localhost:5173')
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://172.0.0.1'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -143,6 +156,11 @@ AUTH_USER_MODEL = 'trashusers.User'
 REST_FRAMEWORK = {
 
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=90)
+    }

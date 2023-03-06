@@ -84,3 +84,5 @@ class GameKeeperSerializer(serializers.ModelSerializer):
             print(user_data)
         gamekeeper, created = GameKeeper.objects.update_or_create(user=user)
         return gamekeeper
+
+
