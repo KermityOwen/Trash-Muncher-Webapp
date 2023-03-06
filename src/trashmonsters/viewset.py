@@ -36,11 +36,14 @@ def bubble_search(TM: TrashMonsters):
 
 
 def calculate_cached_leader():
-    TMs = TrashMonsters.objects.all()
-    for TM in TMs:
-        # print (bubble_search(TM))
-         cached_leader[TM.TM_ID] = bubble_search(TM)
-    print(cached_leader)
+    try:
+        TMs = TrashMonsters.objects.all()
+        for TM in TMs:
+            # print (bubble_search(TM))
+            cached_leader[TM.TM_ID] = bubble_search(TM)
+        print(cached_leader)
+    except:
+        print("DB not yet set up. Run migrate before trying again.")
 
 
 def calculate_specific_leader(TM_ID):

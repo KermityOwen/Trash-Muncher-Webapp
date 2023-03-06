@@ -13,6 +13,8 @@ pillow = "*"
 piplock = "*"
 geopy = "*"
 schedule = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

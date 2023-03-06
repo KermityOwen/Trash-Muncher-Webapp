@@ -7,6 +7,7 @@ urlpatterns = [
     path('add-tm', viewset.addTM),
 
     path('calculate-distance', viewset.calcDistance),
+    path('verify-distance', viewset.verifyDistance),
 
     path('change-score', viewset.changeScore),
     path('add-score', viewset.addScore),
