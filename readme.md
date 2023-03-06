@@ -16,6 +16,10 @@ Gets all trashmunchers and associated data from db. Responds with serialized tra
  Calculates the distance between trashmuncher specified and origin location. Responds with distance in meters.  
 <b>Example request: `{"TM_ID":0, "o-lat": 12.3466, "o-long": 5.6789}`</b>
 
+- calculate-distance [POST] -  
+ Calculates the distance between trashmuncher specified and origin location and returns if it's within valid range. Responds with True or False.  
+<b>Example request: `{"TM_ID":0, "o-lat": 12.3466, "o-long": 5.6789}`</b>
+
 - change-score [POST] -  
 Changes the scores for trashmuncher specified. If a score is not presented, it doesn"t change that score. Responds with the trashmuncher that was just edited.  
 <b>Example request: `{"TM_ID":0, "T1Score":1, "T2Score":2, "T3Score":4}`</b>
