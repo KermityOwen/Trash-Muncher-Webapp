@@ -4,12 +4,47 @@
 	<head>
 		<title> Map Selector :) </title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
 
     <link rel="stylesheet" type="text/css" href={% static "css/mapselect.css" %}>
     <script src={% static "js/mapselect.js" %}></script>
+	<script src={% static "js/mapOptions.js" %}></script>
 	</head>
 	<body>
+
 		<div class="map-modal">
+			<p id="status">Welcome!</p>
+			
+			<div class="below_map">
+			  <button onclick="createMonster()" class="mapButton">Create Monster</button>
+			  <button onclick="toggleLocation()" class="mapButton">Toggle Location</button>
+			  <button class="mapButton" onclick = "changeZoom()">Change Zoom</button>
+			  <br>
+			  <input type="radio" name = "points" id="red" value="red_team">
+			  <label for="red">Red</label>
+			  <input type="radio" name = "points" id="green" value="green_team">
+			  <label for="green">Green</label>
+			  <input type="radio" name = "points" id="blue" value="blue_team">
+			  <label for="blue">Blue</label>
+			  <br>
+			  <button id="enterScore">Add Points</button>
+			  <br>
+			  <label for="latitude">Latitude</label>
+			  <input type="text" class="position" id="latitude" readonly>
+			  <label for="longitude">Longitude</label>
+			  <input type="text" class="position" id="longitude"readonly>
+			  
+	  
+			</div>
+			<div id="map">
+			</div>
+		  </div>
+
+
+
+
+		<!--<div class="map-modal">
 			<div class="map-form">
 				<p>Add a point</p>
 				<form action="mapselect" onsubmit="return sendLocation()">
@@ -23,7 +58,7 @@
 				<img src="{% static 'images/tempmap.png' %}" style="object-fit: cover;">
 			</div>
 		</div>
-
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"defer></script>
+	-->
+		<script src="https://maps.googleapis.com/maps/api/js?&callback=initMap&v=weekly"defer></script>
 	</body>
 </html>

@@ -3,68 +3,40 @@
 var map;
 var monsterArray = [];
 var shapes = [];
-var curLocation = false;
+var curLocation = true;
 var zoomedIn = true;
 
 //draws the map onto the screen
 function initMap(){
 //future code for setting current position
 var coords;
-navigator.permissions.query({name:'geolocation'}).then(async (result) => {
-  if(result.state === 'granted'){
-    await getPosition();
-    
-  }
-  else if(result.state==='prompt'){
-    await getPosition();
-  }
-  else if(result.state==='denied'){
-    console.log("hi");
-    geoButton.style.display = 'inline';
-  }
-  result.addEventListener('change', async () => {
-    if(result.state==='granted'){
-      await getPosition();
-    }
-    if(result.state==='denied'){
-    }
-  });
-});
 
+getPosition().then((position) =>{
+  document.getElementById("mapAwait").hidden = true;
+  createMap(position.coords);
+}).catch((err) => {
+  console.log(err);
+  document.getElementById("awaitText").textContent="Permission not granted. Pls grant <3"
+})
 }
 //deals with initial current position
-async function getPosition(){
+function getPosition(){
   return new Promise((resolve,reject) => {
-    navigator.geolocation.getCurrentPosition(position => {resolve(createMap(position.coords))},reject);
+    navigator.geolocation.getCurrentPosition(resolve,reject,{maximumAge: 100,enableHighAccuracy:true})
   });
 }
 
 //def important function needs changing for different uses
 function createMap(coords){
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 18,
-    tilt:45,
-    disableDefaultUI: true,
-    zoomControl: false,
-    gestureHandling: "none",
-    center:{lat: 50.73646948193597,lng: -3.5317420013942633},
-    //center: {lat: coords.latitude, lng: coords.longitude},
-    mapId:'805b0b106a1a291d'
-  });
+  map = new google.maps.Map(document.getElementById("map"), options.player);
+  map.setCenter({lat:coords.latitude,lng:coords.longitude});
+
   //const webglOverlayView = new google.maps.WebGLOverlayView();
   //webglOverlayView.setMap(map);
 
-  map.addListener("click",(event) => {
-    let latLng = event.latLng;
-    var clickLat = latLng.lat();
-    var clickLng = latLng.lng();
-    document.getElementById("latitude").value=clickLat;
-    document.getElementById("longitude").value=clickLng;
-  })
+
   //will track position
-
-
-  navigator.geolocation.watchPosition(successMove,failure,{timeout:5000});
+  navigator.geolocation.watchPosition(successMove,failure,{timeout:1000, maximumAge: 100,enableHighAccuracy:true});
 
   getMonsters().then(response => {
     if(response!=null){
@@ -90,18 +62,6 @@ async function getMonsters(){
   const url="api/monsters/get-tms";
   const response = await fetch(url, { method: "get" });
     return await response.json();
-}
-
-async function setMonster(latitude,longitude){
-  const monster = {"Latitude":latitude,"Longitude":longitude};
-    const url="api/monsters/add-tm";
-    var csrftoken = Cookies.get('csrftoken');
-    const params = {
-      credentials: 'include',
-      body:JSON.stringify(monster),
-      method:"POST",
-      headers: {"X-CSRFToken": csrftoken,"content-type":"application/json"}};
-    return fetch(url,params).then(response => response.json());
 }
 
 function drawMonsters(monster){
@@ -130,7 +90,10 @@ function drawMonsters(monster){
     monsterArray.push({"id":monster.TM_ID,"monster":monster,"marker":marker,"shape":shape})
 
     marker.addListener("click", () => {
-      //temporary fix for events triggering multiple times when clicking on the markers. Will only be able to press once in final code
+      //some distance checker stuff
+      
+
+
       var oldButton = document.getElementById("enterScore");
       var button = oldButton.cloneNode(true);
       oldButton.parentNode.replaceChild(button,oldButton);
@@ -144,6 +107,7 @@ function drawMonsters(monster){
           //bit of a jank system, button press is done here instead of the usual onclick="" stuff
           button.addEventListener("click", async () => {
             var scoreInc=[0,0,0];
+            //value is the player's team, no need for the query anymore
             let value = document.querySelector('input[name="points"]:checked').value;
             switch(value){
               case "red_team":scoreInc[0]++;break;
@@ -210,22 +174,6 @@ function drawShape(monster){
 }
 
 
-function createMonster(){ //there will be a button to press instead at later date
-  let latitude = document.getElementById("latitude").value
-  let longitude = document.getElementById("longitude").value
-  document.getElementById("status").textContent="New monster created!"
-  if(latitude == null || longitude == null){
-    console.log("invalid input");
-  }
-  else{
-    setMonster(latitude,longitude).then(response => {
-      drawMonsters(response);
-    })
-  }
-  
-}
-
-
 async function updateScore(id,scores){
   const data = {"TM_ID":id,"T1Score":scores[0],"T2Score":scores[1],"T3Score":scores[2]};
   const url="api/monsters/add-score";
@@ -234,6 +182,7 @@ async function updateScore(id,scores){
   return fetch(url,params).then(response => response.json());
 }
 
+//might change this to a view campus button
 function toggleLocation(){
   if(curLocation==false) {
     curLocation = true;
@@ -242,6 +191,7 @@ function toggleLocation(){
   else if(curLocation==true) curLocation = false;
 }
 
+//this one still cool, nice to see big picture
 function changeZoom() {
   if(zoomedIn){
       if(map.getZoom()>15){
@@ -271,6 +221,8 @@ function changeZoom() {
 
 
 function successMove(position){ //will handle distances from monsters to player
+  let errorBar = document.getElementById("errorText");
+  errorBar.hidden=true;
   console.log(curLocation);
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
@@ -279,13 +231,17 @@ function successMove(position){ //will handle distances from monsters to player
     map.panTo({lat:latitude,lng:longitude});
   }
   else{
-    map.panTo({lat:50.73646948193597,lng:-3.5317420013942633})
+    //map.panTo({lat:50.73646948193597,lng:-3.5317420013942633})
   }
 }
 function success(position){ //will handle distances from monsters to player
   return position.coords
 }
-function failure(){
+function failure(err){
+  console.log(err)
+  let errorBar = document.getElementById("errorText");
+  errorBar.hidden=false;
+  errorBar.textContent="Error, location not found";
   return [50.73646948193597, -3.5317420013942633]
 }
 

@@ -8,32 +8,30 @@
 	
 	<link rel="stylesheet" type="text/css" href={% static "css/style.css" %}>
     <script src={% static "js/map.js" %}></script>
+    <script src={% static "js/mapOptions.js" %}></script>
 	</head>
 	<body>
+    {{user}}
     <!--The div element for the map -->
     <div class="map-modal">
       <p id="status">Welcome!</p>
-      <div id="map">
-      </div>
+      
       <div class="below_map">
-        <button onclick="createMonster()" class="mapButton">Create Monster</button>
+        <button class="mapButton" id="enterScore">Insert trash</button>
         <button onclick="toggleLocation()" class="mapButton">Toggle Location</button>
         <button class="mapButton" onclick = "changeZoom()">Change Zoom</button>
-        <p id="showPoints"></p>
-        <input type="radio" name = "points" id="red" value="red_team">
-        <label for="red">Red</label>
-        <input type="radio" name = "points" id="green" value="green_team">
-        <label for="green">Green</label>
-        <input type="radio" name = "points" id="blue" value="blue_team">
-        <label for="blue">Blue</label>
-        <button id="enterScore">Add Points</button>
-        <br>
-        <label for="latitude">Latitude</label>
-        <input type="text" class="position" id="latitude" readonly>
-        <label for="longitude">Longitude</label>
-        <input type="text" class="position" id="longitude"readonly>
+
         
 
+      </div>
+      
+      <div id="mapAwait">
+        <p id="awaitText">Awaiting map</p>
+      </div>
+      <div id="mapContainer">
+        <p id="errorText" hidden>Error bar</p>
+        <div id="map">
+      </div>
       </div>
     </div>
 
