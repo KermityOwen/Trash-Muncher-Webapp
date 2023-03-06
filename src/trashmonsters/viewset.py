@@ -16,6 +16,10 @@ cached_leader = {}
 
 def restart_testing_db():
     TMs = TrashMonsters.objects.all()
+    if len(TMs) == 0:
+        TrashMonsters.objects.create(Longitude=11, Latitude=2)
+        TrashMonsters.objects.create(Longitude=1, Latitude=4)
+        TrashMonsters.objects.create(Longitude=4, Latitude=5)
     for TM in TMs:
         TM.Team1_Score = randint(1, 99)
         TM.Team2_Score = randint(1, 99)
