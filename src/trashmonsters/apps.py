@@ -11,6 +11,9 @@ class TrashmonstersConfig(AppConfig):
         if os.environ.get('RUN_MAIN', None) != 'true':
             # On server start, code below will be ran.
             print("server up")
-            viewset.restart_testing_db()
-            # viewset.calculate_cached_leader()
-            # jobs.start_scheduler()
+            try:
+                viewset.restart_testing_db()
+            except:
+                print("Setting up database")
+            viewset.calculate_cached_leader()
+            jobs.start_scheduler()
