@@ -62,7 +62,10 @@ def run_continuously(self, interval=config["monster_eating_interval"]):
             while not cease_continuous_run.is_set():
                 #self.run_pending()
                 #autoRemoveScore(tm_id=1, team1=1)
-                decrTeamLeaders()
+                try:
+                    decrTeamLeaders()
+                except:
+                    print("Bruh get this yeeyee ass code out of here")
                 time.sleep(interval)
 
     continuous_thread = ScheduleThread()
