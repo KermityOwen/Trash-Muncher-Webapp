@@ -4,24 +4,46 @@
 <html>
   <head>
 	<title>Map :)</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href={% static "css/style.css" %}>
     <script src={% static "js/map.js" %}></script>
 	</head>
 	<body>
     <!--The div element for the map -->
-    <div id="mapUI">
-      <h3>The map</h3>
-      <button onclick="placeMonster()">testMonsterScreen</button>
-      <div id="map"></div>
+    <div class="map-modal">
+      <p id="status">Welcome!</p>
+      <div id="map">
+      </div>
+      <div class="below_map">
+        <button onclick="createMonster()" class="mapButton">Create Monster</button>
+        <button onclick="toggleLocation()" class="mapButton">Toggle Location</button>
+        <button class="mapButton" onclick = "changeZoom()">Change Zoom</button>
+        <p id="showPoints"></p>
+        <input type="radio" name = "points" id="red" value="red_team">
+        <label for="red">Red</label>
+        <input type="radio" name = "points" id="green" value="green_team">
+        <label for="green">Green</label>
+        <input type="radio" name = "points" id="blue" value="blue_team">
+        <label for="blue">Blue</label>
+        <button id="enterScore">Add Points</button>
+        <br>
+        <label for="latitude">Latitude</label>
+        <input type="text" class="position" id="latitude" readonly>
+        <label for="longitude">Longitude</label>
+        <input type="text" class="position" id="longitude"readonly>
+        
+
+      </div>
     </div>
 
     <!--<button onclick="changeZoom()">click to unzoom!!!</button>
     <button onclick="goToLocation()">Current Location</button>
     -->
+    <!--api key is key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg-->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+    
+      src="https://maps.googleapis.com/maps/api/js?&callback=initMap&v=weekly"
       defer
     ></script>
   </body>
