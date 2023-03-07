@@ -42,15 +42,9 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
                                                    reset_password_token.key)
     
     send_mail(
-        # title:
+        subject=
         "Password Reset for {title}".format(title="Trashmunchers"),
-
-        # message:
-        email_plaintext_message,
-
-        # from (needs to be filled in with bot email):
-        "noreply@localhost",
-
-        # to (email of the user requesting the password reset):
-        [reset_password_token.user.email]
+        message=email_plaintext_message,
+        from_email="noreply@localhost", #Needs to be changed https://studygyaan.com/django/how-to-send-email-in-django
+        recipient_list=[reset_password_token.user.email]
     )

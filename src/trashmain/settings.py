@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['*'] # Change when deploy
 # Application definition
 
 INSTALLED_APPS = [
-    'trashsite',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,10 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_rest_passwordreset',
     # For user managing API
     'django_extensions',
+    'trashsite',
     'trashusers',
-    'django_rest_passwordreset',
     # For monster managing API
     'trashmonsters',
     'trashimages',
