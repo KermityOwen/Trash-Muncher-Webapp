@@ -14,6 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
             "id",
             "first_name",
             "last_name",
+            "email",
             "username",
         ]
         read_only_fields = [
@@ -24,7 +25,7 @@ class UserPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         read_only_fields = ["id"]
-        fields = ["username", "first_name", "last_name", "password"]
+        fields = ["username", "first_name", "last_name", "email", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -85,4 +86,11 @@ class GameKeeperSerializer(serializers.ModelSerializer):
         gamekeeper, created = GameKeeper.objects.update_or_create(user=user)
         return gamekeeper
 
-
+class PasswordChangeSerializer(serializers.Serializer):
+    """
+    Serailizer to get the old password from the database and the new one
+    from the request
+    """
+    model = get_user_model()
+    old_pwd = serializers.CharField(required=True)
+    new_pwd = serializers.CharField(required=True)

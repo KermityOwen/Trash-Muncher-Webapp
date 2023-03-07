@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # For user managing API
     'django_extensions',
     'trashusers',
+    'django_rest_passwordreset',
     # For monster managing API
     'trashmonsters',
     'trashimages',
@@ -157,6 +158,7 @@ REST_FRAMEWORK = {
 
     "DEFAULT_AUTHENTICATION_CLASSES": (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 
@@ -164,3 +166,7 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=90)
     }
+
+
+# Allows for the email to be displayed in the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 

@@ -3,65 +3,37 @@ from rest_framework.test import (
     APIClient,
 )
 from rest_framework import status
-from .models import Player, GameKeeper, User, Team
+from trashusers.models import Player, GameKeeper, User, Team
+from .models import TrashMonsters
 from django.contrib.auth.models import Group
 
 
-class UserViewsetTest(APITestCase):
+class TrashmonsterViewsetTest(APITestCase):
     def setUp(self):
-        self.user = User.objects.create(username="first_user", first_name="first", last_name="user",password="secure_password_rock")
-        self.player = Player.objects.create(
-            user=self.user, team=Team.objects.get_or_create(id=1, name='Red')[0]
-        )
+        self.user_one = User.objects.create(username="example_player",
+                                        first_name="test",
+                                        last_name="player",
+                                        password="secure_password")
+
+        self.player = Player.objects.create(user=self.user_one, 
+                                            team=Team.objects.get_or_create
+                                            (id=1, name="Red")[0])
+
+        self.user_two = User.objects.create(username="example_gamekeeper",
+                                        first_name="test",
+                                        last_name="gamekeeper",
+                                        password="secure_password")
+
+        self.gamekeeper = GameKeeper.objects.create(user=self.user_two)
+
+        TrashMonsters.objects.create(Longitude=11, Latitude=2)
+        TrashMonsters.objects.create(Longitude=1, Latitude=4)
+        TrashMonsters.objects.create(Longitude=4, Latitude=5)
+
         self.client = APIClient()
-        self.url = "/api"
+        self.url = "http://google.com/fuckoff"
 
-    def test_create_player(self):
-        self.client.force_authenticate()
-        response = self.client.post(
-            self.url + "/users/player-register/",
-            {
-                "user": 
-                    {
-                        "username": "test_user",
-                        "first_name": "Test",
-                        "last_name": "User",
-                        "password": "secure_password"
-                    },
-                "team": {
-                    "name": 'Red'
-                }
-            },
-            format='json',
-        )
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    def test_create_gamekeeper(self):
-        self.client.force_authenticate()
-        response = self.client.post(
-            self.url + "/users/gamekeeper-register/",
-            {
-                "user": 
-                    {
-                        "username": "test_user",
-                        "first_name": "Test",
-                        "last_name": "User",
-                        "password": "secure_password"
-                    }
-            },
-            format='json',
-        )
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    def test_get_user(self):
-        self.client.force_authenticate(self.user)
-        response = self.client.get(self.url + "/users/me/")
+    def test_get_TMs(self):
+        response = self.client.get(self.url)
+        print(response)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["user"]["username"], self.user.username)
-
-    def test_retreive_user(self):
-        self.client.force_authenticate(self.user)
-        response = self.client.get(self.url + "/users/1/")
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["id"], self.user.id)
-        self.assertEqual(response.data["username"], self.user.username)
