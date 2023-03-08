@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['*'] # Change when deploy
 # Application definition
 
 INSTALLED_APPS = [
-    'trashsite',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_rest_passwordreset',
     # For user managing API
     'django_extensions',
     'trashusers',
@@ -157,6 +157,7 @@ REST_FRAMEWORK = {
 
     "DEFAULT_AUTHENTICATION_CLASSES": (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 
@@ -164,3 +165,7 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=90)
     }
+
+
+# Allows for the email to be displayed in the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 

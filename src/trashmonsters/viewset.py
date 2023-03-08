@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import TrashMonsters
 from .serializer import TMSerializer
 from trashmain.permissions import isPlayer, isGameKeeper
+from rest_framework import status
 
 from geopy import distance
 from random import randint
@@ -78,6 +79,8 @@ def addTM(request):
     serializer = TMSerializer(data=request.data)
     if (serializer.is_valid()):
         serializer.save()
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data)
 
 
@@ -103,8 +106,7 @@ def verifyDistance(request):
     target = (TM.Latitude, TM.Longitude)
     origin = (request.data.get("o-lat", None), request.data.get("o-long", None))
     difference = distance.distance(target, origin).m
-
-    if difference >= config["distance_leeway"]:
+    if difference <= config["distance_leeway"]:
         return Response(True)
     else:
         return Response(False)

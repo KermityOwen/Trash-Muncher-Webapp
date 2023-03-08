@@ -17,5 +17,6 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('logout/', viewsets.LogoutView.as_view()),
+    path('change-password/', viewsets.PasswordChangeView.as_view(), name='change-password'),
 ]
 urlpatterns += users_router.urls

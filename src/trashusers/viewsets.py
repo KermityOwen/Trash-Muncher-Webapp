@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from rest_framework import mixins, status, viewsets
+from rest_framework import mixins, status, viewsets, generics
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
-from .serializers import UserSerializer, UserPostSerializer, PlayerSerializer, GameKeeperSerializer
+from .serializers import UserSerializer, UserPostSerializer, PlayerSerializer, GameKeeperSerializer, PasswordChangeSerializer
 from .models import Player, GameKeeper, User
 
 
@@ -97,3 +97,43 @@ class LogoutView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+class PasswordChangeView(generics.UpdateAPIView):
+    """
+    An endpoint that allows a user to receive an email to change their password
+    """
+    serializer_class = PasswordChangeSerializer
+    model = get_user_model()
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        user = self.request.user
+        return user
+
+    def update(self, request):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # If the password entered is not correct, respond with 400
+            if not self.object.check_password(serializer.data.get("old_pwd")):
+                return Response({
+                    "old_pwd": ["Wrong Password"]
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Get the new password from the request and set it as the user's password
+            self.object.set_password(serializer.data.get("new_pwd"))
+
+            # Save changes to the database 
+            self.object.save()
+
+            return Response(
+                {"status":"success",
+                 "code":status.HTTP_200_OK,
+                 "message":"Password updated successfully",
+                 "data":[]
+                }
+            )
+        
+        # Returns 400 if there was an error getting the serialized info
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

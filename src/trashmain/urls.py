@@ -21,10 +21,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('', include('trashsite.urls')),
+    # path('', include('trashsite.urls')),
     path('api/users/', include('trashusers.urls')),
     path('api/monsters/', include('trashmonsters.urls')),
-    path('api/images/', include('trashimages.urls'))
+    path('api/images/', include('trashimages.urls')),
+    path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404='trashsite.views.handler404'
+# handler404='trashsite.views.handler404'
