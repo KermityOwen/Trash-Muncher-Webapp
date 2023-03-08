@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-import os
+import os, sys
 
 class TrashmonstersConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
@@ -11,6 +11,8 @@ class TrashmonstersConfig(AppConfig):
         if os.environ.get('RUN_MAIN', None) != 'true':
             # On server start, code below will be ran.
             print("server up")
+            if 'runserver' not in sys.argv:
+                return True
             try:
                 viewset.restart_testing_db()
             except:
