@@ -15,7 +15,7 @@ from PIL import Image
 # Create your tests here.
 class ImageSubmissionViewsetTest(APITestCase):
     def setUp(self):
-        # Create two test users 
+        # Create two test users (one player, one gamekeeper)
         self.user_gk = User.objects.create(username="example_gamekeeper",
                                         first_name="test",
                                         last_name="gamekeeper",
@@ -27,9 +27,6 @@ class ImageSubmissionViewsetTest(APITestCase):
                                         first_name="test",
                                         last_name="player",
                                         password="secure_password")
-        
-        
-        # Make one of the users a player and the other a gamekeeper
 
         self.player = Player.objects.create(user=self.user_player, 
                                             team=Team.objects.get_or_create
@@ -38,21 +35,35 @@ class ImageSubmissionViewsetTest(APITestCase):
         # Initialising the APIs
         self.client = APIClient()
         self.url = "/api"
-    
-    def generate_photo_file(self):
-        file = io.BytesIO()
-        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
-        image.save(file, 'png')
-        file.name = 'test.png'
-        file.seek(0)
-        return file
 
+        def generate_photo_file():
+            """
+            Creates a dummy image that can be used for testing
+            :returns file: Image for testing 
+            """
+            file = io.BytesIO()
+            image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+            image.save(file, 'png')
+            file.name = 'test.png'
+            file.seek(0)
+            return file
+
+        self.image = generate_photo_file()
+    
+    def tearDown(self):
+        """
+        Deletes the image created by the test
+        """
+        self.image.__del__()
 
     
     def test_player_submit_image(self):
-        # add the API call to be tested to the URL 
+        """
+        Test to ensure that players are able to access the API enpoint and submit an image
+        :assertions: Expecting a 201 response code is returned
+        """
         parser_classes = (MultiPartParser, FormParser)
-        submission = self.generate_photo_file()
+        submission = self.image
 
         # Getting a dummy response
         self.client.force_authenticate(self.user_player)
@@ -60,8 +71,12 @@ class ImageSubmissionViewsetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
     
     def test_gamekeeper_deny_from_submit(self):
+        """
+        Test to ensure that gamekeepers cannot access this API enpoint
+        :assertions: Expecting a 403 response code is returned
+        """
         parser_classes = (MultiPartParser, FormParser)
-        submission = self.generate_photo_file()
+        submission = self.image
 
         # Getting a dummy response
         self.client.force_authenticate(self.user_gk)
@@ -69,16 +84,28 @@ class ImageSubmissionViewsetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
     
     def test_gamekeeper_list_image(self):
+        """
+        Test to ensure that gamekeepers are able to access the API enpoint and view list of all images in the database
+        :assertions: Expecting a 200 response code is returned
+        """
         self.client.force_authenticate(self.user_gk)
         response = self.client.get(self.url + "/images/list-images/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     
     def test_player_deny_from_list(self):
+        """
+        Test to ensure that players cannot access this API enpoint
+        :assertions: Expecting a 403 response code is returned
+        """
         self.client.force_authenticate(self.user_player)
         response = self.client.get(self.url + "/images/list-images/")
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
     
     def test_gamekeeper_delete_image(self):
+        """
+        Test to ensure that gamekeepers are able to access the API enpoint and delete an image 
+        :assertions: Expecting a 200 response code is returned
+        """
         Images.objects.create(image=File(file=b""))
         self.client.force_authenticate(self.user_gk)
         self.assertEqual(Images.objects.count(), 1)
@@ -87,6 +114,10 @@ class ImageSubmissionViewsetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_player_deny_delete_image(self):
+        """
+        Test to ensure that players cannot access this API enpoint
+        :assertions: Expecting a 403 response code is returned
+        """
         Images.objects.create(image=File(file=b""))
         self.client.force_authenticate(self.user_player)
         self.assertEqual(Images.objects.count(), 1)
