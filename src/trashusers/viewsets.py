@@ -50,7 +50,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
             serializer = self.get_serializer(Player.objects.get(user=request.user))
         if GameKeeper.objects.filter(user=request.user).exists():
             self.serializer_class=GameKeeperSerializer
-            serializer = self.get_serializer(GameKeeperSerializer.objects.get(user=request.user))
+            serializer = self.get_serializer(GameKeeper.objects.get(user=request.user))
         return Response(serializer.data)
 
 class LoginView(APIView):
