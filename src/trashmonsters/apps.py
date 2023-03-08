@@ -11,6 +11,7 @@ class TrashmonstersConfig(AppConfig):
         if os.environ.get('RUN_MAIN', None) != 'true':
             # On server start, code below will be ran.
             print("server up")
+            # Prevents code from running if server is up just for migrating, tests or makemigrations.
             if 'runserver' not in sys.argv:
                 return True
             try:
