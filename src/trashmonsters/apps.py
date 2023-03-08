@@ -15,7 +15,8 @@ class TrashmonstersConfig(AppConfig):
             if 'runserver' not in sys.argv:
                 return True
             try:
-                viewset.restart_testing_db()
+                # viewset.restart_testing_db()
+                pass
             except:
                 print("Setting up database")
             viewset.calculate_cached_leader()
