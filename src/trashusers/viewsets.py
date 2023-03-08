@@ -137,16 +137,3 @@ class PasswordChangeView(generics.UpdateAPIView):
         
         # Returns 400 if there was an error getting the serialized info
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# class SendPasswordReset(View):
-
-#     def get(self, request):
-
-#         # Get the form data 
-#         email = request.GET.get('email', None)
-#         message = request.data.get('message', None)
-
-
-#         # Redirect to same page after form submit
-#         messages.success(request, ('Email sent successfully.'))
-#         return redirect('home') 

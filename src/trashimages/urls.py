@@ -5,7 +5,7 @@ from rest_framework.routers import SimpleRouter
 app_name = "TrashMunchers Images"
 
 urlpatterns = [
-    path('delete-images/', viewsets.ImageDeleteView.as_view()),
+    path('delete-image/', viewsets.ImageDeleteView.as_view()),
 ]
 
 img_router = SimpleRouter()

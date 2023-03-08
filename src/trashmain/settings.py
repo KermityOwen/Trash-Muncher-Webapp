@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django_rest_passwordreset',
     # For user managing API
     'django_extensions',
-    'trashsite',
     'trashusers',
     # For monster managing API
     'trashmonsters',
