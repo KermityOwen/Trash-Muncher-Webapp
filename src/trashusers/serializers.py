@@ -16,8 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "email",
             "username",
-            "is_player",
-            "is_gamekeeper",
+            "is_gamekeeper"
         ]
         read_only_fields = [
             "id",
@@ -62,6 +61,7 @@ class PlayerSerializer(serializers.ModelSerializer):
             "team",
         ]
     def create(self, validated_data):
+        validated_data["is_player"] = True
         user_data = validated_data.get('user')
         user_serializer = UserPostSerializer(data=user_data)
         if user_serializer.is_valid(raise_exception=True):
@@ -79,6 +79,7 @@ class GameKeeperSerializer(serializers.ModelSerializer):
             "user",
         ]
     def create(self, validated_data):
+        validated_data["is_gamekeeper"] = True
         user_data = validated_data.get('user')
         user_serializer = UserPostSerializer(data=user_data)
         if user_serializer.is_valid(raise_exception=ValueError):
