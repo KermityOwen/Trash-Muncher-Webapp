@@ -57,6 +57,7 @@ class UserViewsetTest(APITestCase):
     def test_get_user(self):
         self.client.force_authenticate(self.user)
         response = self.client.get(self.url + "/users/me/")
+        print(response.content)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["user"]["username"], self.user.username)
 

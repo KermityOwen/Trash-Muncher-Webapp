@@ -26,7 +26,7 @@ class UserPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         read_only_fields = ["id"]
-        fields = ["username", "first_name", "last_name", "email", "password"]
+        fields = ["username", "first_name", "last_name", "email", "password", "is_gamekeeper"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
