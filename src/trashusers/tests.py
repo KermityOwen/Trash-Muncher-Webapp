@@ -10,9 +10,14 @@ from django.contrib.auth.models import Group
 
 class UserViewsetTest(APITestCase):
     def setUp(self):
-        self.user = User.objects.create(username="first_user", first_name="first", last_name="user",password="secure_password_rock")
+        self.user = User.objects.create(
+            username="first_user",
+            first_name="first",
+            last_name="user",
+            password="secure_password_rock",
+        )
         self.player = Player.objects.create(
-            user=self.user, team=Team.objects.get_or_create(id=1, name='Red')[0]
+            user=self.user, team=Team.objects.get_or_create(id=1, name="Red")[0]
         )
         self.client = APIClient()
         self.url = "/api"
@@ -22,18 +27,15 @@ class UserViewsetTest(APITestCase):
         response = self.client.post(
             self.url + "/users/player-register/",
             {
-                "user": 
-                    {
-                        "username": "test_user",
-                        "first_name": "Test",
-                        "last_name": "User",
-                        "password": "secure_password"
-                    },
-                "team": {
-                    "name": 'Red'
-                }
+                "user": {
+                    "username": "test_user",
+                    "first_name": "Test",
+                    "last_name": "User",
+                    "password": "secure_password",
+                },
+                "team": {"name": "Red"},
             },
-            format='json',
+            format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
@@ -42,15 +44,14 @@ class UserViewsetTest(APITestCase):
         response = self.client.post(
             self.url + "/users/gamekeeper-register/",
             {
-                "user": 
-                    {
-                        "username": "test_user",
-                        "first_name": "Test",
-                        "last_name": "User",
-                        "password": "secure_password"
-                    }
+                "user": {
+                    "username": "test_user",
+                    "first_name": "Test",
+                    "last_name": "User",
+                    "password": "secure_password",
+                }
             },
-            format='json',
+            format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 

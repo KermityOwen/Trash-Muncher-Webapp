@@ -10,6 +10,7 @@ from trashusers.models import Team
 #     def has_add_permission(self, *args, **kwargs):
 #         return not Counters.objects.exists()
 
+
 class TrashMonsters(models.Model):
     TM_ID = models.AutoField(primary_key=True)
     Latitude = models.FloatField()
@@ -18,8 +19,10 @@ class TrashMonsters(models.Model):
     Team2_Score = models.IntegerField(default=0)
     Team3_Score = models.IntegerField(default=0)
 
-
     # ToString method for debug
     def __str__(self):
-        return ("TM's ID: %d, Lat: %f, Long: %d,"%(self.TM_ID, self.Latitude, self.Longitude))
-
+        return "TM's ID: %d, Lat: %f, Long: %d," % (
+            self.TM_ID,
+            self.Latitude,
+            self.Longitude,
+        )

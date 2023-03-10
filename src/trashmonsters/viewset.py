@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated 
+from rest_framework.permissions import IsAuthenticated
 
 from .models import TrashMonsters
 from .serializer import TMSerializer
@@ -29,12 +29,12 @@ def restart_testing_db():
 
 
 def bubble_search(TM: TrashMonsters):
-    if (TM.Team1_Score >= TM.Team2_Score):
-        if (TM.Team1_Score > TM.Team3_Score):
+    if TM.Team1_Score >= TM.Team2_Score:
+        if TM.Team1_Score > TM.Team3_Score:
             return 1
         else:
             return 3
-    elif (TM.Team2_Score > TM.Team3_Score):
+    elif TM.Team2_Score > TM.Team3_Score:
         return 2
     else:
         return 3
@@ -52,11 +52,11 @@ def calculate_cached_leader():
 
 
 def calculate_specific_leader(TM_ID):
-    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
     cached_leader[TM.TM_ID] = bubble_search(TM)
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getTMs(request):
     TMs = TrashMonsters.objects.all()
@@ -64,31 +64,31 @@ def getTMs(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def getTM(request):
     TM_ID = request.data.get("TM_ID", None)
-    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
     serializer = TMSerializer(TM, many=False)
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated, isGameKeeper])
 def addTM(request):
     serializer = TMSerializer(data=request.data)
-    if (serializer.is_valid()):
+    if serializer.is_valid():
         serializer.save()
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def calcDistance(request):
     TM_ID = request.data.get("TM_ID", None)
-    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
 
     target = (TM.Latitude, TM.Longitude)
     origin = (request.data.get("o-lat", None), request.data.get("o-long", None))
@@ -97,11 +97,11 @@ def calcDistance(request):
     return Response(difference)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def verifyDistance(request):
     TM_ID = request.data.get("TM_ID", None)
-    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
 
     target = (TM.Latitude, TM.Longitude)
     origin = (request.data.get("o-lat", None), request.data.get("o-long", None))
@@ -112,11 +112,11 @@ def verifyDistance(request):
         return Response(False)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated, isGameKeeper])
 def changeScore(request):
     TM_ID = request.data.get("TM_ID", None)
-    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
     T1Score = request.data.get("T1Score", TM.Team1_Score)
     T2Score = request.data.get("T2Score", TM.Team2_Score)
     T3Score = request.data.get("T3Score", TM.Team3_Score)
@@ -131,7 +131,7 @@ def changeScore(request):
     return Response(TMSerializer(TM, many=False).data)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def addScore(request):
     TM_ID = request.data.get("TM_ID", None)
@@ -139,7 +139,7 @@ def addScore(request):
     T2Score = request.data.get("T2Score", 0)
     T3Score = request.data.get("T3Score", 0)
 
-    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
     TM.Team1_Score += T1Score
     TM.Team2_Score += T2Score
     TM.Team3_Score += T3Score
@@ -150,7 +150,7 @@ def addScore(request):
     return Response(TMSerializer(TM, many=False).data)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated, isGameKeeper])
 def removeScore(request):
     TM_ID = request.data.get("TM_ID", None)
@@ -158,7 +158,7 @@ def removeScore(request):
     T2Score = request.data.get("T2Score", 0)
     T3Score = request.data.get("T3Score", 0)
 
-    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
     TM.Team1_Score -= T1Score
     TM.Team2_Score -= T2Score
     TM.Team3_Score -= T3Score
@@ -169,19 +169,19 @@ def removeScore(request):
     return Response(TMSerializer(TM, many=False).data)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def getLeaderTeam(request):
     TM_ID = request.data.get("TM_ID", None)
-    TM = TrashMonsters.objects.get(TM_ID = TM_ID)
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
 
     # Using bubble search for now (hard code for only 3 groups), can optimise or fix in the future. ceebs
-    if (TM.Team1_Score >= TM.Team2_Score):
-        if (TM.Team1_Score > TM.Team3_Score):
+    if TM.Team1_Score >= TM.Team2_Score:
+        if TM.Team1_Score > TM.Team3_Score:
             return Response(1)
         else:
             return Response(3)
-    elif (TM.Team2_Score > TM.Team3_Score):
-        return Response (2)
+    elif TM.Team2_Score > TM.Team3_Score:
+        return Response(2)
     else:
-        return Response (3)
+        return Response(3)
