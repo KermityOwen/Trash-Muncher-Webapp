@@ -12,6 +12,7 @@ class UserViewsetTest(APITestCase):
     def setUp(self):
         self.user = User.objects.create(
             username="first_user",
+            email="first_user@example.com",
             first_name="first",
             last_name="user",
             password="secure_password_rock",
@@ -31,6 +32,7 @@ class UserViewsetTest(APITestCase):
                     "username": "test_user",
                     "first_name": "Test",
                     "last_name": "User",
+                    "email":"test_user@example.com",
                     "password": "secure_password",
                 },
                 "team": {"name": "Red"},
@@ -48,6 +50,7 @@ class UserViewsetTest(APITestCase):
                     "username": "test_user",
                     "first_name": "Test",
                     "last_name": "User",
+                    "email":"test_user@example.com",
                     "password": "secure_password",
                 }
             },
@@ -58,7 +61,6 @@ class UserViewsetTest(APITestCase):
     def test_get_user(self):
         self.client.force_authenticate(self.user)
         response = self.client.get(self.url + "/users/me/")
-        print(response.content)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["user"]["username"], self.user.username)
 
