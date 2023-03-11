@@ -24,6 +24,7 @@ class ImageSubmissionViewsetTest(APITestCase):
             username="example_gamekeeper",
             first_name="test",
             last_name="gamekeeper",
+            email="test_gamekeeper@example.com",
             password="secure_password",
         )
 
@@ -33,6 +34,7 @@ class ImageSubmissionViewsetTest(APITestCase):
             username="example_player",
             first_name="test",
             last_name="player",
+            email="test_player@example.com",
             password="secure_password",
         )
 
