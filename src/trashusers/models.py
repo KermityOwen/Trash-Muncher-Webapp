@@ -13,6 +13,7 @@ from django.utils import timezone
 
 
 class User(AbstractUser):
+    email = models.EmailField(blank=False, unique=True)
     is_player = models.BooleanField(default=False)
     is_gamekeeper = models.BooleanField(default=False)
     pass
