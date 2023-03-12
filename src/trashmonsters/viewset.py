@@ -11,7 +11,6 @@ from geopy import distance
 from random import randint
 import json, os
 
-config = json.load(open("trashmonsters/config.json"))
 cached_leader = {}
 
 
@@ -106,7 +105,7 @@ def verifyDistance(request):
     target = (TM.Latitude, TM.Longitude)
     origin = (request.data.get("o-lat", None), request.data.get("o-long", None))
     difference = distance.distance(target, origin).m
-    if difference <= config["distance_leeway"]:
+    if difference <= 50:
         return Response(True)
     else:
         return Response(False)
