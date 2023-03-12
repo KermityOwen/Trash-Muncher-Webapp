@@ -28,8 +28,8 @@ Steps:
 
 7. Enter the details that you would like the account to have (username and password) 
 8. If already deployed, go to host-ip/admin (for us: http://38.242.137.81:8000/admin/) and login
-   a. If it hasn't been deployed (being run locally), type ```python manage.py runserver``` 
-   b. Go to localhost:8000/admin and login to see if it was successfully created
+   - If it hasn't been deployed (being run locally), type ```python manage.py runserver``` 
+   - Go to localhost:8000/admin and login to see if it was successfully created
 
 ![Admin login page](https://cdn.discordapp.com/attachments/796358887396999198/1084566406709919825/image.png)
 ---
