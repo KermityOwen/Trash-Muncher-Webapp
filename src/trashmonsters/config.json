@@ -1,4 +1,4 @@
 {
     "monster_eating_interval":21600,
-    "distance_leeway": 50
+    "distance_leeway": 40
 }
