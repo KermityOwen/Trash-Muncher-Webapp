@@ -15,8 +15,6 @@ import io
 
 from PIL import Image
 
-
-# Create your tests here.
 class ImageSubmissionViewsetTest(APITestCase):
     def setUp(self):
         # Create two test users (one player, one gamekeeper)

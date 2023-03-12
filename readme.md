@@ -1,11 +1,45 @@
 # Trash-Muncher-Webapp
 
+## Creating an developer user
+
+Prerequisites:
+1. Have Visual Studio code installed
+2. Have Python and Pipenv set up in VS code
+3. Have a local version of the repository
+
+Steps:
+1. Open src folder in VS studio
+2. Open a PowerShell terminal in VS code 
+
+![How to create a new terminal](https://cdn.discordapp.com/attachments/796358887396999198/1084565606717739098/image.png)
+
+3. Type ```pipenv install``` to download all dependencies
+
+![How to install dependencies](https://cdn.discordapp.com/attachments/796358887396999198/1084565698883375234/image.png)
+
+4. Enter the pip environment shell ```pipenv shell```
+
+![How to enter pip environment](https://cdn.discordapp.com/attachments/796358887396999198/1084565904974696518/image.png)
+
+5. Enter src folder ```cd src```
+6. Create a developer user ```python manage,py createsuperuser```
+
+![How to create a developer account](https://cdn.discordapp.com/attachments/796358887396999198/1084566161863217303/image.png)
+
+7. Enter the details that you would like the account to have (username and password) 
+8. If already deployed, go to host-ip/admin (for us: http://38.242.137.81:8000/admin/) and login
+   - If it hasn't been deployed (being run locally), type ```python manage.py runserver``` 
+   - Go to localhost:8000/admin and login to see if it was successfully created
+
+![Admin login page](https://cdn.discordapp.com/attachments/796358887396999198/1084569132894269570/image.png)
+---
+
 ## File structure
 ```
 .
 ├── github                  # Used to update backend host link 
 ├── design_documents        # Markdowns containing information about game and technical design choices
-│ ├── .obsidian               # JSONs for styling markdowns  
+	│ ├── .obsidian               # JSONs for styling markdowns  
     │ ├── GDD.md                  # Information about game design choices
     │ ├── TDD.md                  # Information about technical design choices (Needs to be completed)
     │ └── TrashImagesApp.md       # Instructions on how to run the TrashImages APIs locally to ensure that they can be used for deployment
@@ -13,7 +47,7 @@
 │ ├── assests                 # JSONs for styling markdowns  
 │ ├── media/images            # Contains the images submitted by users
 │ ├── trashimages             # Django app used for image handling
-│├── migrations             # Used to create tables in the database from models.py  
+	│├── migrations             # Used to create tables in the database from models.py  
     │├── __init__.py
     │├── admin.py               # File where models are registered on the admin site for use by the admin
     │├── apps.py                # Name of the application  
@@ -31,7 +65,7 @@
 	│├── urls.py                # List of registered urls that lead to endpoints. Defined for every application created               
 	│└── wsgi.py    
 │ ├── trashmonsters           # Django app for handling the game's monsters
-│├── migrations             # Used to create tables in the database from models.py  
+	│├── migrations             # Used to create tables in the database from models.py  
     │├── __init__.py
     │├── admin.py               
     │├── apps.py                # Handles server startup to ensure that database isn't constantly recreated and overwritten
@@ -57,7 +91,7 @@
 │ ├── manage.py               # Autocreated by Django. Used for executing Django related tasks (e.g., running the server)
 │ └── requirements.txt        # List of dependencies used for deployment
 ├── trashmunchers           # Contains cache files
-│├── trashmunchers/__pycache__        
+	│├── trashmunchers/__pycache__        
     │└── trashsite/__pycache__         
  
 ├── .gitignore              # Prevents certain files from being pushed to the repository
@@ -70,12 +104,6 @@
 ├── requirements.txt        # List of dependencies used for deployment 
 └── run-docker.sh           # Shell script to run the Docker server
 ```
-
----
-
-## License
-
-[NEEDS TO BE ADDED]
 
 ---
 
@@ -151,3 +179,9 @@ Allows the user to login. Responds with the information that they inputted seria
 
 - logout [GET] -  
 Allows a user to logout. Returns a HTTP response confirming to the user that they have been logged out
+
+---
+
+## License
+
+[NEEDS TO BE ADDED]

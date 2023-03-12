@@ -10,7 +10,17 @@ from trashusers.models import Team
 #     def has_add_permission(self, *args, **kwargs):
 #         return not Counters.objects.exists()
 
+""" 
+Class that creates an TrashMonsters table in the database  
 
+Attributes: 
+TM_ID (django.db.models.AutoField): Unique identifier for each trashmonster. Automatically increases when there is a new entry
+Latitude (django.db.models.FloatField): Field for the latitude of the monster 
+Longitude (django.db.models.FloatField): Field for the longitude of the monster
+Team1_Score (django.db.models.IntegerField): Team 1's score for this trashmonster
+Team2_Score (django.db.models.IntegerField): Team 2's score for this trashmonster
+Team3_Score (django.db.models.IntegerField): Team 3's score for this trashmonster
+"""
 class TrashMonsters(models.Model):
     TM_ID = models.AutoField(primary_key=True)
     Latitude = models.FloatField()
@@ -19,7 +29,16 @@ class TrashMonsters(models.Model):
     Team2_Score = models.IntegerField(default=0)
     Team3_Score = models.IntegerField(default=0)
 
-    # ToString method for debug
+    """
+    ToString method used for debugging
+
+    Returns:
+    "TM's ID: %d, Lat: %f, Long: %d," % (
+            self.TM_ID,
+            self.Latitude,
+            self.Longitude,
+        ) - TrashMonster's ID, latitude and longitude as string
+    """
     def __str__(self):
         return "TM's ID: %d, Lat: %f, Long: %d," % (
             self.TM_ID,

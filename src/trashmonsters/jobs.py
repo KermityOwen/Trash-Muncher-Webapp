@@ -9,11 +9,19 @@ import json, os
 from .viewset import cached_leader
 
 
-
+"""
+Function to determine which team's score should be decremented 
+based on if they are the leader for the TrashMonster.
+Used to incentivise players to keep revisiting that TrashMonster to 
+keep the lead 
+"""
 def decrTeamLeaders():
     TMs = TrashMonsters.objects.all()
     for TM in TMs:
-        # HOLY FUCK THIS IS HORRIBLE. can be optimized with pointers but python is fucked
+        """
+        Game functionality to reduce the each TrashMonsters leading 
+        team's current score by one 
+        """
         if TM.Team1_Score > TM.Team2_Score:
             if TM.Team1_Score > TM.Team3_Score:
                 autoRemoveScore(tm_id=TM.TM_ID, rem_team=1)
@@ -31,6 +39,13 @@ def decrTeamLeaders():
             # print("TM: %d, Winning Team: %d"%(TM.TM_ID, 2))
 
 
+"""
+Function to decrement a team's score by one
+
+Parameters:
+tm_id (int) - ID of the TrashMonster
+rem_team (int) - ID of the leading team 
+"""
 def autoRemoveScore(tm_id, rem_team):
     try:
         TM = TrashMonsters.objects.get(TM_ID=tm_id)
@@ -49,6 +64,12 @@ def autoRemoveScore(tm_id, rem_team):
         print("Error: Something went wrong!")
 
 
+"""
+Function used to schedule the thread running to decrease a team's score
+
+Parameters:
+interval (int) - Time that the thread will sleep for before continuing 
+"""
 def run_continuously(self, interval=21600):
     cease_continuous_run = threading.Event()
 

@@ -2,6 +2,5 @@ from django.contrib import admin
 
 from .models import TrashMonsters  # , Counters
 
-# Register your models here.
-# admin.site.register(Counters)
+# Registering the models on the admin site 
 admin.site.register(TrashMonsters)
