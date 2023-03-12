@@ -33,7 +33,7 @@ class ImageSubmissionViewsetTest(APITestCase):
         self.user_player = User.objects.create(
             username="example_player",
             first_name="test",
-            last_name="player", 
+            last_name="player",
             email="test_player@example.com",
             password="secure_password",
         )
