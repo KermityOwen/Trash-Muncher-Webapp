@@ -4,7 +4,7 @@
 
 Trashmunchers is a location based "cookie-clicker" game developed to promote sustainability at the University of Exeter. The objective of the game is for players to feed Trashmonsters at different recycling points scattered across campus in order for their team to gain control of the Trashmonsters. Players can visit their nearest Trashmonster and take a picture of what they are recycling. By doing so, they are awarded a certain amount of points based on the size of what they recycled. [NEEDS TO BE ELABORATED]
 
-## Creating an developer user
+## Creating a developer user
 
 Prerequisites:
 1. Have Visual Studio code installed
