@@ -1,6 +1,7 @@
 # Trash-Muncher-Webapp
 
 ## File structure
+```
 .
 ├── github                  # Used to update backend host link 
 ├── design_documents        # Markdowns containing information about game and technical design choices
@@ -15,7 +16,7 @@
 ├── readme.md               
 ├── requirements.txt        # List of dependencies used for deployment 
 └── run-docker.sh           # Shell script to run the Docker server
-
+```
 ### License
 
 [MIT](https://choosealicense.com/licenses/mit/)

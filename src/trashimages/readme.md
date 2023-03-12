@@ -1,6 +1,7 @@
 # Trash-Muncher-Webapp - trashimages 
 
 ## File structure
+```
 ./src/trashimages
 ├── migrations             # Used to create tables in the database from models.py  
 ├── __init__.py
@@ -11,3 +12,4 @@
 ├── tests.py               # Unit tests for this API
 ├── urls.py                # List of registered urls that lead to endpoints                
 └── viewsets.py            # Outlines what happens when a user accesses a URL. For more info, visit https://www.django-rest-framework.org/api-guide/viewsets/
+```
