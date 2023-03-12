@@ -49,6 +49,13 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
+    """
+    Function to get the current authenticated user. Checks whether their data can be found in either
+    the Player database or the Gamkeeper database
+
+    Returns:
+    Response(serializer.data) - Data from the serializer 
+    """
     @action(detail=False, methods=["get"], url_path="me", name="me")
     def me(self, request):
         """Get the current authenticated user"""
@@ -61,10 +68,21 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(serializer.data)
 
 
+"""
+Class that creates an endpoint to allow users to login 
+"""
 class LoginView(APIView):
     permission_classes = ()
     authentication_classes = ()
 
+    """
+    Function that provides the endpoint with post functionality. Allows users to send a post 
+    request to login 
+
+    Returns:
+    Response(status.code) - Either responds with a 400 code if they have left input fields blank
+                            or responds with a 200 code if they have successfully logged in 
+    """
     def post(self, request, format=None):
         username = request.data.get("username", None)
         password = request.data.get("password", None)
@@ -93,10 +111,20 @@ class LoginView(APIView):
                 status=status.HTTP_401_UNAUTHORIZED,
             )
 
-
+"""
+Class that creates an endpoint to allow users to logout 
+"""
 class LogoutView(APIView):
     permission_classes = (IsAuthenticated,)
 
+    """
+    Function that provides the endpoint with post functionality. Allows users to send a post 
+    request to logout
+
+    Returns:
+    Response(status.code) - Either responds with a 205 or 400 response code based on the outcome 
+                            of attempting to logout 
+    """
     def post(self, request):
         try:
             refresh_token = request.data["refresh_token"]
@@ -106,22 +134,35 @@ class LogoutView(APIView):
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
+"""
+Class that creates an endpoint to allow users to change their password 
+"""
 class PasswordChangeView(generics.UpdateAPIView):
-    """
-    An endpoint that allows a user to receive an email to change their password
-    """
-
     serializer_class = PasswordChangeSerializer
     model = get_user_model()
     permission_classes = [IsAuthenticated]
 
+    """
+    Function to get the current user making the request 
+
+    Returns:
+    user (user) - The current user making the request 
+    """
     def get_object(self):
         user = self.request.user
         return user
 
+    """
+    Function to make sure that the user entered the correct password to allow them to change it 
+
+    Returns:
+    Response(information) (response) - Informs the user whether they have entered the correct password. 
+    Produces a 400 BAD request if the user entered the wrong password for their old password 
+    """
     def update(self, request):
+        # Get the current user 
         self.object = self.get_object()
+        # Serialize the data submitted 
         serializer = self.get_serializer(data=request.data)
 
         if serializer.is_valid():
@@ -137,6 +178,7 @@ class PasswordChangeView(generics.UpdateAPIView):
             # Save changes to the database
             self.object.save()
 
+            # Inform the user that their password has successfully been changed 
             return Response(
                 {
                     "status": "success",
