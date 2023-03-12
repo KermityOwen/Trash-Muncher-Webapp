@@ -5,8 +5,61 @@
 .
 ├── github                  # Used to update backend host link 
 ├── design_documents        # Markdowns containing information about game and technical design choices
+	│ ├── .obsidian               # JSONs for styling markdowns  
+    │ ├── GDD.md                  # Information about game design choices
+    │ ├── TDD.md                  # Information about technical design choices (Needs to be completed)
+    │ └── TrashImagesApp.md       # Instructions on how to run the TrashImages APIs locally to ensure that they can be used for deployment
 ├── src                     # Source files 
-├── trashmunchers           # Contains cache files 
+│ ├── assests                 # JSONs for styling markdowns  
+│ ├── media/images            # Contains the images submitted by users
+│ ├── trashimages             # Django app used for image handling
+	│├── migrations             # Used to create tables in the database from models.py  
+    │├── __init__.py
+    │├── admin.py               # File where models are registered on the admin site for use by the admin
+    │├── apps.py                # Name of the application  
+    │├── models.py              # Definition of the tables 
+    │├── serializer.py          # Outlines the JSON format that requests will be received/sent in  
+    │├── tests.py               # Unit tests for this API
+    │├── urls.py                # List of registered urls that lead to endpoints                
+    │└── viewsets.py            # Outlines what happens when a user accesses a URL. For more info, visit https://www.django-rest-framework.org/api-guide/viewsets/
+│ ├── trashmain               # Main Django app for configuration (Initial API endpoint)
+	│├── __init__.py  
+	│├── asgi.py
+	│├── auxillary.py           # Used to get a player's team 
+	│├── permissions.py         # Used to check if a player is a gamekeeper or a player to restrict them from certain endpoints   
+	│├── settings.py            # Contains settings used for configuration to ensure that the app runs as intended. Must include created APIs in INSTALLED_APPS
+	│├── urls.py                # List of registered urls that lead to endpoints. Defined for every application created               
+	│└── wsgi.py    
+│ ├── trashmonsters           # Django app for handling the game's monsters
+	│├── migrations             # Used to create tables in the database from models.py  
+    │├── __init__.py
+    │├── admin.py               
+    │├── apps.py                # Handles server startup to ensure that database isn't constantly recreated and overwritten
+    │├── config.json            # Contains "monster eating" interval and maximum distance leeway   
+    │├── jobs.py                # Handles the score decreasing methods using a scheduler    
+    │├── models.py              
+    │├── serializer.py 
+    │├── tests.py               # Unit tests for this application
+    │├── urls.py                                
+    │└── viewsets.py 
+│ ├── trashusers              # Django app for handling users
+	│├── fixtures               # Contains JSON file that is used to create three teams on startup  
+	│├── migrations               
+	│├── __init__.py
+	│├── admin.py               
+	│├── apps.py                 
+	│├── models.py               
+	│├── serializer.py            
+	│├── tests.py               
+	│├── urls.py                                
+	│└── viewsets.py             
+│ ├── db.sqlite3              # Database where information is stored 
+│ ├── manage.py               # Autocreated by Django. Used for executing Django related tasks (e.g., running the server)
+│ └── requirements.txt        # List of dependencies used for deployment
+├── trashmunchers           # Contains cache files
+	│├── trashmunchers/__pycache__        
+    │└── trashsite/__pycache__         
+ 
 ├── .gitignore              # Prevents certain files from being pushed to the repository
 ├── Dockerfile              # Used to install the latest dependencies upon deployment 
 ├── Pipfile                 # Contains all project dependecies required for the application to be built 
@@ -17,9 +70,12 @@
 ├── requirements.txt        # List of dependencies used for deployment 
 └── run-docker.sh           # Shell script to run the Docker server
 ```
-### License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+---
+
+## License
+
+[NEEDS TO BE ADDED]
 
 ---
 
