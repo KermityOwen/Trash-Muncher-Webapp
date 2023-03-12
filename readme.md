@@ -107,12 +107,6 @@ Steps:
 
 ---
 
-## License
-
-[NEEDS TO BE ADDED]
-
----
-
 ## API DOCUMENTATION
 
 ### ip:port/api/monsters/ - 
@@ -185,3 +179,9 @@ Allows the user to login. Responds with the information that they inputted seria
 
 - logout [GET] -  
 Allows a user to logout. Returns a HTTP response confirming to the user that they have been logged out
+
+---
+
+## License
+
+[NEEDS TO BE ADDED]
