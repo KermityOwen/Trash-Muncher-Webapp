@@ -8,8 +8,6 @@ import json, os
 
 from .viewset import cached_leader
 
-# print(os.path.abspath(os.getcwd()))
-config = json.load(open("trashmonsters/config.json"))
 
 
 def decrTeamLeaders():
@@ -51,7 +49,7 @@ def autoRemoveScore(tm_id, rem_team):
         print("Error: Something went wrong!")
 
 
-def run_continuously(self, interval=config["monster_eating_interval"]):
+def run_continuously(self, interval=21600):
     cease_continuous_run = threading.Event()
 
     class ScheduleThread(threading.Thread):
