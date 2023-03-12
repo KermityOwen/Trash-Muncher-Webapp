@@ -1,6 +1,30 @@
-# API DOCUMENTATION
+# Trash-Muncher-Webapp
 
-## ip:port/api/monsters/ - 
+## File structure
+.
+├── github                  # Used to update backend host link 
+├── design_documents        # Markdowns containing information about game and technical design choices
+├── src                     # Source files 
+├── trashmunchers           # Contains cache files 
+├── .gitignore              # Prevents certain files from being pushed to the repository
+├── Dockerfile              # Used to install the latest dependencies upon deployment 
+├── Pipfile                 # Contains all project dependecies required for the application to be built 
+├── Pipfile.lock            # Declares all project dependecies, their latest available versions and the hashes for those files
+├── READMEFORDEVS.txt       # Information for development team on how to maintain program
+├── docker-compose.yml      # Used to run the Django server through Docker 
+├── readme.md               
+├── requirements.txt        # List of dependencies used for deployment 
+└── run-docker.sh           # Shell script to run the Docker server
+
+### License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+---
+
+## API DOCUMENTATION
+
+### ip:port/api/monsters/ - 
 - get-tms [GET] -   
 Gets all trashmunchers and associated data from db. Responds with serialized trashmunchers.
 
@@ -38,7 +62,7 @@ Gets the team with the leading number of scores. Responds with team number.
 
 ---
 
-## ip:port/api/images/ - 
+### ip:port/api/images/ - 
 - submit-image [POST] -   
 Add an image to a database. IDs are auto-incremented. Responds with a serialized image containing the ID and a link to the image just added
 <b>Example request: `{"id":5, "image":"http://localhost/media/images/example.jpg"}`</b>
@@ -52,7 +76,7 @@ Removes an image from the database with a specified ID. Responds with serialized
 
 ---
 
-## ip:port/api/users/ - 
+### ip:port/api/users/ - 
 - me [GET] -  
 Gets the current user's information. Responds with their information serialized.
 <b>Example request: `{"username":"tortoise_hugger", "first_name":"David", "last_name":"Smith", "Team":"Green"}`</b>
