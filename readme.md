@@ -31,7 +31,7 @@ Steps:
    - If it hasn't been deployed (being run locally), type ```python manage.py runserver``` 
    - Go to localhost:8000/admin and login to see if it was successfully created
 
-![Admin login page](https://cdn.discordapp.com/attachments/796358887396999198/1084566406709919825/image.png)
+![Admin login page](https://cdn.discordapp.com/attachments/796358887396999198/1084569132894269570/image.png)
 ---
 
 ## File structure
