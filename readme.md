@@ -22,7 +22,7 @@ Steps:
 ![How to enter pip environment](https://cdn.discordapp.com/attachments/796358887396999198/1084565904974696518/image.png)
 
 5. Enter src folder ```cd src```
-6. Create a developer user ```python manage,py createsuperuser```
+6. Create a developer user ```python manage.py createsuperuser```
 
 ![How to create a developer account](https://cdn.discordapp.com/attachments/796358887396999198/1084566161863217303/image.png)
 
