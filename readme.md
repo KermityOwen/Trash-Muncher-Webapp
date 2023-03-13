@@ -7,30 +7,40 @@ Trashmunchers is a location based "cookie-clicker" game developed to promote sus
 ## Creating a developer user
 
 Prerequisites:
-1. Have Visual Studio code installed
-2. Have Python and Pipenv set up in VS code
-3. Have a local version of the repository
+1. Have Python installed (Link to download: https://www.python.org/downloads/)
+2. Have pipenv installed (Steps to installation: https://pypi.org/project/pipenv/#installation)
+3. Have a local version of the repository (How to clone a repository: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
 Steps:
-1. Open src folder in VS studio
-2. Open a PowerShell terminal in VS code 
+1. Open a terminal (Windows - PowerShell or Command Prompt, UNIX - Terminal)
+2. Open the src folder in a terminal 
 
-![How to create a new terminal](https://cdn.discordapp.com/attachments/796358887396999198/1084565606717739098/image.png)
+![How to open src in terminal](https://cdn.discordapp.com/attachments/796358887396999198/1084816785104183346/image.png)
 
 3. Type ```pipenv install``` to download all dependencies
 
-![How to install dependencies](https://cdn.discordapp.com/attachments/796358887396999198/1084565698883375234/image.png)
+![How to install dependencies](https://cdn.discordapp.com/attachments/796358887396999198/1084817425477927012/image.png)
 
 4. Enter the pip environment shell ```pipenv shell```
 
-![How to enter pip environment](https://cdn.discordapp.com/attachments/796358887396999198/1084565904974696518/image.png)
+![How to enter pip environment](https://cdn.discordapp.com/attachments/796358887396999198/1084817618604662784/image.png)
+
+- You should be met with a message confirming that you have entered the pipenv shell
+
+![pipenv shell confirmation](https://cdn.discordapp.com/attachments/796358887396999198/1084817674418270289/image.png)
 
 5. Enter src folder ```cd src```
+
+![How to enter src folder](https://cdn.discordapp.com/attachments/796358887396999198/1084817966815789056/image.png)
+
 6. Create a developer user ```python manage.py createsuperuser```
 
-![How to create a developer account](https://cdn.discordapp.com/attachments/796358887396999198/1084566161863217303/image.png)
+![How to create a developer account](https://cdn.discordapp.com/attachments/796358887396999198/1084818356651163750/image.png)
 
-7. Enter the details that you would like the account to have (username and password) 
+7. Enter the details that you would like the account to have (username, email and password) 
+
+![Entering user details](https://cdn.discordapp.com/attachments/796358887396999198/1084818641377316954/image.png)
+
 8. If already deployed, go to host-ip/admin (for us: http://38.242.137.81:8000/admin/) and login
    - If it hasn't been deployed (being run locally), type ```python manage.py runserver``` 
    - Go to localhost:8000/admin and login to see if it was successfully created
@@ -130,6 +140,12 @@ Steps:
 
 ---
 
-## License
+## Privacy Policy :lock:
+
+[NEEDS TO BE ADDED]
+
+---
+
+## License :page_with_curl:
 
 [NEEDS TO BE ADDED]
