@@ -48,7 +48,7 @@ class Player(models.Model):
     Creates a Player table in the database  
 
     Attributes: 
-    user (django.db.models.OneToOneField): Account that the player belongs to  
+    user (django.db.models.OneToOneField): Account that the player is assosciated to
     team (django.db.models.ForeignKey): The team that player belongs to 
     """
     user = models.OneToOneField(
@@ -63,10 +63,10 @@ class Player(models.Model):
 
 class GameKeeper(models.Model):
     """ 
-    Creates a Player table in the database  
+    Creates a Gamekeeper table in the database  
 
     Attributes: 
-    user (django.db.models.OneToOneField): Account that the player belongs to
+    user (django.db.models.OneToOneField): Account that the gamekeeper is assosciatted to
     """
     user = models.OneToOneField(
         User,
@@ -75,7 +75,14 @@ class GameKeeper(models.Model):
         related_name="gamekeeper",
     )
 
+class GkEmail(models.Model):
+    """ 
+    Creates a table of emails that are allowed to create a GK
 
+    Attributes: 
+    email (django.db.models.EmailField): Email that is allowed to create a Gamekeeoer account
+    """
+    valid_email = models.EmailField()
 
 @receiver(reset_password_token_created)
 def password_reset_token_created(

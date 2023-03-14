@@ -4,7 +4,7 @@ from rest_framework.test import (
     force_authenticate,
 )
 from rest_framework import status
-from .models import Player, GameKeeper, User, Team
+from .models import Player, GameKeeper, User, Team, GkEmail
 from django.contrib.auth.models import Group
 
 
@@ -56,6 +56,7 @@ class UserViewsetTest(APITestCase):
         :assertions: Expecting a 201 response code is returned
         """
         self.client.force_authenticate()
+        GkEmail.objects.create(valid_email='test_user@example.com')
         response = self.client.post(
             self.url + "/users/gamekeeper-register/",
             {

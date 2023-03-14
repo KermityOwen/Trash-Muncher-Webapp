@@ -1,6 +1,6 @@
 from django.test import TestCase
 from .models import Images
-from trashusers.models import User, GameKeeper, Team, Player
+from trashusers.models import User, GameKeeper, Team, Player, GkEmail
 from rest_framework import status
 from rest_framework.test import (
     APITestCase,
@@ -18,6 +18,8 @@ from PIL import Image
 class ImageSubmissionViewsetTest(APITestCase):
     def setUp(self):
         # Create two test users (one player, one gamekeeper)
+        
+        GkEmail.objects.create(valid_email='test_gamekeeper@example.com')
         self.user_gk = User.objects.create(
             username="example_gamekeeper",
             first_name="test",

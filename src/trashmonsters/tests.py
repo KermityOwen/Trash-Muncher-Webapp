@@ -3,15 +3,16 @@ from rest_framework.test import (
     APIClient,
 )
 from rest_framework import status
-from trashusers.models import Player, GameKeeper, User, Team
+from trashusers.models import Player, GameKeeper, User, Team, GkEmail
 from .models import TrashMonsters
-from django.contrib.auth.models import Group
 import json
 
 
 class TrashmonsterViewsetTest(APITestCase):
     def setUp(self):
         # Create two test users (one gamekeeper, one user)
+
+        GkEmail.objects.create(valid_email='test_gamekeeper@example.com')
         self.user_gk = User.objects.create(
             username="example_gamekeeper",
             first_name="test",

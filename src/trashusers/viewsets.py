@@ -19,7 +19,7 @@ from .serializers import (
     GameKeeperSerializer,
     PasswordChangeSerializer,
 )
-from .models import Player, GameKeeper, User
+from .models import Player, GameKeeper, User, GkEmail
 
 
 class PlayerRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
@@ -32,6 +32,19 @@ class GamekeeperRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericVie
     queryset = GameKeeper.objects.all()
     authentication_classes = []
     serializer_class = GameKeeperSerializer
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Checking if the email submitted is in the table of allowed emaisl maintained by the superuser
+        print(serializer.validated_data)
+        valid_email = GkEmail.objects.filter(valid_email=serializer.validated_data['user']['email']).exists()
+        print(valid_email)
+        if not valid_email:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class UserRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
