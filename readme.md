@@ -50,9 +50,9 @@ Steps:
 
 ![Admin login page](https://cdn.discordapp.com/attachments/796358887396999198/1084569132894269570/image.png)
 
+9. Now, you can manage all users, teams and trashmonsters in the database. 
 
-### Side note
-If you would like to change team names, simply change the name field in the teams.json file in the fixtures folder found in the trashusers directory
+(It is also possible to edit team names in teams.json)
 ---
 
 ## File structure
