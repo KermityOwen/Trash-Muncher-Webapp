@@ -4,6 +4,8 @@
 
 [Trashmunchers](https://www.trashmunchers.co.uk/) is a location based game developed to promote sustainability at the University of Exeter. The objective of the game is for players to feed Trashmonsters at different recycling points scattered across campus in order for their team to gain control of the Trashmonsters. Players can visit their nearest Trashmonster and take a picture of what they are recycling. By doing so, they are awarded a certain amount of points based on the size of what they recycled. [NEEDS TO BE ELABORATED]
 
+---
+
 ## Creating a developer user
 
 Prerequisites:
@@ -17,7 +19,7 @@ Steps:
 
 ![How to open src in terminal](https://cdn.discordapp.com/attachments/796358887396999198/1084816785104183346/image.png)
 
-3. Type ```pipenv install``` to download all dependencies
+3. Run ```pipenv install``` to download all dependencies
 
 ![How to install dependencies](https://cdn.discordapp.com/attachments/796358887396999198/1084817425477927012/image.png)
 
@@ -42,10 +44,15 @@ Steps:
 ![Entering user details](https://cdn.discordapp.com/attachments/796358887396999198/1084818641377316954/image.png)
 
 8. If already deployed, go to host-ip/admin (for us: http://38.242.137.81:8000/admin/) and login
-   - If it hasn't been deployed (being run locally), type ```python manage.py runserver``` 
+   - If it hasn't been deployed (being run locally), run ```python manage.py loaddata teams``` to initialise the teams
+   - Then, run ```python manage.py runserver```
    - Go to localhost:8000/admin and login to see if it was successfully created
 
 ![Admin login page](https://cdn.discordapp.com/attachments/796358887396999198/1084569132894269570/image.png)
+
+
+### Side note
+If you would like to change team names, simply change the name field in the teams.json file in the fixtures folder found in the trashusers directory
 ---
 
 ## File structure
@@ -91,7 +98,8 @@ Steps:
     │├── urls.py                                
     │└── viewsets.py 
 │ ├── trashusers              # Django app for handling users
-	│├── fixtures               # Contains JSON file that is used to create three teams on startup  
+	│├── fixtures                
+		│├── teams.json       # JSON file that is used to create three teams on startup 
 	│├── migrations               
 	│├── __init__.py
 	│├── admin.py               
