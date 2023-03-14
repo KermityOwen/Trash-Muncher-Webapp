@@ -1,5 +1,5 @@
 from rest_framework.routers import SimpleRouter
-from django.urls import path
+from django.urls import path, include
 from . import viewsets
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -29,5 +29,6 @@ urlpatterns = [
         viewsets.PasswordChangeView.as_view(),
         name="change-password",
     ),
+    path('password-reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]
 urlpatterns += users_router.urls
