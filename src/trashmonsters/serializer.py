@@ -1,13 +1,14 @@
 from rest_framework import serializers
 from .models import TrashMonsters
 
-""" 
-Class that used to get specific attributes from the database in JSON format
-"""
+
 class TMSerializer(serializers.ModelSerializer):
     """ 
-    Class that specifies which model the fields will be coming from and the fields extracted
+    Used to get specific attributes from the database in JSON format
     """
     class Meta:
+        """ 
+        Specifies which model the fields will be coming from and the fields extracted
+        """
         model = TrashMonsters
         fields = "__all__"

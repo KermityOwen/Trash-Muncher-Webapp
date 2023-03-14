@@ -66,7 +66,7 @@ class ImageSubmissionViewsetTest(APITestCase):
 
     def test_player_submit_image(self):
         """
-        Test to ensure that players are able to access the API enpoint and submit an image
+        Ensure that players are able to access the API enpoint and submit an image
         :assertions: Expecting a 201 response code is returned
         """
         parser_classes = (MultiPartParser, FormParser)
@@ -83,7 +83,7 @@ class ImageSubmissionViewsetTest(APITestCase):
 
     def test_gamekeeper_deny_from_submit(self):
         """
-        Test to ensure that gamekeepers cannot access this API enpoint
+        Ensure that gamekeepers cannot access this API enpoint
         :assertions: Expecting a 403 response code is returned
         """
         parser_classes = (MultiPartParser, FormParser)
@@ -100,7 +100,7 @@ class ImageSubmissionViewsetTest(APITestCase):
 
     def test_gamekeeper_list_image(self):
         """
-        Test to ensure that gamekeepers are able to access the API enpoint and view list of all images in the database
+        Ensure that gamekeepers are able to access the API enpoint and view list of all images in the database
         :assertions: Expecting a 200 response code is returned
         """
         self.client.force_authenticate(self.user_gk)
@@ -109,7 +109,7 @@ class ImageSubmissionViewsetTest(APITestCase):
 
     def test_player_deny_from_list(self):
         """
-        Test to ensure that players cannot access this API enpoint
+        Ensure that players cannot access this API enpoint
         :assertions: Expecting a 403 response code is returned
         """
         self.client.force_authenticate(self.user_player)
@@ -118,7 +118,7 @@ class ImageSubmissionViewsetTest(APITestCase):
 
     def test_gamekeeper_delete_image(self):
         """
-        Test to ensure that gamekeepers are able to access the API enpoint and delete an image
+        Ensure that gamekeepers are able to access the API enpoint and delete an image
         :assertions: Expecting a 200 response code is returned
         """
         Images.objects.create(image=File(file=b""))
@@ -132,7 +132,7 @@ class ImageSubmissionViewsetTest(APITestCase):
 
     def test_player_deny_delete_image(self):
         """
-        Test to ensure that players cannot access this API enpoint
+        Ensure that players cannot access this API enpoint
         :assertions: Expecting a 403 response code is returned
         """
         Images.objects.create(image=File(file=b""))

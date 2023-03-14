@@ -1,5 +1,7 @@
 # API DOCUMENTATION
 
+Built using the Django Rest Framework. For more information, please visit https://www.django-rest-framework.org/
+
 ## ip:port/api/monsters/ - 
 - get-tms [GET] -   
 Gets all trashmunchers and associated data from db. Responds with serialized trashmunchers.

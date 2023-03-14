@@ -9,10 +9,11 @@ from trashmain.permissions import isGameKeeper, isPlayer
 
 
 class UserSerializer(serializers.ModelSerializer):
-    """ 
-    Class that specifies which model the fields will be coming from and the fields extracted
-    """
+   
     class Meta:
+        """ 
+        Specifies which model the fields will be coming from and the fields extracted
+        """
         model = get_user_model()
         fields = ["id", "first_name", "last_name", "email", "username", "is_gamekeeper"]
         read_only_fields = [
@@ -21,10 +22,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserPostSerializer(serializers.ModelSerializer):
-    """ 
-    Class that specifies which model the fields will be coming from and the fields extracted
-    """
+    
     class Meta:
+        """ 
+        Specifies which model the fields will be coming from and the fields extracted
+        """
         model = get_user_model()
         read_only_fields = ["id"]
         fields = [
@@ -37,16 +39,17 @@ class UserPostSerializer(serializers.ModelSerializer):
         ]
         extra_kwargs = {"password": {"write_only": True}}
 
-    """
-    Function used to create a user and guarantee that the password is strong. Inherited from rest_framework
-
-    Parameters:
-    validated_data (str) - Gets the password from the serialized JSON
-
-    Returns:
-    user (user) - The new user created with the data inputted on the website 
-    """
+    
     def create(self, validated_data):
+        """
+        Creates a user and guarantee that the password is strong. Inherited from rest_framework
+
+        Parameters:
+        validated_data (str) - Gets the password from the serialized JSON
+
+        Returns:
+        user (user) - The new user created with the data inputted on the website 
+        """
         raw_password = validated_data.pop("password")
         try:
             validate_password(raw_password)
@@ -61,10 +64,11 @@ class UserPostSerializer(serializers.ModelSerializer):
 
 
 class TeamSerializer(serializers.ModelSerializer):
-    """ 
-    Class that specifies which model the fields will be coming from and the fields extracted
-    """
+    
     class Meta:
+        """ 
+        Specifies which model the fields will be coming from and the fields extracted
+        """
         model = Team
         fields = ["name"]
 
@@ -75,26 +79,28 @@ class PlayerSerializer(serializers.ModelSerializer):
     user = UserPostSerializer(required=True)
     team = TeamSerializer(required=True)
 
-    """ 
-    Class that specifies which model the fields will be coming from and the fields extracted
-    """
+    
     class Meta:
+        """ 
+        Specifies which model the fields will be coming from and the fields extracted
+        """
         model = Player
         fields = [
             "user",
             "team",
         ]
 
-    """
-    Function used to create a player and guarantees that the information inputted is valid. Inherited from rest_framework
-
-    Parameters:
-    validated_data (str) - Gets the user's information from the request  
-
-    Returns:
-    player (player) - The new player created from the user's data  
-    """
+    
     def create(self, validated_data):
+        """
+        Creates a player and guarantees that the information inputted is valid. Inherited from rest_framework
+
+        Parameters:
+        validated_data (str) - Gets the user's information from the request  
+
+        Returns:
+        player (player) - The new player created from the user's data  
+        """
         validated_data["is_player"] = True
         user_data = validated_data.get("user")
         user_serializer = UserPostSerializer(data=user_data)
@@ -111,25 +117,27 @@ class PlayerSerializer(serializers.ModelSerializer):
 class GameKeeperSerializer(serializers.ModelSerializer):
     user = UserPostSerializer(required=True)
 
-    """ 
-    Class that specifies which model the fields will be coming from and the fields extracted
-    """
+    
     class Meta:
+        """ 
+        Specifies which model the fields will be coming from and the fields extracted
+        """
         model = GameKeeper
         fields = [
             "user",
         ]
 
-    """
-    Function used to create a gamekeeper and guarantees that the information inputted is valid. Inherited from rest_framework
-
-    Parameters:
-    validated_data (str) - Gets the user's information from the request  
-
-    Returns:
-    gamekeeper (gamekeeper) - The new gamekeeper created from the user's data  
-    """
+    
     def create(self, validated_data):
+        """
+        Used to create a gamekeeper and guarantees that the information inputted is valid. Inherited from rest_framework
+
+        Parameters:
+        validated_data (str) - Gets the user's information from the request  
+
+        Returns:
+        gamekeeper (gamekeeper) - The new gamekeeper created from the user's data  
+        """
         validated_data["is_gamekeeper"] = True
         user_data = validated_data.get("user")
         user_serializer = UserPostSerializer(data=user_data)
@@ -140,11 +148,12 @@ class GameKeeperSerializer(serializers.ModelSerializer):
         gamekeeper, created = GameKeeper.objects.update_or_create(user=user)
         return gamekeeper
 
-"""
-Class to serialize and get the old password from the database and the new one
-from the request
-"""
+
 class PasswordChangeSerializer(serializers.Serializer):
+    """
+    Serializes and gets the old password from the database and the new one
+    from the request
+    """
     model = get_user_model()
     old_pwd = serializers.CharField(required=True)
     new_pwd = serializers.CharField(required=True)
