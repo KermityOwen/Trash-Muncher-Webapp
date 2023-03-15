@@ -91,3 +91,21 @@ class UserViewsetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["id"], self.user.id)
         self.assertEqual(response.data["username"], self.user.username)
+
+    def test_login(self):
+        user = User.objects.create(
+            username="test_login",
+            email="test_login@example.com",
+            first_name="test",
+            last_name="login")
+        user.set_password('secure_password_rock')
+        user.save()
+        response = self.client.post(
+            self.url + "/users/login/",
+            {
+                "username": "test_login",
+                "password": "secure_password_rock"
+            },
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
