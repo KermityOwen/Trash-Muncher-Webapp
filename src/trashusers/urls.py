@@ -29,6 +29,6 @@ urlpatterns = [
         viewsets.PasswordChangeView.as_view(),
         name="change-password",
     ),
-    path('password-reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+    path('password-reset/', include('django_rest_passwordreset.urls', namespace='password-reset')),
 ]
 urlpatterns += users_router.urls
