@@ -99,7 +99,6 @@ class LoginView(APIView):
         if user is not None:
             login(request, user)
             refresh = RefreshToken.for_user(user)
-            print(refresh)
             return Response(
                 {
                     "message": "Logged in successfully",
