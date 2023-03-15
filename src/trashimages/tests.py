@@ -40,6 +40,8 @@ class ImageSubmissionViewsetTest(APITestCase):
             user=self.user_player, team=Team.objects.get_or_create(id=1, name="Red")[0]
         )
 
+        self.b64_val = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
+
         # Initialising the APIs
         self.client = APIClient()
         self.url = "/api"
@@ -70,13 +72,14 @@ class ImageSubmissionViewsetTest(APITestCase):
         :assertions: Expecting a 201 response code is returned
         """
         parser_classes = (MultiPartParser, FormParser)
-        submission = self.image
+        submission = self.b64_val
+
 
         # Getting a dummy response
         self.client.force_authenticate(self.user_player)
         response = self.client.post(
             self.url + "/images/submit-image/",
-            {"image": submission},
+            {"b64_img": submission},
             format="multipart",
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -87,13 +90,13 @@ class ImageSubmissionViewsetTest(APITestCase):
         :assertions: Expecting a 403 response code is returned
         """
         parser_classes = (MultiPartParser, FormParser)
-        submission = self.image
+        submission = self.b64_val
 
         # Getting a dummy response
         self.client.force_authenticate(self.user_gk)
         response = self.client.post(
             self.url + "/images/submit-image/",
-            {"image": submission},
+            {"b64_img": submission},
             format="multipart",
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
