@@ -4,6 +4,8 @@ import base64
 from .models import Images
 from trashusers.models import Team
 from trashmonsters.models import TrashMonsters
+from trashmonsters.serializer import TMIDSerializer
+from trashusers.serializers import TeamSerializer
 from uuid import uuid4
 
 
@@ -17,7 +19,8 @@ class ImageSerializer(serializers.ModelSerializer):
     """ 
     Used to get specific attributes from the database in JSON format
     """
-
+    monster = TMIDSerializer(required=True)
+    team = TeamSerializer(required=True)
     class Meta:
         """ 
         Specifies which model the fields will be coming from and the fields extracted
@@ -28,10 +31,20 @@ class ImageSerializer(serializers.ModelSerializer):
     
 
     def create(self, validated_data):
+        """ 
+        Gets the information from the post request and uses it to create an Images
+        to allow for images to be sent within forms
+
+        Parameters:
+        validated_data - POST request sent by the user in JSON format
+
+        Returns: 
+        image - Image object created with the data from the POST request 
+        """
         img_data = validated_data.get("b64_img")
         img = base64_to_img(img_data)
         team_data = validated_data.get("team")
         monster_data = validated_data.get("monster")
         image, created = Images.objects.update_or_create(
-            image=img, team=team_data, monster=monster_data)
+            image=img, team=Team.objects.get(name=team_data["name"]), monster=TrashMonsters.objects.get(TM_ID=monster_data["id"]))
         return image

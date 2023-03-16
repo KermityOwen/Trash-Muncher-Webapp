@@ -40,6 +40,7 @@ class ImageSubmissionViewsetTest(APITestCase):
             user=self.user_player, team=Team.objects.get_or_create(id=1, name="Red")[0]
         )
 
+        # Example Base64 value 
         self.b64_val = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
 
         # Initialising the APIs
