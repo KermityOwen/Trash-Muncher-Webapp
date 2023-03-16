@@ -10,7 +10,8 @@ from uuid import uuid4
 def base64_to_img(data):
         format, img_str = data.split(';base64,')
         name, ext = format.split('/')
-        return ContentFile(base64.b64decode(img_str + "=="), name=uuid4().hex + "." + ext[1])
+        print(ext)
+        return ContentFile(base64.b64decode(img_str + "=="), name=uuid4().hex + "." + ext)
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -29,6 +30,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         img_data = validated_data.get("b64_img")
+
         img = base64_to_img(img_data)
         team_data = validated_data.get("team")
         monster_data = validated_data.get("monster")
