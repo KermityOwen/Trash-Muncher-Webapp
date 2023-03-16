@@ -23,7 +23,7 @@ class ImageSerializer(serializers.ModelSerializer):
         Specifies which model the fields will be coming from and the fields extracted
         """
         model = Images
-        fields = ["id","b64_img","team","monster"]
+        fields = ["id", "b64_img", "image", "team","monster"]
 
     
 
