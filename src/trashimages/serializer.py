@@ -20,7 +20,6 @@ class ImageSerializer(serializers.ModelSerializer):
     Used to get specific attributes from the database in JSON format
     """
     monster = TMIDSerializer(required=True)
-    team = TeamSerializer(required=True)
     class Meta:
         """ 
         Specifies which model the fields will be coming from and the fields extracted
@@ -46,5 +45,5 @@ class ImageSerializer(serializers.ModelSerializer):
         team_data = validated_data.get("team")
         monster_data = validated_data.get("monster")
         image, created = Images.objects.update_or_create(
-            image=img, team=Team.objects.get(name=team_data["name"]), monster=TrashMonsters.objects.get(TM_ID=monster_data["id"]))
+            image=img, team=team_data, monster=TrashMonsters.objects.get(TM_ID=monster_data["id"]))
         return image
