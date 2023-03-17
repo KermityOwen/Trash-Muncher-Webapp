@@ -1,23 +1,21 @@
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    branches: [ main ]
   
 jobs:
-  run_pull:
-    name: run pull
+  build:
     runs-on: ubuntu-latest
     
     steps:
     - name: install ssh keys
+      uses: appleboy/ssh-action@master
       # check this thread to understand why its needed:
       # https://stackoverflow.com/a/70447517
-      run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-    - name: connect and pull
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git pull && ./run-docker.sh && exit"
-    - name: cleanup
-      run: rm -rf ~/.ssh
+      with:
+        host: ${{ secrets.HOST }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ../home/trashmunchers/Trash-Muncher-Webapp
+          git pull
+          ./run-docker.sh
