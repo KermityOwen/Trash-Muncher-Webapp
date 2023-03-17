@@ -19,7 +19,7 @@ class ImageSerializer(serializers.ModelSerializer):
     """ 
     Used to get specific attributes from the database in JSON format
     """
-    monster = TMIDSerializer(required=True)
+    monster = serializers.IntegerField()
     class Meta:
         """ 
         Specifies which model the fields will be coming from and the fields extracted
@@ -41,7 +41,7 @@ class ImageSerializer(serializers.ModelSerializer):
         image - Image object created with the data from the POST request 
         """
         
-        # Get the relevant data needed to create the model from the request
+        # Get the relevant data needed to create the model frpo
         img_data = validated_data.get("b64_img")
         team_data = validated_data.get("team")
         monster_data = validated_data.get("monster")
@@ -49,5 +49,5 @@ class ImageSerializer(serializers.ModelSerializer):
         # Convert the base64 string to an image
         img = base64_to_img(img_data)
         image, created = Images.objects.update_or_create(
-            image=img, team=team_data, monster=TrashMonsters.objects.get(TM_ID=monster_data["TM_ID"]))
+            image=img, team=team_data, monster=TrashMonsters.objects.get(TM_ID=monster_data))
         return image
