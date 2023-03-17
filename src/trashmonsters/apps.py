@@ -10,6 +10,7 @@ class TrashmonstersConfig(AppConfig):
     Function to begin the scheduler and find the last leading team for 
     each TrashMonster
     """
+
     def ready(self):
         from . import jobs, viewset
 

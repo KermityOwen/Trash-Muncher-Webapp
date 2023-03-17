@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('trashimages', '0002_images_b64_img'),
+        ("trashimages", "0002_images_b64_img"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='images',
-            name='b64_img',
+            model_name="images",
+            name="b64_img",
             field=models.CharField(max_length=9223372036854775807, null=True),
         ),
     ]

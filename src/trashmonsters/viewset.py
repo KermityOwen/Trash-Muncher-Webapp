@@ -14,11 +14,10 @@ import json, os
 cached_leader = {}
 
 
-
 def restart_testing_db():
     """
-    Resets the database used for testing by checking that there are 
-    TrashMonsters in the database and create three TrashMonster objects 
+    Resets the database used for testing by checking that there are
+    TrashMonsters in the database and create three TrashMonster objects
     """
     TMs = TrashMonsters.objects.all()
     if len(TMs) == 0:
@@ -32,18 +31,17 @@ def restart_testing_db():
         TM.save()
 
 
-
 def bubble_search(TM: TrashMonsters):
     """
-    Carries out a bubble search to find which team has the highest monster 
+    Carries out a bubble search to find which team has the highest monster
 
     Parameters:
-    TM (TrashMonster) - The TrashMonster that we are trying to find the leader for 
+    TM (TrashMonster) - The TrashMonster that we are trying to find the leader for
 
     Returns:
-    1 (int) - Team 1 is the leading team for this monster 
-    2 (int) - Team 2 is the leading team for this monster 
-    3 (int) - Team 3 is the leading team for this monster 
+    1 (int) - Team 1 is the leading team for this monster
+    2 (int) - Team 2 is the leading team for this monster
+    3 (int) - Team 3 is the leading team for this monster
     """
     if TM.Team1_Score >= TM.Team2_Score:
         if TM.Team1_Score > TM.Team3_Score:
@@ -56,11 +54,10 @@ def bubble_search(TM: TrashMonsters):
         return 3
 
 
-
 def calculate_cached_leader():
     """
-    Finds out who the current leader is so that it's always displayed to the user. 
-    Finds the leader of which team currently has the lead for each team 
+    Finds out who the current leader is so that it's always displayed to the user.
+    Finds the leader of which team currently has the lead for each team
     """
     try:
         TMs = TrashMonsters.objects.all()
@@ -72,20 +69,20 @@ def calculate_cached_leader():
         print("DB not yet set up. Run migrate before trying again.")
 
 
-
 def calculate_specific_leader(TM_ID):
     """
-    Finds out who the current leader is so that it's always displayed to the user. 
+    Finds out who the current leader is so that it's always displayed to the user.
     Finds the leader of which team currently has the lead for each team.
     """
     TM = TrashMonsters.objects.get(TM_ID=TM_ID)
     cached_leader[TM.TM_ID] = bubble_search(TM)
 
 
-
 """
 For information regarding the API views, please view api_documentation.md
 """
+
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getTMs(request):
@@ -137,7 +134,7 @@ def verifyDistance(request):
     origin = (request.data.get("o-lat", None), request.data.get("o-long", None))
     difference = distance.distance(target, origin).m
 
-    # Value can be changed if you would like to increase the leeway a user receives 
+    # Value can be changed if you would like to increase the leeway a user receives
     if difference <= 50:
         return Response(True)
     else:

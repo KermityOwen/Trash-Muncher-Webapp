@@ -15,6 +15,7 @@ import io
 
 from PIL import Image
 
+
 class ImageSubmissionViewsetTest(APITestCase):
     def setUp(self):
         # Create two test users (one player, one gamekeeper)
@@ -40,7 +41,7 @@ class ImageSubmissionViewsetTest(APITestCase):
             user=self.user_player, team=Team.objects.get_or_create(id=1, name="Red")[0]
         )
 
-        # Example Base64 value 
+        # Example Base64 value
         self.b64_val = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
 
         # Initialising the APIs
@@ -74,7 +75,6 @@ class ImageSubmissionViewsetTest(APITestCase):
         """
         parser_classes = (MultiPartParser, FormParser)
         submission = self.b64_val
-
 
         # Getting a dummy response
         self.client.force_authenticate(self.user_player)
