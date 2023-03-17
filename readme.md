@@ -2,17 +2,17 @@
 
 ## Contents
 
-- [![Overview](https://github.com/KermityOwen/Trash-Muncher-Webapp#overview)
+- ![Overview](https://github.com/KermityOwen/Trash-Muncher-Webapp#overview)
 
-- [![Creating a developer user](https://github.com/KermityOwen/Trash-Muncher-Webapp#creating-a-developer-user)
+- ![Creating a developer user](https://github.com/KermityOwen/Trash-Muncher-Webapp#creating-a-developer-user)
 
-- [![File structure](https://github.com/KermityOwen/Trash-Muncher-Webapp#file-structure) 
+- ![File structure](https://github.com/KermityOwen/Trash-Muncher-Webapp#file-structure) 
 
-- [![Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp#contributors)
+- ![Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp#contributors)
 
-- [![Privacy policy]()
+- ![Privacy policy]()
 
-- [![License](https://github.com/KermityOwen/Trash-Muncher-Webapp#license)
+- ![License](https://github.com/KermityOwen/Trash-Muncher-Webapp#license)
 
 
 
