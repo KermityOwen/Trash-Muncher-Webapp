@@ -2,10 +2,7 @@ from rest_framework import serializers
 from django.core.files.base import ContentFile
 import base64
 from .models import Images
-from trashusers.models import Team
 from trashmonsters.models import TrashMonsters
-from trashmonsters.serializer import TMIDSerializer
-from trashusers.serializers import TeamSerializer
 from uuid import uuid4
 
 
