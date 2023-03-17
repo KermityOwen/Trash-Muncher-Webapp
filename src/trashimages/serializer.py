@@ -2,10 +2,7 @@ from rest_framework import serializers
 from django.core.files.base import ContentFile
 import base64
 from .models import Images
-from trashusers.models import Team
 from trashmonsters.models import TrashMonsters
-from trashmonsters.serializer import TMIDSerializer
-from trashusers.serializers import TeamSerializer
 from uuid import uuid4
 
 
@@ -19,13 +16,14 @@ class ImageSerializer(serializers.ModelSerializer):
     """ 
     Used to get specific attributes from the database in JSON format
     """
-    monster = serializers.IntegerField()
+    # Used to get the ID of the monster from the POST request 
+    monster_id = serializers.IntegerField()
     class Meta:
         """ 
         Specifies which model the fields will be coming from and the fields extracted
         """
         model = Images
-        fields = ["id", "b64_img", "image", "team","monster"]
+        fields = ["id", "b64_img", "image", "team", "monster_id"]
 
     
 
@@ -44,12 +42,16 @@ class ImageSerializer(serializers.ModelSerializer):
         # Get the relevant data needed to create the model frpo
         img_data = validated_data.get("b64_img")
         team_data = validated_data.get("team")
-        monster_data = validated_data.get("monster")
+        monster_data = validated_data.get("monster_id")
+
+        print(type(monster_data))
 
         # Convert the base64 string to an image
         img = base64_to_img(img_data)
 
+        mster = TrashMonsters.objects.get(TM_ID=monster_data)
+
         # Create a new Images object 
         image, created = Images.objects.update_or_create(
-            image=img, team=team_data, monster=monster_data)
+            image=img, team=team_data, monster=mster)
         return image
