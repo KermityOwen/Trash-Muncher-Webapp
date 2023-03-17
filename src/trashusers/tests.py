@@ -76,7 +76,7 @@ class UserViewsetTest(APITestCase):
         Ensure that information about a user can be obtained
         :assertions: Expecting a 200 response code is returned
         """
-        self.client.force_authenticate(self.user)
+        self.client.force_authenticate(self.user) 
         response = self.client.get(self.url + "/users/me/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["user"]["username"], self.user.username)
