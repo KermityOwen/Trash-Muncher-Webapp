@@ -48,6 +48,8 @@ class ImageSerializer(serializers.ModelSerializer):
 
         # Convert the base64 string to an image
         img = base64_to_img(img_data)
+
+        # Create a new Images object 
         image, created = Images.objects.update_or_create(
-            image=img, team=team_data, monster=TrashMonsters.objects.get(TM_ID=monster_data))
+            image=img, team=team_data, monster=monster_data)
         return image
