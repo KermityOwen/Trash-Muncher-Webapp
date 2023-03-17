@@ -8,11 +8,11 @@
 
 - ![File structure](https://github.com/KermityOwen/Trash-Muncher-Webapp#file-structure) 
 
-- ![Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp#contributors)
+- ![Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#contributors-computer)
 
 - ![Privacy policy]()
 
-- ![License](https://github.com/KermityOwen/Trash-Muncher-Webapp#license)
+- ![License](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#license-page_with_curl)
 
 
 
