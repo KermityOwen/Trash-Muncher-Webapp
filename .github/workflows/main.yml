@@ -13,4 +13,8 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.PRIVATE_KEY }}
         port: ${{ 22 }}
-        script: whoami
+        script: |
+          cd ../home/trashmuncher/Trash-Muncher-Webapp
+          git stash
+          git pull
+          ./run-docker.sh
