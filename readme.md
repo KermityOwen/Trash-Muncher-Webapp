@@ -2,17 +2,17 @@
 
 ## Contents
 
-- ![Overview](https://github.com/KermityOwen/Trash-Muncher-Webapp#overview)
+- [Overview](https://github.com/KermityOwen/Trash-Muncher-Webapp#overview)
 
-- ![Creating a developer user](https://github.com/KermityOwen/Trash-Muncher-Webapp#creating-a-developer-user)
+- [Creating a developer user](https://github.com/KermityOwen/Trash-Muncher-Webapp#creating-a-developer-user)
 
-- ![File structure](https://github.com/KermityOwen/Trash-Muncher-Webapp#file-structure) 
+- [File structure](https://github.com/KermityOwen/Trash-Muncher-Webapp#file-structure) 
 
-- ![Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#contributors-computer)
+- [Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#contributors-computer)
 
-- ![Privacy policy]()
+- [Privacy policy]()
 
-- ![License](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#license-page_with_curl)
+- [License](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#license-page_with_curl)
 
 
 
@@ -167,7 +167,7 @@ Steps:
 
 ## Privacy Policy :lock:
 
-[NEEDS TO BE ADDED]
+[Privacy policy](tm_privacy_policy.pdf)
 
 ---
 
