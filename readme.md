@@ -10,7 +10,7 @@
 
 - [Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#contributors-computer)
 
-- [Privacy policy]()
+- [Privacy policy](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#privacy-policy-lock)
 
 - [License](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#license-page_with_curl)
 
