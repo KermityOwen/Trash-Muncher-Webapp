@@ -52,10 +52,7 @@ class ImageSerializer(serializers.ModelSerializer):
         # Convert the base64 string to an image
         img = base64_to_img(img_data)
 
-<<<<<<< Updated upstream
         mster = TrashMonsters.objects.get(TM_ID=monster_data)
-=======
->>>>>>> Stashed changes
 
         # Create a new Images object 
         image, created = Images.objects.update_or_create(
