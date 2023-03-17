@@ -11,6 +11,6 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.KEY }}
+        key: ${{ secrets.PRIVATE_KEY }}
         port: ${{ 22 }}
         script: whoami
