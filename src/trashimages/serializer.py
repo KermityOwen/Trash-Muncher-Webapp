@@ -40,10 +40,14 @@ class ImageSerializer(serializers.ModelSerializer):
         Returns: 
         image - Image object created with the data from the POST request 
         """
+        
+        # Get the relevant data needed to create the model from the request
         img_data = validated_data.get("b64_img")
-        img = base64_to_img(img_data)
         team_data = validated_data.get("team")
         monster_data = validated_data.get("monster")
+
+        # Convert the base64 string to an image
+        img = base64_to_img(img_data)
         image, created = Images.objects.update_or_create(
-            image=img, team=team_data, monster=TrashMonsters.objects.get(TM_ID=monster_data["id"]))
+            image=img, team=team_data, monster=TrashMonsters.objects.get(TM_ID=monster_data["TM_ID"]))
         return image
