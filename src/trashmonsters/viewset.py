@@ -14,21 +14,39 @@ import json, os
 cached_leader = {}
 
 
-def restart_testing_db():
-    """
-    Resets the database used for testing by checking that there are
-    TrashMonsters in the database and create three TrashMonster objects
-    """
-    TMs = TrashMonsters.objects.all()
-    if len(TMs) == 0:
-        TrashMonsters.objects.create(Longitude=11, Latitude=2)
-        TrashMonsters.objects.create(Longitude=1, Latitude=4)
-        TrashMonsters.objects.create(Longitude=4, Latitude=5)
-    for TM in TMs:
-        TM.Team1_Score = randint(1, 99)
-        TM.Team2_Score = randint(1, 99)
-        TM.Team3_Score = randint(1, 99)
-        TM.save()
+# def restart_testing_db():
+#     """
+#     Resets the database used for testing by checking that there are
+#     TrashMonsters in the database and create three TrashMonster objects
+#     """
+#     TMs = TrashMonsters.objects.all()
+#     if len(TMs) == 0:
+#         TrashMonsters.objects.create(Longitude=11, Latitude=2)
+#         TrashMonsters.objects.create(Longitude=1, Latitude=4)
+#         TrashMonsters.objects.create(Longitude=4, Latitude=5)
+#     for TM in TMs:
+#         TM.Team1_Score = randint(1, 99)
+#         TM.Team2_Score = randint(1, 99)
+#         TM.Team3_Score = randint(1, 99)
+#         TM.save()
+
+def wipe_all_monsters():
+    # PLEASE DONT RUN THIS OTHER THAN FOR DEBUGGING
+    TrashMonsters.objects.all().delete()
+
+def initialize_monsters():
+    # TMs = TrashMonsters.objects.all()
+    TM_list = [
+        {"Name": "Amory" , "Lat": 50.736262041651216, "Long": -3.5317508235089345},
+        {"Name": "Innovation" , "Lat": 50.73788528320402, "Long": -3.530730960576723},
+        {"Name": "Forum" , "Lat": 50.7353905744737, "Long": -3.533979019411838},
+        {"Name": "Peter Chalk" , "Lat": 50.73625444792592, "Long": -3.5360954821568695}
+    ]
+    for i in TM_list:
+        if TrashMonsters.objects.filter(TM_Name = i["Name"]).exists():
+            pass
+        else:
+            TrashMonsters.objects.create(Longitude=i["Long"], Latitude=i["Lat"], TM_Name=i["Name"])
 
 
 def bubble_search(TM: TrashMonsters):
