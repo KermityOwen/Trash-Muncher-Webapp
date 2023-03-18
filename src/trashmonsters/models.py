@@ -30,6 +30,7 @@ class TrashMonsters(models.Model):
     Team1_Score = models.IntegerField(default=0)
     Team2_Score = models.IntegerField(default=0)
     Team3_Score = models.IntegerField(default=0)
+    TM_Name = models.CharField(default="Name Not Set*", max_length=512)
 
     def __str__(self):
         """
