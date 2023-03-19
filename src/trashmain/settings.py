@@ -150,16 +150,21 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "trashusers.User"
 
+
+
 REST_FRAMEWORK = {
+    # JWT authentication for session handling
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
+    # Throttle classes to limit API calls 
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.AnonRateThrottle",
         "rest_framework.throttling.UserRateThrottle",
+        "rest_framework.throttling.ScopedRateThrottle"
     ],
-    "DEFAULT_THROTTLE_RATES": {"anon": "20/second", "user": "20/second"},
+    "DEFAULT_THROTTLE_RATES": {"anon": "20/second", "user": "20/second", "uploads":"1/day"},
 }
 
 SIMPLE_JWT = {

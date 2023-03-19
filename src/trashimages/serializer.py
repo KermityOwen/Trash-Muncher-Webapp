@@ -45,8 +45,6 @@ class ImageSerializer(serializers.ModelSerializer):
         team_data = validated_data.get("team")
         monster_data = validated_data.get("monster_id")
 
-        print(type(monster_data))
-
         # Convert the base64 string to an image
         img = base64_to_img(img_data)
 
