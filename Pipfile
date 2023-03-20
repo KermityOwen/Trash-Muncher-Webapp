@@ -18,6 +18,7 @@ djangorestframework-simplejwt = "*"
 django-rest-passwordreset = "*"
 djoser = "*"
 python-dotenv = "*"
+django-environ = "*"
 
 [dev-packages]
 

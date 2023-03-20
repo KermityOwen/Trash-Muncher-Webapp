@@ -48,3 +48,4 @@ virtualenv==20.20.0
 virtualenv-clone==0.5.7
 zipp==3.15.0
 zope.interface==5.5.2
+django-environ==0.10.0 
