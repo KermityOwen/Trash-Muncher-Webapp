@@ -95,6 +95,6 @@ def password_reset_token_created(
     send_mail(
         subject="Password Reset for {title}".format(title="Trashmunchers"),
         message=email_plaintext_message,
-        from_email="noreply@localhost",  # Needs to be changed https://studygyaan.com/django/how-to-send-email-in-django
+        from_email="noreply@trashmunchers.co.uk",  # Needs to be changed https://studygyaan.com/django/how-to-send-email-in-django
         recipient_list=[reset_password_token.user.email],
     )
