@@ -1,4 +1,10 @@
 name: Deploy to remote VPS
+env:
+  API_KEY: ${{ secrets.SECRET_KEY }}
+  EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+  EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
+  EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
+  EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
 on: [push]
 jobs:
 
