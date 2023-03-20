@@ -218,6 +218,24 @@ def removeScore(request):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
+def addCarbon(request):
+    TM_ID = request.data.get("TM_ID", None)
+    T1Carbon = request.data.get("T1Carbon", 0)
+    T2Carbon = request.data.get("T2Carbon", 0)
+    T3Carbon = request.data.get("T3Carbon", 0)
+
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
+    TM.Team1_Carbon += T1Carbon
+    TM.Team2_Carbon += T2Carbon
+    TM.Team3_Carbon += T3Carbon
+
+    TM.save()
+    calculate_specific_leader(TM_ID)
+
+    return Response(TMSerializer(TM, many=False).data)
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def getLeaderTeam(request):
     TM_ID = request.data.get("TM_ID", None)
     TM = TrashMonsters.objects.get(TM_ID=TM_ID)
