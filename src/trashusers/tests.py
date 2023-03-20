@@ -106,3 +106,4 @@ class UserViewsetTest(APITestCase):
             {"username": "test_login", "password": "secure_password_rock"},
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
