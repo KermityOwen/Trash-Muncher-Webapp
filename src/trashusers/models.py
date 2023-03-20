@@ -91,7 +91,7 @@ def password_reset_token_created(
     link = "{}?token={}".format(
         "trashmunchers.co.uk/reset-password", reset_password_token.key
     )
-    message = \
+    email_plaintext_message = \
     """ 
         Hi {},
 
@@ -105,6 +105,6 @@ def password_reset_token_created(
     send_mail(
         subject="Password Reset for {title}".format(title="Trashmunchers"),
         message=email_plaintext_message,
-        from_email="noreply@trashmunchers.co.uk",  # Needs to be changed https://studygyaan.com/django/how-to-send-email-in-django
+        from_email="noreply@trashmunchers.co.uk",
         recipient_list=[reset_password_token.user.email],
     )
