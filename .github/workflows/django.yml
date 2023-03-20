@@ -1,6 +1,6 @@
 name: Django CI
 env:
-  API_KEY: ${{ secrets.SECRET_KEY }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
   EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
   EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
   EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
