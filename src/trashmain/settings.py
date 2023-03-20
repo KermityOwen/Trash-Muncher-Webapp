@@ -179,6 +179,3 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-print(EMAIL_HOST_USER)
-print(EMAIL_HOST_PASSWORD)
-print(EMAIL_PORT)
