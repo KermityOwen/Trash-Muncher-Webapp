@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
-
-# To access environment variables
 from dotenv import load_dotenv
 import os
 
@@ -174,10 +172,7 @@ SIMPLE_JWT = {
 
 
 # Email settings
-EMAIL_USE_TLS = True
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_HOST_USER = 'noreply@trashmunchers.co.uk'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
