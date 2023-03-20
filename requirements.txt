@@ -32,6 +32,7 @@ pipenv==2023.2.18
 piplock==0.1.0
 platformdirs==3.1.0
 pycparser==2.21
+python-dotenv==1.0.0
 PyJWT==2.6.0
 python3-openid==3.2.0
 pytz==2022.7.1
