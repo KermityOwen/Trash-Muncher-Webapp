@@ -13,44 +13,45 @@ from django.utils import timezone
 
 
 class User(AbstractUser):
-    """ 
-    Creates an User table in the database  
+    """
+    Creates an User table in the database
 
-    Attributes: 
-    email (django.db.models.EmailField): Email that the user used when signing up  
+    Attributes:
+    email (django.db.models.EmailField): Email that the user used when signing up
     is_player (django.db.models.BooleanField): Field to confirm whether a user is a player
     is_gamekeeper (django.db.models.BooleanField): Field to confirm whether a user is a gamekeeper
-    """ 
+    """
+
     email = models.EmailField(blank=False, unique=True)
     is_player = models.BooleanField(default=False)
     is_gamekeeper = models.BooleanField(default=False)
     pass
 
 
-
 class Team(models.Model):
-    """ 
-    Creates a Team table in the database  
-
-    Attributes: 
-    TEAMS (list): List of the possible teams that the user can be. Each element is a tuple of the team's name and its abbreviation 
-    name (django.db.models.CharField): Name of the team. Cannot be more than 10 characters
-    points (django.db.models.IntegerField): Number of points the team has accummulated 
     """
+    Creates a Team table in the database
+
+    Attributes:
+    TEAMS (list): List of the possible teams that the user can be. Each element is a tuple of the team's name and its abbreviation
+    name (django.db.models.CharField): Name of the team. Cannot be more than 10 characters
+    points (django.db.models.IntegerField): Number of points the team has accummulated
+    """
+
     TEAMS = [("R", "Red"), ("B", "Blue"), ("G", "Green")]
     name = models.CharField(max_length=10)
     points = models.IntegerField(default=0)
 
 
-
 class Player(models.Model):
-    """ 
-    Creates a Player table in the database  
-
-    Attributes: 
-    user (django.db.models.OneToOneField): Account that the player belongs to  
-    team (django.db.models.ForeignKey): The team that player belongs to 
     """
+    Creates a Player table in the database
+
+    Attributes:
+    user (django.db.models.OneToOneField): Account that the player belongs to
+    team (django.db.models.ForeignKey): The team that player belongs to
+    """
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -60,21 +61,20 @@ class Player(models.Model):
     team = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL)
 
 
-
 class GameKeeper(models.Model):
-    """ 
-    Creates a Player table in the database  
+    """
+    Creates a Player table in the database
 
-    Attributes: 
+    Attributes:
     user (django.db.models.OneToOneField): Account that the player belongs to
     """
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         primary_key=True,
         related_name="gamekeeper",
     )
-
 
 
 @receiver(reset_password_token_created)
@@ -104,7 +104,7 @@ def password_reset_token_created(
 
     send_mail(
         subject="Password Reset for {title}".format(title="Trashmunchers"),
-        message=message,
-        from_email="noreply@localhost",  # Needs to be changed https://studygyaan.com/django/how-to-send-email-in-django
+        message=email_plaintext_message,
+        from_email="noreply@trashmunchers.co.uk",  # Needs to be changed https://studygyaan.com/django/how-to-send-email-in-django
         recipient_list=[reset_password_token.user.email],
     )

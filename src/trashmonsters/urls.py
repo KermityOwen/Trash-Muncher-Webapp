@@ -1,7 +1,7 @@
 from django.urls import path
 from . import viewset
 
-# List of URLs to allow for access to the endpoints 
+# List of URLs to allow for access to the endpoints
 urlpatterns = [
     path("get-tms", viewset.getTMs),
     path("get-tm", viewset.getTM),

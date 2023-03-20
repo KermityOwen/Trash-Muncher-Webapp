@@ -10,6 +10,7 @@ class TrashmonstersConfig(AppConfig):
     Function to begin the scheduler and find the last leading team for 
     each TrashMonster
     """
+
     def ready(self):
         from . import jobs, viewset
 
@@ -20,9 +21,9 @@ class TrashmonstersConfig(AppConfig):
             if "runserver" not in sys.argv:
                 return True
             try:
-                # viewset.restart_testing_db()
-                pass
-            except:
-                print("Setting up database")
+                # viewset.wipe_all_monsters()
+                viewset.initialize_monsters()
+            except Exception as e:
+                print(e)
             viewset.calculate_cached_leader()
             jobs.start_scheduler()

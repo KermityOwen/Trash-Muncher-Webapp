@@ -1,5 +1,24 @@
 # Trash-Muncher-Webapp
 
+## Contents
+
+- [Overview](https://github.com/KermityOwen/Trash-Muncher-Webapp#overview)
+
+- [Creating a developer user](https://github.com/KermityOwen/Trash-Muncher-Webapp#creating-a-developer-user)
+
+- [File structure](https://github.com/KermityOwen/Trash-Muncher-Webapp#file-structure) 
+
+- [Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#contributors-computer)
+
+- [Privacy policy](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#privacy-policy-lock)
+
+- [License](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#license-page_with_curl)
+
+
+
+
+---
+
 ## Overview
 
 [Trashmunchers](https://www.trashmunchers.co.uk/) is a location based game developed to promote sustainability at the University of Exeter. The objective of the game is for players to feed Trashmonsters at different recycling points scattered across campus in order for their team to gain control of the Trashmonsters. Players can visit their nearest Trashmonster and take a picture of what they are recycling. By doing so, they are awarded a certain amount of points based on the size of what they recycled. [NEEDS TO BE ELABORATED]
@@ -148,10 +167,10 @@ Steps:
 
 ## Privacy Policy :lock:
 
-[NEEDS TO BE ADDED]
+[Privacy policy](tm_privacy_policy.pdf)
 
 ---
 
 ## License :page_with_curl:
 
-[NEEDS TO BE ADDED]
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)

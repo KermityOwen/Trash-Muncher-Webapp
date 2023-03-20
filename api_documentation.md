@@ -43,14 +43,16 @@ Gets the team with the leading number of scores. Responds with team number.
 ## ip:port/api/images/ - 
 - submit-image [POST] -   
 Add an image to a database. IDs are auto-incremented. Responds with a serialized image containing the ID and a link to the image just added
-<b>Example request: `{"id":5, "image":"http://localhost/media/images/example.jpg"}`</b>
+<b><b>Example request: `{"b64_img":"data:image/png;base64,...","team":1, "monster_id":1}`</b></b>
+<b><b>Example response: `{"id":5, "b64_img":null, "image":"http://localhost/media/images/example.jpg", "team":1, "monster_id":1}`</b></b>
 - list-images [GET] -  
  Gets all images from the database. Responds with serialized list of images, containing their IDs and the links to them  
-<b>Example request: `[{"id":5, "image":"http://localhost/media/images/example.jpg"}, {"id":6, "image":"http://localhost/media/images/example2.jpg"}]`</b>
+<b>Example response: `[{"id":5, "b64_img":null, "image":"http://localhost/media/images/example.jpg", "team":1, "monster_id":1}, {"id":6, "b64_img":null, "image":"http://localhost/media/images/example2.jpg", "team":2, "monster_id":1}]`</b>
 
 - delete-images [POST] -  
 Removes an image from the database with a specified ID. Responds with serialized message either stating the image has successfully been deleted (200), or the image couldn't be found (404).  
 <b>Example request: `{"id":4}`</b>
+<b>Example response: `{"message":"Image successfully deleted"}`</b>
 
 ---
 

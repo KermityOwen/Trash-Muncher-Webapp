@@ -12,25 +12,26 @@ from trashusers.models import Team
 
 
 class TrashMonsters(models.Model):
-    """ 
-    Creates an TrashMonsters table in the database  
+    """
+    Creates an TrashMonsters table in the database
 
-    Attributes: 
+    Attributes:
     TM_ID (django.db.models.AutoField): Unique identifier for each trashmonster. Automatically increases when there is a new entry
-    Latitude (django.db.models.FloatField): Field for the latitude of the monster 
+    Latitude (django.db.models.FloatField): Field for the latitude of the monster
     Longitude (django.db.models.FloatField): Field for the longitude of the monster
     Team1_Score (django.db.models.IntegerField): Team 1's score for this trashmonster
     Team2_Score (django.db.models.IntegerField): Team 2's score for this trashmonster
     Team3_Score (django.db.models.IntegerField): Team 3's score for this trashmonster
     """
+
     TM_ID = models.AutoField(primary_key=True)
     Latitude = models.FloatField()
     Longitude = models.FloatField()
     Team1_Score = models.IntegerField(default=0)
     Team2_Score = models.IntegerField(default=0)
     Team3_Score = models.IntegerField(default=0)
+    TM_Name = models.CharField(default="Name Not Set*", max_length=512)
 
-    
     def __str__(self):
         """
         ToString method used for debugging

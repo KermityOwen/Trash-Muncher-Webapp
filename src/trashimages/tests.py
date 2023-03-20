@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .models import Images
 from trashusers.models import User, GameKeeper, Team, Player
+from trashmonsters.models import TrashMonsters
 from rest_framework import status
 from rest_framework.test import (
     APITestCase,
@@ -14,6 +15,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 import io
 
 from PIL import Image
+
 
 class ImageSubmissionViewsetTest(APITestCase):
     def setUp(self):
@@ -39,6 +41,11 @@ class ImageSubmissionViewsetTest(APITestCase):
         self.player = Player.objects.create(
             user=self.user_player, team=Team.objects.get_or_create(id=1, name="Red")[0]
         )
+
+        self.trashmonster_one = TrashMonsters.objects.create(Longitude=11, Latitude=2)
+
+        # Example Base64 value
+        self.b64_val = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
 
         # Initialising the APIs
         self.client = APIClient()
@@ -70,13 +77,13 @@ class ImageSubmissionViewsetTest(APITestCase):
         :assertions: Expecting a 201 response code is returned
         """
         parser_classes = (MultiPartParser, FormParser)
-        submission = self.image
+        submission = self.b64_val
 
         # Getting a dummy response
         self.client.force_authenticate(self.user_player)
         response = self.client.post(
             self.url + "/images/submit-image/",
-            {"image": submission},
+            {"b64_img": submission, "monster_id":1},
             format="multipart",
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -87,13 +94,13 @@ class ImageSubmissionViewsetTest(APITestCase):
         :assertions: Expecting a 403 response code is returned
         """
         parser_classes = (MultiPartParser, FormParser)
-        submission = self.image
+        submission = self.b64_val
 
         # Getting a dummy response
         self.client.force_authenticate(self.user_gk)
         response = self.client.post(
             self.url + "/images/submit-image/",
-            {"image": submission},
+            {"b64_img": submission},
             format="multipart",
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

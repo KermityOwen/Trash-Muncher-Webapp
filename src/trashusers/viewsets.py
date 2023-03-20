@@ -49,7 +49,6 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
-    
     @action(detail=False, methods=["get"], url_path="me", name="me")
     def me(self, request):
         """
@@ -57,7 +56,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
         the Player database or the Gamkeeper database
 
         Returns:
-        Response(serializer.data) - Data from the serializer 
+        Response(serializer.data) - Data from the serializer
         """
 
         # Get the current authenticated user
@@ -70,23 +69,22 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(serializer.data)
 
 
-
 class LoginView(APIView):
     """
-    Creates an endpoint to allow users to login 
+    Creates an endpoint to allow users to login
     """
+
     permission_classes = ()
     authentication_classes = ()
 
-    
     def post(self, request, format=None):
         """
-        Provides the endpoint with post functionality. Allows users to send a post 
-        request to login 
+        Provides the endpoint with post functionality. Allows users to send a post
+        request to login
 
         Returns:
         Response(status.code) - Either responds with a 400 code if they have left input fields blank
-                                or responds with a 200 code if they have successfully logged in 
+                                or responds with a 200 code if they have successfully logged in
         """
         username = request.data.get("username", None)
         password = request.data.get("password", None)
@@ -99,7 +97,6 @@ class LoginView(APIView):
         if user is not None:
             login(request, user)
             refresh = RefreshToken.for_user(user)
-            print(refresh)
             return Response(
                 {
                     "message": "Logged in successfully",
@@ -118,19 +115,19 @@ class LoginView(APIView):
 
 class LogoutView(APIView):
     """
-    Creates an endpoint to allow users to logout 
+    Creates an endpoint to allow users to logout
     """
+
     permission_classes = (IsAuthenticated,)
 
-    
     def post(self, request):
         """
-        Provides the endpoint with post functionality. Allows users to send a post 
+        Provides the endpoint with post functionality. Allows users to send a post
         request to logout
 
         Returns:
-        Response(status.code) - Either responds with a 205 or 400 response code based on the outcome 
-                                of attempting to logout 
+        Response(status.code) - Either responds with a 205 or 400 response code based on the outcome
+                                of attempting to logout
         """
         try:
             refresh_token = request.data["refresh_token"]
@@ -143,36 +140,35 @@ class LogoutView(APIView):
 
 class PasswordChangeView(generics.UpdateAPIView):
     """
-    Creates an endpoint to allow users to change their password 
+    Creates an endpoint to allow users to change their password
     """
+
     serializer_class = PasswordChangeSerializer
     model = get_user_model()
     permission_classes = [IsAuthenticated]
 
-    
     def get_object(self):
         """
-        Gets the current user making the request 
+        Gets the current user making the request
 
         Returns:
-        user (user) - The current user making the request 
+        user (user) - The current user making the request
         """
         user = self.request.user
         return user
 
-    
     def update(self, request):
         """
-        Ensures that the user entered the correct password to allow them to change it 
+        Ensures that the user entered the correct password to allow them to change it
 
         Returns:
-        Response(information) (response) - Informs the user whether they have entered the correct password. 
-        Produces a 400 BAD request if the user entered the wrong password for their old password 
+        Response(information) (response) - Informs the user whether they have entered the correct password.
+        Produces a 400 BAD request if the user entered the wrong password for their old password
         """
-        
-        # Get the current user 
+
+        # Get the current user
         self.object = self.get_object()
-        # Serialize the data submitted 
+        # Serialize the data submitted
         serializer = self.get_serializer(data=request.data)
 
         if serializer.is_valid():
@@ -188,7 +184,7 @@ class PasswordChangeView(generics.UpdateAPIView):
             # Save changes to the database
             self.object.save()
 
-            # Inform the user that their password has successfully been changed 
+            # Inform the user that their password has successfully been changed
             return Response(
                 {
                     "status": "success",
