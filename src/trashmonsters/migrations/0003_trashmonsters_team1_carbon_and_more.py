@@ -4,25 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('trashmonsters', '0002_trashmonsters_tm_name'),
+        ("trashmonsters", "0002_trashmonsters_tm_name"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='trashmonsters',
-            name='Team1_Carbon',
+            model_name="trashmonsters",
+            name="Team1_Carbon",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='trashmonsters',
-            name='Team2_Carbon',
+            model_name="trashmonsters",
+            name="Team2_Carbon",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='trashmonsters',
-            name='Team3_Carbon',
+            model_name="trashmonsters",
+            name="Team3_Carbon",
             field=models.IntegerField(default=0),
         ),
     ]

@@ -16,9 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = get_user_model()
         fields = ["id", "first_name", "last_name", "email", "username", "is_gamekeeper"]
-        read_only_fields = [
-            "id",  "is_gamekeeper"
-        ]
+        read_only_fields = ["id", "is_gamekeeper"]
 
 
 class UserPostSerializer(serializers.ModelSerializer):
