@@ -142,6 +142,7 @@ Steps:
 ├── readme.md               
 ├── requirements.txt        # List of dependencies used for deployment
 ├── run-docker.sh           # Shell script to run the Docker server 
+├── LICENSE           # License used for this repository  
 └── api_documentation.md    # Information about API endpoints
 ```
 
