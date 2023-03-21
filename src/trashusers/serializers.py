@@ -34,7 +34,7 @@ class UserPostSerializer(serializers.ModelSerializer):
             "password",
             "is_gamekeeper",
         ]
-        read_only_fields = ["id"]
+        read_only_fields = ["id", "is_gamekeeper"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -97,9 +97,9 @@ class PlayerSerializer(serializers.ModelSerializer):
         Returns:
         player (player) - The new player created from the user's data
         """
-        validated_data["is_gamekeeper"] = False
-        validated_data["is_player"] = True
         user_data = validated_data.get("user")
+        user_data["is_gamekeeper"] = False
+        user_data["is_player"] = True
         user_serializer = UserPostSerializer(data=user_data)
         if user_serializer.is_valid(raise_exception=True):
             user = user_serializer.create(validated_data=user_data)
@@ -134,9 +134,9 @@ class GameKeeperSerializer(serializers.ModelSerializer):
         Returns:
         gamekeeper (gamekeeper) - The new gamekeeper created from the user's data
         """
-        validated_data["is_gamekeeper"] = True
-        validated_data["is_player"] = False
         user_data = validated_data.get("user")
+        user_data["is_gamekeeper"] = True
+        user_data["is_player"] = False
         user_serializer = UserPostSerializer(data=user_data)
         if user_serializer.is_valid(raise_exception=ValueError):
             user = user_serializer.create(validated_data=user_data)
