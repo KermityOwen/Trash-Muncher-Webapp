@@ -12,5 +12,5 @@ urlpatterns = [
     path("add-score", viewset.addScore),
     path("remove-score", viewset.removeScore),
     path("get-leader", viewset.getLeaderTeam),
-    path("add-carbon", viewset.addCarbon)
+    path("add-carbon", viewset.addCarbon),
 ]

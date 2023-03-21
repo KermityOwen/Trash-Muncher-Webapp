@@ -16,9 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = get_user_model()
         fields = ["id", "first_name", "last_name", "email", "username", "is_gamekeeper"]
-        read_only_fields = [
-            "id",
-        ]
+        read_only_fields = ["id", "is_gamekeeper"]
 
 
 class UserPostSerializer(serializers.ModelSerializer):
@@ -99,6 +97,7 @@ class PlayerSerializer(serializers.ModelSerializer):
         Returns:
         player (player) - The new player created from the user's data
         """
+        validated_data["is_gamekeeper"] = False
         validated_data["is_player"] = True
         user_data = validated_data.get("user")
         user_serializer = UserPostSerializer(data=user_data)
@@ -136,6 +135,7 @@ class GameKeeperSerializer(serializers.ModelSerializer):
         gamekeeper (gamekeeper) - The new gamekeeper created from the user's data
         """
         validated_data["is_gamekeeper"] = True
+        validated_data["is_player"] = False
         user_data = validated_data.get("user")
         user_serializer = UserPostSerializer(data=user_data)
         if user_serializer.is_valid(raise_exception=ValueError):

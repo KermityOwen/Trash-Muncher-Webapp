@@ -91,8 +91,7 @@ def password_reset_token_created(
     link = "{}?token={}".format(
         "trashmunchers.co.uk/reset-password", reset_password_token.key
     )
-    email_plaintext_message = \
-    """ 
+    email_plaintext_message = """ 
         Hi {},
 
         There was a request to change your password!
@@ -100,7 +99,9 @@ def password_reset_token_created(
         If you did not make this request then please ignore this email.
 
         Otherwise, please click this link to change your password: {}
-    """.format(reset_password_token.user.username, link)
+    """.format(
+        reset_password_token.user.username, link
+    )
 
     send_mail(
         subject="Password Reset for {title}".format(title="Trashmunchers"),

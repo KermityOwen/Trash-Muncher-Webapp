@@ -83,7 +83,7 @@ class ImageSubmissionViewsetTest(APITestCase):
         self.client.force_authenticate(self.user_player)
         response = self.client.post(
             self.url + "/images/submit-image/",
-            {"b64_img": submission, "monster_id":1},
+            {"b64_img": submission, "monster_id": 1},
             format="multipart",
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
