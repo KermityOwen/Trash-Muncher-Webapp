@@ -17,13 +17,11 @@
 
 
 
----
 
 ## Overview
 
-[Trashmunchers](https://www.trashmunchers.co.uk/) is a location based game developed to promote sustainability at the University of Exeter. The objective of the game is for players to feed Trashmonsters at different recycling points scattered across campus in order for their team to gain control of the Trashmonsters. Players can visit their nearest Trashmonster and take a picture of what they are recycling. By doing so, they are awarded a certain amount of points based on the size of what they recycled. [NEEDS TO BE ELABORATED]
+[Trashmunchers](https://www.trashmunchers.co.uk/) is a location based game developed to promote sustainability at the University of Exeter. The objective of the game is for players to feed Trashmonsters at different recycling points scattered across campus in order for their team to gain control of the Trashmonsters. Players can visit their nearest Trashmonster and take a picture of what they are recycling. By doing so, they are awarded a certain amount of points based on the size of what they recycled. In addition to this, they are given a certain amount of carbon dependant on the size of their trash to represent their impact on sustainability. 
 
----
 
 ## Creating a developer user
 
@@ -70,7 +68,7 @@ Steps:
 ![Admin login page](https://cdn.discordapp.com/attachments/796358887396999198/1084569132894269570/image.png)
 
 9. Now, you can manage all users, teams and trashmonsters in the database. (It is also possible to edit team names in src/trashusers/fixtures/teams.json)
----
+10. 
 
 ## File structure
 ```
@@ -151,14 +149,12 @@ Steps:
 
 [Privacy policy](tm_privacy_policy.pdf)
 
----
 
 ## License :page_with_curl:
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 
---- 
 
 ## Contributors :computer: 
 
@@ -174,6 +170,4 @@ Steps:
 	  </tr>
   </tbody>
 </table>
-	  
 
----
