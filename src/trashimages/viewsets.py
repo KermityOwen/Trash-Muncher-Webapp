@@ -2,6 +2,7 @@ from rest_framework import mixins, status, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
+from rest_framework.throttling import ScopedRateThrottle
 
 from .models import Images
 from .serializer import ImageSerializer
@@ -18,10 +19,15 @@ class ImageSubmissionViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     Provides an endpoint for users to allow them to submit images to the database.
     Can only be accessed by players
     """
-
     queryset = Images.objects.all()
     parser_classes = (MultiPartParser, FormParser)
+    
+    # Only allow authenticated players to use this endpoint
     permission_classes = [permissions.IsAuthenticated, isPlayer]
+
+    # Limiting API calls to one per day 
+    throttle_class = [ScopedRateThrottle]
+    throttle_scope = "uploads"
     serializer_class = ImageSerializer
 
     def perform_create(self, serializer):
@@ -40,6 +46,8 @@ class ImageListViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     queryset = Images.objects.all()
     parser_classes = (MultiPartParser, FormParser)
+
+    # Only allow authenticated gamekeepers to use this endpoint
     permission_classes = [permissions.IsAuthenticated, isGameKeeper]
     serializer_class = ImageSerializer
 
@@ -60,6 +68,7 @@ class ImageDeleteView(APIView):
     Can only be accessed by gamekeepers
     """
 
+    # Only allow authenticated gamekeepers to use this endpoint 
     permission_classes = [permissions.IsAuthenticated, isGameKeeper]
 
     def post(self, request):
