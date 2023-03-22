@@ -17,6 +17,7 @@ django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 django-rest-passwordreset = "*"
 djoser = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

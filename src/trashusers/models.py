@@ -88,13 +88,24 @@ def password_reset_token_created(
     instance (instance) - View Instace that sent the signal
     reset_password_token (password_token) - Token Model Object
     """
-    email_plaintext_message = "{}?token={}".format(
-        reverse("password_reset:reset-password-request"), reset_password_token.key
+    link = "{}?token={}".format(
+        "trashmunchers.co.uk/reset-password", reset_password_token.key
+    )
+    email_plaintext_message = """ 
+        Hi {},
+
+        There was a request to change your password!
+
+        If you did not make this request then please ignore this email.
+
+        Otherwise, please click this link to change your password: {}
+    """.format(
+        reset_password_token.user.username, link
     )
 
     send_mail(
         subject="Password Reset for {title}".format(title="Trashmunchers"),
         message=email_plaintext_message,
-        from_email="noreply@localhost",  # Needs to be changed https://studygyaan.com/django/how-to-send-email-in-django
+        from_email="noreply@trashmunchers.co.uk",
         recipient_list=[reset_password_token.user.email],
     )

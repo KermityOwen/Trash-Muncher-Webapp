@@ -30,23 +30,27 @@ cached_leader = {}
 #         TM.Team3_Score = randint(1, 99)
 #         TM.save()
 
+
 def wipe_all_monsters():
     # PLEASE DONT RUN THIS OTHER THAN FOR DEBUGGING
     TrashMonsters.objects.all().delete()
 
+
 def initialize_monsters():
     # TMs = TrashMonsters.objects.all()
     TM_list = [
-        {"Name": "Amory" , "Lat": 50.736262041651216, "Long": -3.5317508235089345},
-        {"Name": "Innovation" , "Lat": 50.73788528320402, "Long": -3.530730960576723},
-        {"Name": "Forum" , "Lat": 50.7353905744737, "Long": -3.533979019411838},
-        {"Name": "Peter Chalk" , "Lat": 50.73625444792592, "Long": -3.5360954821568695}
+        {"Name": "Amory", "Lat": 50.736262041651216, "Long": -3.5317508235089345},
+        {"Name": "Innovation", "Lat": 50.73788528320402, "Long": -3.530730960576723},
+        {"Name": "Forum", "Lat": 50.7353905744737, "Long": -3.533979019411838},
+        {"Name": "Peter Chalk", "Lat": 50.73625444792592, "Long": -3.5360954821568695},
     ]
     for i in TM_list:
-        if TrashMonsters.objects.filter(TM_Name = i["Name"]).exists():
+        if TrashMonsters.objects.filter(TM_Name=i["Name"]).exists():
             pass
         else:
-            TrashMonsters.objects.create(Longitude=i["Long"], Latitude=i["Lat"], TM_Name=i["Name"])
+            TrashMonsters.objects.create(
+                Longitude=i["Long"], Latitude=i["Lat"], TM_Name=i["Name"]
+            )
 
 
 def bubble_search(TM: TrashMonsters):
@@ -209,6 +213,25 @@ def removeScore(request):
     TM.Team1_Score -= T1Score
     TM.Team2_Score -= T2Score
     TM.Team3_Score -= T3Score
+
+    TM.save()
+    calculate_specific_leader(TM_ID)
+
+    return Response(TMSerializer(TM, many=False).data)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def addCarbon(request):
+    TM_ID = request.data.get("TM_ID", None)
+    T1Carbon = request.data.get("T1Carbon", 0)
+    T2Carbon = request.data.get("T2Carbon", 0)
+    T3Carbon = request.data.get("T3Carbon", 0)
+
+    TM = TrashMonsters.objects.get(TM_ID=TM_ID)
+    TM.Team1_Carbon += T1Carbon
+    TM.Team2_Carbon += T2Carbon
+    TM.Team3_Carbon += T3Carbon
 
     TM.save()
     calculate_specific_leader(TM_ID)

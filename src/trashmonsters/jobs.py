@@ -50,11 +50,11 @@ def autoRemoveScore(tm_id, rem_team):
     try:
         TM = TrashMonsters.objects.get(TM_ID=tm_id)
         # so ugly but only way without refactoring the whole db for trashmonsters
-        if rem_team == 1 and TM.Team1_Score>=1:
+        if rem_team == 1 and TM.Team1_Score >= 1:
             TM.Team1_Score -= 1
-        elif rem_team == 2 and TM.Team2_Score>=1:
+        elif rem_team == 2 and TM.Team2_Score >= 1:
             TM.Team2_Score -= 1
-        elif rem_team == 3 and TM.Team3_Score>=1:
+        elif rem_team == 3 and TM.Team3_Score >= 1:
             TM.Team3_Score -= 1
         else:
             print("Error: Invalid team or Team already has 0 Score")

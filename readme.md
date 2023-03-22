@@ -8,20 +8,17 @@
 
 - [File structure](https://github.com/KermityOwen/Trash-Muncher-Webapp#file-structure) 
 
-- [Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#contributors-computer)
-
 - [Privacy policy](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#privacy-policy-lock)
 
 - [License](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#license-page_with_curl)
 
-
-
+- [Contributors](https://github.com/KermityOwen/Trash-Muncher-Webapp/blob/main/readme.md#contributors-computer)
 
 ---
 
 ## Overview
 
-[Trashmunchers](https://www.trashmunchers.co.uk/) is a location based game developed to promote sustainability at the University of Exeter. The objective of the game is for players to feed Trashmonsters at different recycling points scattered across campus in order for their team to gain control of the Trashmonsters. Players can visit their nearest Trashmonster and take a picture of what they are recycling. By doing so, they are awarded a certain amount of points based on the size of what they recycled. [NEEDS TO BE ELABORATED]
+[Trashmunchers](https://www.trashmunchers.co.uk/) is a location based game developed to promote sustainability at the University of Exeter. The objective of the game is for players to feed Trashmonsters at different recycling points scattered across campus in order for their team to gain control of the Trashmonsters. Players can visit their nearest Trashmonster and take a picture of what they are recycling. By doing so, they are awarded a certain amount of points based on the size of what they recycled. In addition to this, they are given a certain amount of carbon dependant on the size of their trash to represent their impact on sustainability. 
 
 ---
 
@@ -70,6 +67,7 @@ Steps:
 ![Admin login page](https://cdn.discordapp.com/attachments/796358887396999198/1084569132894269570/image.png)
 
 9. Now, you can manage all users, teams and trashmonsters in the database. (It is also possible to edit team names in src/trashusers/fixtures/teams.json)
+
 ---
 
 ## File structure
@@ -77,7 +75,7 @@ Steps:
 .
 ├── github                  # Used to update backend host link 
 ├── design_documents        # Markdowns containing information about game and technical design choices
-	│ ├── .obsidian               # JSONs for styling markdowns  
+    │ ├── .obsidian               # JSONs for styling markdowns  
     │ ├── GDD.md                  # Information about game design choices
     │ ├── TDD.md                  # Information about technical design choices (Needs to be completed)
     │ └── TrashImagesApp.md       # Instructions on how to run the TrashImages APIs locally to ensure that they can be used for deployment
@@ -85,7 +83,7 @@ Steps:
 │ ├── assests                 # JSONs for styling markdowns  
 │ ├── media/images            # Contains the images submitted by users
 │ ├── trashimages             # Django app used for image handling
-	│├── migrations             # Used to create tables in the database from models.py  
+    │├── migrations             # Used to create tables in the database from models.py  
     │├── __init__.py
     │├── admin.py               # File where models are registered on the admin site for use by the admin
     │├── apps.py                # Name of the application  
@@ -103,7 +101,7 @@ Steps:
 	│├── urls.py                # List of registered urls that lead to endpoints. Defined for every application created               
 	│└── wsgi.py    
 │ ├── trashmonsters           # Django app for handling the game's monsters
-	│├── migrations             # Used to create tables in the database from models.py  
+    │├── migrations             # Used to create tables in the database from models.py  
     │├── __init__.py
     │├── admin.py               
     │├── apps.py                # Handles server startup to ensure that database isn't constantly recreated and overwritten
@@ -130,7 +128,7 @@ Steps:
 │ ├── manage.py               # Autocreated by Django. Used for executing Django related tasks (e.g., running the server)
 │ └── requirements.txt        # List of dependencies used for deployment
 ├── trashmunchers           # Contains cache files
-	│├── trashmunchers/__pycache__        
+    │├── trashmunchers/__pycache__        
     │└── trashsite/__pycache__         
  
 ├── .gitignore              # Prevents certain files from being pushed to the repository
@@ -142,10 +140,23 @@ Steps:
 ├── readme.md               
 ├── requirements.txt        # List of dependencies used for deployment
 ├── run-docker.sh           # Shell script to run the Docker server 
+├── Trashmunchers Testing Strategy.pdf           # Document outlining the testing strategy used for this product
+├── LICENSE           # License used for this repository  
 └── api_documentation.md    # Information about API endpoints
 ```
 
---- 
+---
+
+## Privacy Policy :lock:
+
+[Privacy policy](tm_privacy_policy.pdf)
+
+
+## License :page_with_curl:
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+---
 
 ## Contributors :computer: 
 
@@ -161,16 +172,4 @@ Steps:
 	  </tr>
   </tbody>
 </table>
-	  
 
----
-
-## Privacy Policy :lock:
-
-[Privacy policy](tm_privacy_policy.pdf)
-
----
-
-## License :page_with_curl:
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
