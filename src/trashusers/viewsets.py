@@ -19,9 +19,26 @@ from .serializers import (
     GameKeeperSerializer,
     PasswordChangeSerializer,
 )
-from .models import Player, GameKeeper, User
+from .models import Player, GameKeeper, User, Team
 
-
+def intitialise_test_users():
+    player_user = User.objects.create(
+            username="player_user",
+            email="player_user@example.com",
+            first_name="player",
+            last_name="user",
+            password="secure_password_rock",
+        )
+    
+    gamekeeper_user = User.objects.create(
+        username="gamekeeper_user",
+        email="gamekeeper_user@example.com",
+        first_name="gamekeeper",
+        last_name="user",
+        password="secure_password_rock",
+    )
+    Player.objects.create(user=player_user, team=Team.objects.get_or_create(id=1, name="Red")[0])
+    GameKeeper.objects.create(user=gamekeeper_user)
 class PlayerRegistrationViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Player.objects.all()
     authentication_classes = []

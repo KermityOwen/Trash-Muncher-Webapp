@@ -63,14 +63,15 @@ Gets the current user's information. Responds with their information serialized.
 
 - player-register [POST] -  
 Allows a person to register as a player. Responds with the information that they inputted serialized. Prevents input fields from being empty and requires a strong password. 
-<b>Example request: `{"username":"OnionRings101", "first_name":"Souff", "last_name":"Lé", "Team":"Red"}`</b>
+<b>Example request: `{"user":{"username":"OnionRings101", "password":"password", "email":"foo@bar.com", "first_name":"Souff", "last_name":"Lé"}, "Team":"Red"}`</b>
 
 - gamekeeper-register [GET] -  
 Allows a person to register as a gamekeeper. Responds with the information that they inputted serialized. Prevents input fields from being empty and requires a strong password. 
-<b>Example request: `{"id":22, username":"GKeeper", "first_name":"Alban", "last_name":"Lafont"}`</b>
+<b>Example request: `{"user":{"username":"OnionRings101", "password":"password", "email":"foo@bar.com", "first_name":"Souff", "last_name":"Lé"}}`</b>
 
 - login [POST] -  
-Allows the user to login. Responds with the information that they inputted serialized. Prevents input fields from being empty. 
+Allows the user to login. Responds with the information that they inputted serialized. Prevents input fields from being empty.
+<b>Example request: `{"user":{"username":"OnionRings101", "password":"password"}}`</b>
 
 - logout [GET] -  
 Allows a user to logout. Returns a HTTP response confirming to the user that they have been logged out
