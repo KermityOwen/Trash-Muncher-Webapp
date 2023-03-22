@@ -140,7 +140,7 @@ Steps:
 ├── readme.md               
 ├── requirements.txt        # List of dependencies used for deployment
 ├── run-docker.sh           # Shell script to run the Docker server 
-├── run-docker.sh           # Shell script to run the Docker server 
+├── Trashmunchers Testing Strategy.pdf           # Document outlining the testing strategy used for this product
 ├── LICENSE           # License used for this repository  
 └── api_documentation.md    # Information about API endpoints
 ```
