@@ -75,7 +75,7 @@ Steps:
 .
 ├── github                  # Used to update backend host link 
 ├── design_documents        # Markdowns containing information about game and technical design choices
-	│ ├── .obsidian               # JSONs for styling markdowns  
+    │ ├── .obsidian               # JSONs for styling markdowns  
     │ ├── GDD.md                  # Information about game design choices
     │ ├── TDD.md                  # Information about technical design choices (Needs to be completed)
     │ └── TrashImagesApp.md       # Instructions on how to run the TrashImages APIs locally to ensure that they can be used for deployment
@@ -83,7 +83,7 @@ Steps:
 │ ├── assests                 # JSONs for styling markdowns  
 │ ├── media/images            # Contains the images submitted by users
 │ ├── trashimages             # Django app used for image handling
-	│├── migrations             # Used to create tables in the database from models.py  
+    │├── migrations             # Used to create tables in the database from models.py  
     │├── __init__.py
     │├── admin.py               # File where models are registered on the admin site for use by the admin
     │├── apps.py                # Name of the application  
@@ -101,7 +101,7 @@ Steps:
 	│├── urls.py                # List of registered urls that lead to endpoints. Defined for every application created               
 	│└── wsgi.py    
 │ ├── trashmonsters           # Django app for handling the game's monsters
-	│├── migrations             # Used to create tables in the database from models.py  
+    │├── migrations             # Used to create tables in the database from models.py  
     │├── __init__.py
     │├── admin.py               
     │├── apps.py                # Handles server startup to ensure that database isn't constantly recreated and overwritten
@@ -128,7 +128,7 @@ Steps:
 │ ├── manage.py               # Autocreated by Django. Used for executing Django related tasks (e.g., running the server)
 │ └── requirements.txt        # List of dependencies used for deployment
 ├── trashmunchers           # Contains cache files
-	│├── trashmunchers/__pycache__        
+    │├── trashmunchers/__pycache__        
     │└── trashsite/__pycache__         
  
 ├── .gitignore              # Prevents certain files from being pushed to the repository
@@ -139,6 +139,7 @@ Steps:
 ├── docker-compose.yml      # Used to run the Django server through Docker 
 ├── readme.md               
 ├── requirements.txt        # List of dependencies used for deployment
+├── run-docker.sh           # Shell script to run the Docker server 
 ├── run-docker.sh           # Shell script to run the Docker server 
 ├── LICENSE           # License used for this repository  
 └── api_documentation.md    # Information about API endpoints
