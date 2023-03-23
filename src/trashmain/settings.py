@@ -169,7 +169,7 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.UserRateThrottle",
         "rest_framework.throttling.ScopedRateThrottle"
     ],
-    "DEFAULT_THROTTLE_RATES": {"anon": "20/second", "user": "20/second", "uploads":"1/day"},
+    "DEFAULT_THROTTLE_RATES": {"anon": "20/second", "user": "20/second"},
 }
 
 SIMPLE_JWT = {
