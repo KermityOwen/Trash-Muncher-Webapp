@@ -160,9 +160,9 @@ def verifyDistance(request):
 
     # Value can be changed if you would like to increase the leeway a user receives
     if difference <= 200:
-        return Response(True)
+        return Response("True")
     else:
-        return Response(False)
+        return Response("False")
 
 
 @api_view(["POST"])
