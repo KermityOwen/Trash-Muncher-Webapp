@@ -59,6 +59,7 @@ CSRF_COOKIE_HTTPSONLY = False
 CSRF_TRUSTED_ORIGINS = ["https://api.trashmunchers.co.uk"]
 
 CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = "localhost:5173"
 CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "http://172.0.0.1", "https://api.trashmunchers.co.uk"]
 
