@@ -110,7 +110,9 @@ For information regarding the API views, please view api_documentation.md
 def getTMs(request):
     TMs = TrashMonsters.objects.all()
     serializer = TMSerializer(TMs, many=True)
-    return Response(serializer.data)
+    resp = Response(serializer.data)
+    resp['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 
 @api_view(["POST"])
