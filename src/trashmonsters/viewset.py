@@ -160,7 +160,7 @@ def verifyDistance(request):
     difference = distance.distance(target, origin).m
 
     # Value can be changed if you would like to increase the leeway a user receives
-    if difference <= 200:
+    if difference <= 50:
         return HttpResponse(json.dumps({'result': 'True'}), content_type="application/json")
     else:
         return HttpResponse(json.dumps({'result': 'False'}), content_type="application/json")
