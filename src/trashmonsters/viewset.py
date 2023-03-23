@@ -1,5 +1,6 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticated
 
 from .models import TrashMonsters
@@ -160,9 +161,9 @@ def verifyDistance(request):
 
     # Value can be changed if you would like to increase the leeway a user receives
     if difference <= 200:
-        return Response("True")
+        return HttpResponse(json.dumps({'result': 'True'}), content_type="application/json")
     else:
-        return Response("False")
+        return HttpResponse(json.dumps({'result': 'False'}), content_type="application/json")
 
 
 @api_view(["POST"])

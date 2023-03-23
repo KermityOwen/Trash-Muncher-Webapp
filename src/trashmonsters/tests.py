@@ -164,7 +164,8 @@ class TrashmonsterViewsetTest(APITestCase):
             {"TM_ID": 1, "o-lat": 2.0, "o-long": 11.0},
             format="json",
         )
-        self.assertEqual(response.content, b'"True"')
+        result = json.loads(response.content)["result"]
+        self.assertEqual(result, "True")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_verifyDistance_gamekeeper(self):
@@ -180,7 +181,8 @@ class TrashmonsterViewsetTest(APITestCase):
             {"TM_ID": 1, "o-lat": 2.0, "o-long": 11.0},
             format="json",
         )
-        self.assertEqual(response.content,b'"True"')
+        result = json.loads(response.content)["result"]
+        self.assertEqual(result, "True")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_changeScore_gamekeeper(self):
