@@ -25,9 +25,6 @@ class ImageSubmissionViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
     # Only allow authenticated players to use this endpoint
     permission_classes = [permissions.IsAuthenticated, isPlayer]
 
-    # Limiting API calls to one per day 
-    throttle_class = [ScopedRateThrottle]
-    throttle_scope = "uploads"
     serializer_class = ImageSerializer
 
     def perform_create(self, serializer):
