@@ -159,7 +159,7 @@ def verifyDistance(request):
     difference = distance.distance(target, origin).m
 
     # Value can be changed if you would like to increase the leeway a user receives
-    if difference <= 50:
+    if difference <= 200:
         return Response(True)
     else:
         return Response(False)
