@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPSONLY = False
-CSRF_TRUSTED_ORIGIN = ["https://api.trashmunchers.co.uk"]
+CSRF_TRUSTED_ORIGINS = ["https://api.trashmunchers.co.uk"]
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = "localhost:5173"
