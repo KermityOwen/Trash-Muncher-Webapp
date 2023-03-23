@@ -56,10 +56,11 @@ INSTALLED_APPS = [
 
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPSONLY = False
-CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGIN = ["https://api.trashmunchers.co.uk"]
 
+CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = "localhost:5173"
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "http://172.0.0.1"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "http://172.0.0.1", "https://api.trashmunchers.co.uk"]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
